@@ -71,6 +71,29 @@ CREATE TABLE IF NOT EXISTS manages (
     CONSTRAINT mng_fk_br FOREIGN KEY (mng_br_code) REFERENCES branch(br_code) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS trip (
+    tr_id INT(11) NOT NULL AUTO_INCREMENT,
+    tr_departure TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP (),
+    tr_return TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP (),
+    tr_maxseats TINYINT(4) NOT NULL,
+    tr_cost FLOAT(7 , 2 ) NOT NULL,
+    tr_br_code INT(11) NOT NULL,
+    tr_gui_code INT(11) NOT NULL,
+    tr_gui_AT CHAR(10) NOT NULL,
+    tr_drv_AT CHAR(10) NOT NULL,
+    PRIMARY KEY (tr_id),
+    CONSTRAINT tr_gui_AT_ FOREIGN KEY (tr_gui_AT)
+        REFERENCES guide (gui_AT)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT tr_br_code_ FOREIGN KEY (tr_br_code)
+        REFERENCES branch (br_code)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT tr_drv_AT_ FOREIGN KEY (tr_drv_AT)
+        REFERENCES driver (drv_AT)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
 CREATE TABLE IF NOT EXISTS event (
     ev_tr_id INT(11) NOT NULL,
     ev_start TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP (),
@@ -112,6 +135,18 @@ CREATE TABLE IF NOT EXISTS languages (
         REFERENCES guide (gui_AT)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
+CREATE TABLE IF NOT EXISTS destination (
+    dst_id INT(11) NOT NULL AUTO_INCREMENT,
+    dst_name VARCHAR(50) NOT NULL DEFAULT 'UNKWOWN',
+    dst_descr TEXT,
+    dsrt_type ENUM('LOCAL', 'ABROAD'),
+    dst_language VARCHAR(30) NOT NULL,
+    dst_location INT(11) NOT NULL,
+    PRIMARY KEY (dst_id),
+    CONSTRAINT dst_location_ FOREIGN KEY (dst_location)
+        REFERENCES destination (dst_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 CREATE TABLE IF NOT EXISTS travel_to (
     to_tr_id INT(11) NOT NULL,
@@ -121,22 +156,10 @@ CREATE TABLE IF NOT EXISTS travel_to (
     PRIMARY KEY (to_tr_id , to_dst_id),
     CONSTRAINT to_tr_id_ FOREIGN KEY (to_tr_id)
         REFERENCES trip (tr_id)
-        ON DELETE CASCADE ON UPDATE CASCADE
-);
-CREATE TABLE IF NOT EXISTS destination (
-    dst_id INT(11) NOT NULL,
-    dst_name VARCHAR(50) NOT NULL DEFAULT 'UNKWOWN',
-    dst_descr TEXT,
-    dsrt_type ENUM('LOCAL', 'ABROAD'),
-    dst_language VARCHAR(30) NOT NULL,
-    dst_location INT(11) NOT NULL,
-    PRIMARY KEY (dst_id),
-    CONSTRAINT dst_id_ FOREIGN KEY (dst_id)
-        REFERENCES travel_to (to_dst_id)
         ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT dst_location_ FOREIGN KEY (dst_id)
+      CONSTRAINT to_dst_id_ FOREIGN KEY (to_dst_id)
         REFERENCES destination (dst_id)
-        ON DELETE CASCADE ON UPDATE CASCADE
+        ON DELETE CASCADE ON UPDATE CASCADE   
 );
          
 CREATE TABLE IF NOT EXISTS reservation (
@@ -150,3 +173,5 @@ CREATE TABLE IF NOT EXISTS reservation (
         REFERENCES trip (tr_id)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
