@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS event (
     ev_tr_id INT(11) AUTO_INCREMENT NOT NULL,
     ev_start TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP (),
     ev_end TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP (),
-    ev_descr TEXT DEFAULT 'UNKNOWN',
+    ev_descr TEXT,
     PRIMARY KEY (ev_tr_id , ev_start)
 );
 
