@@ -50,6 +50,8 @@ INSERT INTO worker VALUES ('ΑΡ154483', 'Σάσα', 'Παπαδήμα', 1566.45
 INSERT INTO worker VALUES ('ΑΘ454855', 'Αντώνης', 'Καλουδάκης', 1548.45, 5);
 INSERT INTO worker VALUES ('ΑΤ874122', 'Μπήλιω', 'Παπαδάκη', 2315.45, 6);
 INSERT INTO worker VALUES ('ΑΕ231867', 'Χάινριχ', 'φον Σνίτσελ', 9121.45, 7);
+INSERT INTO worker VALUES ('ΑΖ484331', 'Όλγα', 'Χαρίτου', 1354.98, 8);
+INSERT INTO worker VALUES ('Δ4841268', 'Ειρήνη', 'Χαρίτου', 78521.45, 9);
 INSERT INTO worker VALUES ('ΑΠ454875', 'Ντομινικ', 'Σεζάρ', 15815.45, 10);
 INSERT INTO worker VALUES ('ΑΛ118355', 'Ανδρέας', 'Χαρίτος', 4812.45, 10);
 INSERT INTO worker VALUES ('Α4154822', 'Μπία', 'Μπέκου', 1583.45, 10);
