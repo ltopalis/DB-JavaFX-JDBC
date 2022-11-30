@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS trip (
 CREATE TABLE IF NOT EXISTS languages (
     lng_gui_AT CHAR(10) NOT NULL,
     lng_language VARCHAR(30) NOT NULL,
-    PRIMARY KEY (lng_gui_AT),
+    PRIMARY KEY (lng_gui_AT, lng_language),
     CONSTRAINT lng_gui_AT_ FOREIGN KEY (lng_gui_AT)
         REFERENCES guide (gui_AT)
         ON DELETE CASCADE ON UPDATE CASCADE
