@@ -40,14 +40,22 @@ INSERT INTO phones VALUES (8, '3015644564');
 INSERT INTO phones VALUES (9, '1864154156');
 INSERT INTO phones VALUES (10, '8929090821');
 INSERT INTO phones VALUES (11, '2104648549');
-INSERT INTO phones VALUES (19, '2104648346');
-INSERT INTO phones VALUES (17, '2108757908');
+INSERT INTO phones VALUES (12, '2101818486');
+INSERT INTO phones VALUES (13, '2610548963');
+INSERT INTO phones VALUES (14, '2611228966');
+INSERT INTO phones VALUES (15, '6941231821');
 INSERT INTO phones VALUES (15, '2104632121');
+INSERT INTO phones VALUES (16, '2610468549');
+INSERT INTO phones VALUES (17, '2610412084');
+INSERT INTO phones VALUES (17, '2610021050');
+INSERT INTO phones VALUES (18, '2108757908');
+INSERT INTO phones VALUES (19, '2610051054');
+INSERT INTO phones VALUES (20, '2104648346');
 
 -- worker table 
 INSERT INTO worker VALUES ('ΑΤ546357', 'Τζέλα', 'Δελαφράγκα', 90000.43, 1);
 INSERT INTO worker VALUES ('ΑΟ489713', 'Λιλίκα', 'Καλλίτση', 7825.70, 1);
-INSERT INTO worker VALUES ('ΑΒ789750', 'Σμαρούλα', 'Κολιάτσιυ', 4505.00, 1);
+INSERT INTO worker VALUES ('ΑΒ789750', 'Σμαρούλα', 'Κολιάτσoυ', 4505.00, 1);
 INSERT INTO worker VALUES ('ΑΑ875155', 'Ελλάδα', 'Οικονόμου', 13243.45, 2);
 INSERT INTO worker VALUES ('ΑΓ715638', 'Μήτσος', 'Παυλάτος', 4500.45, 2);
 INSERT INTO worker VALUES ('ΑΞ785121', 'Χρόνης', 'Μπατσινίλας', 745.35, 2);
@@ -61,19 +69,50 @@ INSERT INTO worker VALUES ('ΑΓ456483', 'Χριστίνα', 'Μαρκάτου',
 INSERT INTO worker VALUES ('ΑΡ154483', 'Σάσα', 'Παπαδήμα', 1566.45, 5);
 INSERT INTO worker VALUES ('ΑΘ454855', 'Αντώνης', 'Καλουδάκης', 1548.45, 5);
 INSERT INTO worker VALUES ('ΑΤ874122', 'Μπήλιω', 'Παπαδάκη', 2315.45, 6);
+INSERT INTO worker VALUES ('AE012330','Κώστας','Bουτσάς',9100.98,6);
+INSERT INTO worker VALUES ('AR097875','Ρένα','Γαλάνη',6000.89,6);
 INSERT INTO worker VALUES ('ΑΕ231867', 'Χάινριχ', 'φον Σνίτσελ', 9121.45, 7);
+INSERT INTO worker VALUES ('AH234511','Σοφία','Βέμπο',9000.00,7);
+INSERT INTO worker VALUES ('ΑΣ180215','Λίτσα','Πατέρα', 6456.89,7);
+INSERT INTO worker VALUES ('ΑΠ348900', 'Βασίλης', 'Αργυρόπουλος', 8000.45,8);
+INSERT INTO worker VALUES ('ΑΗ484230', 'Παυλίνα', 'Κακουδάκη', 89612,8);
+INSERT INTO worker VALUES ('ΑΞ474502', 'Δέσποινα', 'Βίσση', 78202.10,8);
+INSERT INTO worker VALUES ('ΑΙ485610', 'Φώτο', 'Μπαρτζώκα', 89756, 9);
+INSERT INTO worker VALUES ('ΑΛ448100', 'Μαίρη', 'Σκαρμούτσου', 1250, 9);
+INSERT INTO worker VALUES ('ΑΔ458400', 'Μανωλία', 'Μπούρνοβα', 20014, 9);
 INSERT INTO worker VALUES ('ΑΠ454875', 'Ντομινικ', 'Σεζάρ', 15815.45, 10);
 INSERT INTO worker VALUES ('ΑΛ118355', 'Ανδρέας', 'Χαρίτος', 4812.45, 10);
 INSERT INTO worker VALUES ('Α4154822', 'Μπία', 'Μπέκου', 1583.45, 10);
 INSERT INTO worker VALUES ('ΑΚ548122', 'Μαρία', 'Χαρίτου', 1218.56, 11);
 INSERT INTO worker VALUES ('ΑΤ512106', 'Καίτη', 'Τόνγκα', 1235.54, 11);
 INSERT INTO worker VALUES ('ΑΤ459812', 'Σάββας', 'Κατσίκης', 7000.45, 11);
-INSERT INTO worker VALUES ('ΑΤ459813', 'Αντώνης', 'Αντωνίου', 7100.45,10);
-INSERT INTO worker VALUES ('ΑΠ348900', 'Βασίλης', 'Αργυρόπουλος', 8000.45,8);
-INSERT INTO worker VALUES ('AH234511','Σοφία','Βέμπο',9000.00,7);
-INSERT INTO worker VALUES ('AE012330','Κώστας','Bουτσάς',9100.98,6);
-INSERT INTO worker VALUES ('AR097875','Ρένα','Γαλάνη',6000.89,6);
-
+INSERT INTO worker VALUES ('ΑΤ459813', 'Αντώνης', 'Αντωνίου', 7100.45,12);
+INSERT INTO worker VALUES ('ΑΔ150401', 'Άρης', 'Ζαφώλιας', 2186, 12);
+INSERT INTO worker VALUES ('Φ5400521', 'Ρωξάνη', 'Ντάνου-Κουλουμπή', 89756, 12);
+INSERT INTO worker VALUES ('Γ4800548', 'Ντίμης', 'Τσιμισκής-Χόφμαν', 99999, 13);
+INSERT INTO worker VALUES ('Η5150412', 'Ρούλα', 'Κορομηλά', 89756, 13);
+INSERT INTO worker VALUES ('Φ6234799', 'Καίτη', 'Κολεσίδου', 15015, 13);
+INSERT INTO worker VALUES ('Π1580100', 'Μίλτος', 'Γιατζόγλου', 21588, 14);
+INSERT INTO worker VALUES ('Γ4801089', 'Μάρω', 'Ανδρέου', 548.45, 14);
+INSERT INTO worker VALUES ('Π5084000', 'Μαρτσέλο', 'Ανδρέου', 15015, 14);
+INSERT INTO worker VALUES ('ΑΠ801088', 'Πόπη', 'Καμμένου', 1280.06, 15);
+INSERT INTO worker VALUES ('ΑΚ188009', 'Γεράσιμος', 'Μαντάς', 2554.7, 15);
+INSERT INTO worker VALUES ('ΞΗ148080', 'Ντίντα', 'Σερμπαντινα', 12500, 15);
+INSERT INTO worker VALUES ('ΚΛ732429', 'Νίκος', 'Κελέσμιτος', 15040, 17);
+INSERT INTO worker VALUES ('ΚΛ548805', 'Τάμυ', 'Τσανάκα', 7812.12, 16);
+INSERT INTO worker VALUES ('ΠΞ480408', 'Ευδοκία ', 'Κουτσαγγελά', 2188.78, 16);
+INSERT INTO worker VALUES ('ΓΗ480480', 'Μαρία', 'Μενούνος', 78520, 19);
+INSERT INTO worker VALUES ('ΚΛ150805', 'Κορίνα', 'Μητροπούλου', 11080.78, 17);
+INSERT INTO worker VALUES ('ΗΘ080440', 'Αλέκος', 'Παπαδήμας', 11045.78, 17);
+INSERT INTO worker VALUES ('ΚΛ104085', 'Σωσώ', 'Παπαδήμα', 5085.78, 18);
+INSERT INTO worker VALUES ('ΚΞ104200', 'Φώτης', 'Κουτσούμπας', 11508.48, 18);
+INSERT INTO worker VALUES ('ΛΚ181829', 'Χαρούλα', 'Μπαρμπαγιαννακάκη', 1188.84, 18);
+INSERT INTO worker VALUES ('ΗΓ158048', 'Βικτώρια', 'Γιακουματος', 11508.48, 16);
+INSERT INTO worker VALUES ('ΗΞ840121', 'Θανάσης', 'Μπαλαφούτης', 15565, 19);
+INSERT INTO worker VALUES ('ΗΞ744133', 'Ελένη', 'Βλαχάκη', 26901.45, 19);
+INSERT INTO worker VALUES ('ΞΚ754258', 'Άννα', 'της 17η Νοέμβρη', 8489.33, 20);
+INSERT INTO worker VALUES ('ΗΓ745515', 'Νώντας', 'Περιστερόπουλος', 7512.78, 20);
+INSERT INTO worker VALUES ('ΚΗ787512', 'Πέγκυ', 'Καρρά', 71218.78, 20);
 
 -- driver table
 INSERT INTO driver VALUES ('ΑΤ459812','A','LOCAL',3);
@@ -86,7 +125,17 @@ INSERT INTO driver VALUES ('ΑΠ348900','A','ABROAD',3);
 INSERT INTO driver VALUES ('ΑΦ486513','C','LOCAL',7);
 INSERT INTO driver VALUES ('ΑΤ154486','D','ABROAD',9);
 INSERT INTO driver VALUES ('ΑΓ777154','A','LOCAL',6);
-INSERT INTO driver VALUES ('ΑΟ489713','B','ABROAD',7);
+INSERT INTO driver VALUES ('ΑΗ484230','B','ABROAD',7);
+INSERT INTO driver VALUES ('ΚΛ104085','A','ABROAD',4);
+INSERT INTO driver VALUES ('AH234511','B','LOCAL',7);
+INSERT INTO driver VALUES ('ΑΘ454855','C','ABROAD',2);
+INSERT INTO driver VALUES ('ΑΞ785121','D','LOCAL',10);
+INSERT INTO driver VALUES ('Π1580100','A','ABROAD',4);
+INSERT INTO driver VALUES ('Γ4800548','B','LOCAL',3);
+INSERT INTO driver VALUES ('ΛΚ181829','C','ABROAD',9);
+INSERT INTO driver VALUES ('ΚΛ150805','D','LOCAL',4);
+INSERT INTO driver VALUES ('ΚΗ787512','A','ABROAD',8);
+INSERT INTO driver VALUES ('ΑΡ154483','C','LOCAL',4);
 
 -- guide table
 INSERT INTO guide VALUES ('ΑΡ154483','Friendly');
@@ -99,3 +148,39 @@ INSERT INTO guide VALUES ('ΑΒ789750','Multilingual');
 INSERT INTO guide VALUES ('AR097875','Experienced');
 INSERT INTO guide VALUES ('AH234511','Kind');
 INSERT INTO guide VALUES ('ΑΓ456483','Polite');
+INSERT INTO guide VALUES ('Φ6234799', "Καίτη Κ;ολεσίδου-Γκίουλμπαμπα, 15 χρόνια για φόνο εκ προμελέτης, που να το 'ξερα, δεν θα τον παντρεύομουν ποτέ τον γέρο. Που να 'ξερα η μαύρη ότι επαίρνε κρύφα τα βιάγκρα και να μου μείνει στα χέρια τη πρώτη νύχτα του γάμου πριν τον χαρώ; Που τι να χαρείς δηλαδή από δαύτον; Αλλά σάμπος και είχα χαρεί κανέναν άλλον; Είπα και εγώ 'Παππούς; Παππους!', άκουσα και κάτι φίλες 'Πάρ' τονα μωρή να βγεις απ' την...' και φτάσαμε εδώ που φτάσαμε. 
+Τώρα θα μου λέγατε να τα πιάναμε απ' την αρχή γιατί δεν καταλάβατε Χριστό. Και εσείς δίκιο έχετε απ' την μεριά σας! Αλλά εγώ τα έχω χάσει η γυναίκα. 
+30 και κάτι είμαι κύριε μου! Δεν σας αφορά, και δεν πάει και στο διάολο; Όλη η εταιρία το ξέρει, παρθένα κύριε μου. Εντελώς και από παντού. Το 'χω δει, το 'χω πίασει, δεν το 'χω φάει. Τώρα θα μου πείτε να μην στενοχωριέμαι, μικρή είμαι ακόμα. Σωστό και αυτό! Το θέμα είναι πότε θα παλιώσω με τον παππού που έμπλεξα; Τώρα θα μου πείτε που κολλάει ο παππούς; Στο πήδημα κόλλησε κύριε μου. Και πήρε τα βιάγκρα πίσω απ' την πλάτη μου και του έγινε η καρδιά μπαλόνι-αερόστατο και έσκασε ο μαύρος. Ανάθεμα του, καλή του ώρα εκεί που βρίσκεται.
+Πέφτουνε μετά τα σόγια και αρχίζουν 'Και εσύ τον έφαγες μωρή για να του πάρεις τα λεφτά'. Ανάγκη που τα είχα εγώ τα λεφτά του κύριε μου!
+Εγώ κύριε μου έχω ένα υπερσύγχρονο γραφείο κηδειών δίπλα σε ΙΚΑ. 20 συνταξιο'υχους την εβδομάδα θάβω, δόξασι ο Θεό! Και εσάς, επειδή σας συμπάθησα, όταν θα έρθει η ώρα η καλή, δεν θα πληρώσετε ευρώ. Όλα κερασμένα απ' την Καιτούλα! Έτσι και αλλιώς τα κορόιδα που μένουν πίσω πληρώνουν πάντα.");
+INSERT INTO guide VALUES ('ΑΓ777154', "Ανυποψίαστη νοικοκυρά και αθώα μάνα, σήμερα θα συζητήσω μαζί σας ενά καυτό θέμα, πως θα καταλάβετε αν το απιδί σας έχει μπει στον δρόμο του σατανισμού. Αν το έχετε δει να έχει πετάξει τα λούκι λουκ και κοιτάει την μαύρη Βίβλο. Αν παίζει όλη την ημέρα με ένα κουνελάκι - και δεν είναι Πάσχα. Αν σας απαγορεύει να βάζετε σκόρδο στο φαγητό του και κυρίως στο τζατζίκι. Αν σας ζητάει για φαγητό βρασμένη γάτα. Αν έχει παντού καρφίτσες - και δεν ράβει. Αν το Πάσχα σας ζητήσει μαζί με το αρνί να σουβλίσετε και κανέναν φίλο του. Αν αλλάζει πόλη μόλις συναντήσει παπά στον δρόμο. Αν του αρέσει να τον φωνάζουν Λούσι από το Λούσιφερ. Αν του αρέσει να ακούει τους δίσκους του ανάποδα. Αν όταν φεύγει από το σπίτι σας χαιρετά με την φράση 'Θα σε δω στην κόλαση γλυκία μου'. Αν του αρέσουν εκφράσεις του στυλ 'πάω κατά διαόλου΄, 'στου διαόλου τη μάνα', 'έσπασε ο διάολος το ποδάρι του', 'τι στο διάολο', 'διαβόλου κάλτσα'. Και τέλος, αν σας κουβαλήσει στο σπίτι μια τύπισσα σαν εμένα, μην κάνετε τον σταυρό σας, μπορεί να μπείτε σε μπελάδες!");
+
+-- languages table
+INSERT INTO languages VALUES ('ΑΡ154483', 'Ελληνικά');
+INSERT INTO languages VALUES ('ΑΡ154483', 'Αγγλικά');
+INSERT INTO languages VALUES ('ΑΤ459812', 'Ελληνικά');
+INSERT INTO languages VALUES ('ΑΤ459812', 'Γαλλικά');
+INSERT INTO languages VALUES ('ΑΑ875155', 'Ελληνικά');
+INSERT INTO languages VALUES ('ΑΑ875155', 'Γερμανικά');
+INSERT INTO languages VALUES ('ΑΑ875155', 'Ιταλικά');
+INSERT INTO languages VALUES ('ΑΚ548122', 'Ελληνικά');
+INSERT INTO languages VALUES ('ΑΚ548122', 'Αγγλικά');
+INSERT INTO languages VALUES ('ΑΚ548122', 'Γερμανικά');
+INSERT INTO languages VALUES ('ΑΚ548122', 'Ρώσικα');
+INSERT INTO languages VALUES ('ΑΤ874122', 'Αγγλικά');
+INSERT INTO languages VALUES ('ΑΞ748945', 'Ελληνικά');
+INSERT INTO languages VALUES ('ΑΞ748945', 'Αγγλικά');
+INSERT INTO languages VALUES ('ΑΞ748945', 'Ισπανικά');
+INSERT INTO languages VALUES ('ΑΒ789750', 'Ελληνικά');
+INSERT INTO languages VALUES ('ΑΒ789750', 'Αγγλικά');
+INSERT INTO languages VALUES ('ΑΒ789750', 'Ιαπωνικά');
+INSERT INTO languages VALUES ('AR097875', 'Ελληνικά');
+INSERT INTO languages VALUES ('AR097875', 'Αγγλικά');
+INSERT INTO languages VALUES ('AR097875', 'Σουηδικά');
+INSERT INTO languages VALUES ('AR097875', 'Ιταλικά');
+INSERT INTO languages VALUES ('AH234511', 'Τούρκικα');
+INSERT INTO languages VALUES ('AH234511', 'Βουλγάρικα');
+INSERT INTO languages VALUES ('AH234511', 'Αγγλικά');
+INSERT INTO languages VALUES ('ΑΓ456483', 'Ελληνικά');
+INSERT INTO languages VALUES ('ΑΓ456483', 'Αγγλικά');
+INSERT INTO languages VALUES ('ΑΓ456483', 'Αλβανικά');
