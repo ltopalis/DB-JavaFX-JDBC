@@ -78,7 +78,6 @@ CREATE TABLE IF NOT EXISTS trip (
     tr_maxseats TINYINT(4) NOT NULL,
     tr_cost FLOAT(7 , 2 ) NOT NULL,
     tr_br_code INT(11) NOT NULL,
-    tr_gui_code INT(11) NOT NULL,
     tr_gui_AT CHAR(10) NOT NULL,
     tr_drv_AT CHAR(10) NOT NULL,
     PRIMARY KEY (tr_id),
@@ -141,7 +140,7 @@ CREATE TABLE IF NOT EXISTS destination (
     dst_descr TEXT,
     dsrt_type ENUM('LOCAL', 'ABROAD'),
     dst_language VARCHAR(30) NOT NULL,
-    dst_location INT(11) NOT NULL,
+    dst_location INT(11) NULL DEFAULT NULL,
     PRIMARY KEY (dst_id),
     CONSTRAINT dst_location_ FOREIGN KEY (dst_location)
         REFERENCES destination (dst_id)
