@@ -148,12 +148,16 @@ INSERT INTO guide VALUES ('ΑΒ789750','Multilingual');
 INSERT INTO guide VALUES ('AR097875','Experienced');
 INSERT INTO guide VALUES ('AH234511','Kind');
 INSERT INTO guide VALUES ('ΑΓ456483','Polite');
-INSERT INTO guide VALUES ('Φ6234799', "Καίτη Κ;ολεσίδου-Γκίουλμπαμπα, 15 χρόνια για φόνο εκ προμελέτης, που να το 'ξερα, δεν θα τον παντρεύομουν ποτέ τον γέρο. Που να 'ξερα η μαύρη ότι επαίρνε κρύφα τα βιάγκρα και να μου μείνει στα χέρια τη πρώτη νύχτα του γάμου πριν τον χαρώ; Που τι να χαρείς δηλαδή από δαύτον; Αλλά σάμπος και είχα χαρεί κανέναν άλλον; Είπα και εγώ 'Παππούς; Παππους!', άκουσα και κάτι φίλες 'Πάρ' τονα μωρή να βγεις απ' την...' και φτάσαμε εδώ που φτάσαμε. 
-Τώρα θα μου λέγατε να τα πιάναμε απ' την αρχή γιατί δεν καταλάβατε Χριστό. Και εσείς δίκιο έχετε απ' την μεριά σας! Αλλά εγώ τα έχω χάσει η γυναίκα. 
-30 και κάτι είμαι κύριε μου! Δεν σας αφορά, και δεν πάει και στο διάολο; Όλη η εταιρία το ξέρει, παρθένα κύριε μου. Εντελώς και από παντού. Το 'χω δει, το 'χω πίασει, δεν το 'χω φάει. Τώρα θα μου πείτε να μην στενοχωριέμαι, μικρή είμαι ακόμα. Σωστό και αυτό! Το θέμα είναι πότε θα παλιώσω με τον παππού που έμπλεξα; Τώρα θα μου πείτε που κολλάει ο παππούς; Στο πήδημα κόλλησε κύριε μου. Και πήρε τα βιάγκρα πίσω απ' την πλάτη μου και του έγινε η καρδιά μπαλόνι-αερόστατο και έσκασε ο μαύρος. Ανάθεμα του, καλή του ώρα εκεί που βρίσκεται.
-Πέφτουνε μετά τα σόγια και αρχίζουν 'Και εσύ τον έφαγες μωρή για να του πάρεις τα λεφτά'. Ανάγκη που τα είχα εγώ τα λεφτά του κύριε μου!
-Εγώ κύριε μου έχω ένα υπερσύγχρονο γραφείο κηδειών δίπλα σε ΙΚΑ. 20 συνταξιο'υχους την εβδομάδα θάβω, δόξασι ο Θεό! Και εσάς, επειδή σας συμπάθησα, όταν θα έρθει η ώρα η καλή, δεν θα πληρώσετε ευρώ. Όλα κερασμένα απ' την Καιτούλα! Έτσι και αλλιώς τα κορόιδα που μένουν πίσω πληρώνουν πάντα.");
-INSERT INTO guide VALUES ('ΑΓ777154', "Ανυποψίαστη νοικοκυρά και αθώα μάνα, σήμερα θα συζητήσω μαζί σας ενά καυτό θέμα, πως θα καταλάβετε αν το απιδί σας έχει μπει στον δρόμο του σατανισμού. Αν το έχετε δει να έχει πετάξει τα λούκι λουκ και κοιτάει την μαύρη Βίβλο. Αν παίζει όλη την ημέρα με ένα κουνελάκι - και δεν είναι Πάσχα. Αν σας απαγορεύει να βάζετε σκόρδο στο φαγητό του και κυρίως στο τζατζίκι. Αν σας ζητάει για φαγητό βρασμένη γάτα. Αν έχει παντού καρφίτσες - και δεν ράβει. Αν το Πάσχα σας ζητήσει μαζί με το αρνί να σουβλίσετε και κανέναν φίλο του. Αν αλλάζει πόλη μόλις συναντήσει παπά στον δρόμο. Αν του αρέσει να τον φωνάζουν Λούσι από το Λούσιφερ. Αν του αρέσει να ακούει τους δίσκους του ανάποδα. Αν όταν φεύγει από το σπίτι σας χαιρετά με την φράση 'Θα σε δω στην κόλαση γλυκία μου'. Αν του αρέσουν εκφράσεις του στυλ 'πάω κατά διαόλου΄, 'στου διαόλου τη μάνα', 'έσπασε ο διάολος το ποδάρι του', 'τι στο διάολο', 'διαβόλου κάλτσα'. Και τέλος, αν σας κουβαλήσει στο σπίτι μια τύπισσα σαν εμένα, μην κάνετε τον σταυρό σας, μπορεί να μπείτε σε μπελάδες!");
+INSERT INTO guide VALUES ('Φ6234799','Multilingual');
+INSERT INTO guide VALUES ('ΑΓ777154','Devoted');
+INSERT INTO guide VALUES ('ΞΚ754258','Kind');
+INSERT INTO guide VALUES ('ΑΚ188009','Polite');
+INSERT INTO guide VALUES ('ΚΞ104200','Smart');
+INSERT INTO guide VALUES ('ΗΞ744133','Helpful');
+INSERT INTO guide VALUES ('ΚΛ548805','Experienced');
+INSERT INTO guide VALUES ('ΑΣ180215','Master in Astrology');
+INSERT INTO guide VALUES ('ΓΗ480480','Friendly');
+INSERT INTO guide VALUES ('Φ6234799','Smart');
 
 -- languages table
 INSERT INTO languages VALUES ('ΑΡ154483', 'Ελληνικά');
@@ -184,3 +188,27 @@ INSERT INTO languages VALUES ('AH234511', 'Αγγλικά');
 INSERT INTO languages VALUES ('ΑΓ456483', 'Ελληνικά');
 INSERT INTO languages VALUES ('ΑΓ456483', 'Αγγλικά');
 INSERT INTO languages VALUES ('ΑΓ456483', 'Αλβανικά');
+
+-- admin table
+INSERT INTO admin VALUES ('ΑΔ150401','ACCOUNTING','Master in Economics');
+INSERT INTO admin VALUES ('ΑΓ715638','LOGISTICS','Master in Economics');
+INSERT INTO admin VALUES ('ΗΓ745515','ADMINISTRATIVE','Master in business administration');
+INSERT INTO admin VALUES ('Η5150412','LOGISTICS','Master in Logistics');
+INSERT INTO admin VALUES ('Γ4800548','ADMINISTRATIVE','Master in business administration');
+INSERT INTO admin VALUES ('ΑΙ485610','ACCOUNTING','Accountant');
+INSERT INTO admin VALUES ('ΑΞ474502','ADMINISTRATIVE','Master in business administration');
+INSERT INTO admin VALUES ('ΚΛ150805','ADMINISTRATIVE','Business administration');
+INSERT INTO admin VALUES ('ΑΛ448100','ADMINISTRATIVE','Business administration');
+INSERT INTO admin VALUES ('Π1580100','ADMINISTRATIVE','Business administration');
+INSERT INTO admin VALUES ('AR097875','ADMINISTRATIVE','Business administration');
+INSERT INTO admin VALUES ('Π5084000','ADMINISTRATIVE','Business administration');
+
+-- manages table
+INSERT INTO manages VALUES ('ΗΓ745515',1);
+INSERT INTO manages VALUES ('Γ4800548',2);
+INSERT INTO manages VALUES ('ΑΞ474502',3);
+INSERT INTO manages VALUES ('ΚΛ150805',4);
+INSERT INTO manages VALUES ('ΑΛ448100',5);
+INSERT INTO manages VALUES ('Π1580100',6);
+INSERT INTO manages VALUES ('AR097875',7);
+INSERT INTO manages VALUES ('Π5084000',8);
