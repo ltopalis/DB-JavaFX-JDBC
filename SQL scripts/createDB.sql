@@ -5,7 +5,7 @@ USE travel_agency ;
 
 CREATE TABLE IF NOT EXISTS branch (
     br_code   INT(8)      PRIMARY KEY AUTO_INCREMENT NOT NULL, 
-    br_street VARCHAR(30)  NOT NULL,
+    br_street VARCHAR(30) NOT NULL,
     br_num    INT(4)      NULL DEFAULT NULL,
     br_city   VARCHAR(30) NOT NULL
 ) ENGINE = InnoDB;
