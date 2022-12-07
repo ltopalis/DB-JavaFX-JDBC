@@ -313,3 +313,7 @@ INSERT INTO travel_to VALUES(1, 2, "2023-01-22 17:00:00", "2023-01-18 15:30:00")
 INSERT INTO travel_to VALUES(2, 3, "2023-01-03 21:30:00", "2022-12-24 07:00:00");
 INSERT INTO travel_to VALUES(3, 4, "2022-12-26 09:30:00", "2022-12-24 06:15:00");
 INSERT INTO travel_to VALUES(3, 5, "2022-12-27 17:45:00", "2022-12-26 09:30:00");
+
+-- reservation table
+INSERT INTO reservation VALUES(1, 7, "Τζίτζι", "Χαντίντ", "ADULT");
+INSERT INTO reservation VALUES(1, 4, "Μαριάννα", "Ντούβλη", "ADULT");
