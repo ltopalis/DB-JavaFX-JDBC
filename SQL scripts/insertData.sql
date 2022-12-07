@@ -1,5 +1,6 @@
 USE travel_agency;
 
+
 -- branch table
 INSERT INTO branch(br_street, br_num, br_city) VALUES ('Πεσμαζόγλου', 5, 'Αθήνα');
 INSERT INTO branch(br_street, br_num, br_city) VALUES ('Αγίου Κωνσταντίνου', 22, 'Αθήνα');
@@ -295,6 +296,23 @@ INSERT INTO manages VALUES ('Γ4800548', 20);
 INSERT INTO trip VALUES(NULL, "2023-01-15 06:00:00", "2023-01-22 20:30:00", 50, 150.67, 13, "ΑΓ456483", "ΑΓ777154");
 INSERT INTO trip VALUES(NULL, "2022-12-24 09:00:00", "2023-01-03 20:30:00", 100, 670.69, 2, "ΑΤ459812", "Π1580100");
 INSERT INTO trip VALUES(NULL, "2022-12-24 06:15:00", "2022-12-27 19:45:00", 100, 230.00, 7, "ΠΞ480408", "ΑΠ348900");
+INSERT INTO trip VALUES(NULL, "2023-03-09 08:12:00", "2023-03-11 20:30:00", 80,  250.00, 6, "ΑΒ789750", "ΑΓ777154");
+INSERT INTO trip VALUES(NULL, "2023-06-10 12:10:00", "2023-06-13 21:00:00", 100, 300.00, 5, "AR097875", "ΑΗ484230");
+INSERT INTO trip VALUES(NULL, "2023-05-10 11:20:00", "2023-05-15 20:00:00", 100, 900.00, 4, "ΞΚ754258", "AH234511");
+INSERT INTO trip VALUES(NULL, "2023-07-20 09:10:00", "2023-07-25 21:00:00", 100, 950.00, 10, "ΑΓ456483", "ΑΘ454855");
+INSERT INTO trip VALUES(NULL, "2023-09-22 09:00:00", "2023-09-25 22:00:00", 50,  150.00,  2, "ΑΓ456483", "ΑΓ777154");  
+INSERT INTO trip VALUES(NULL, "2023-10-01 08:00:00", "2023-10-03 21:00:00", 100, 140.00,  3, "ΓΗ480480", "ΑΦ486513");
+INSERT INTO trip VALUES(NULL, "2023-10-04 07:00:00", "2023-10-06 20:00:00", 100, 130.00,  1, "ΑΣ180215", "ΑΘ454855");
+INSERT INTO trip VALUES(NULL, "2023-11-01 06:00:00", "2023-11-05 20:00:00",  90, 300.00,  12, "ΑΚ548122", "Π1580100");
+INSERT INTO trip VALUES(NULL, "2023-12-08 07:00:00", "2023-12-12 21:00:00",  80, 500.00,  15, "ΑΓ777154", "ΚΗ787512");
+INSERT INTO trip VALUES(NULL, "2023-12-11 08:00:00", "2023-12-15 22:00:00",  70, 300.00,  16, "ΑΓ777154", "ΑΠ454875");
+INSERT INTO trip VALUES(NULL, "2023-02-08 06:00:00", "2023-02-10 20:00:00",  60, 200.00,  18, "ΚΞ104200", "ΑΤ459812");
+INSERT INTO trip VALUES(NULL, "2023-03-08 06:00:00", "2023-03-11 20:00:00",  50, 210.00,  1, "ΚΛ548805",  "ΑΗ484230");
+INSERT INTO trip VALUES(NULL, "2023-04-08 07:00:00", "2023-04-10 19:00:00",  90, 190.00,  12, "ΑΓ456483", "ΑΘ454855");
+INSERT INTO trip VALUES(NULL, "2023-08-09 05:00:00", "2023-08-14 21:00:00",  100, 1000.00, 9, "ΞΚ754258", "ΑΞ785121");
+INSERT INTO trip VALUES(NULL, "2023-08-01 06:00:00", "2023-08-08 20:00:00",  100, 2000.00,  2, "ΑΚ188009", "ΑΗ484230");
+INSERT INTO trip VALUES(NULL, "2023-02-01 08:00:00", "2023-02-09 21:00:00",  70, 2900.00,  16, "AH234511", "AE012330");
+INSERT INTO trip VALUES(NULL, "2023-01-08 09:00:00", "2023-02-10 19:00:00",  60, 200.00,  18, "ΑΚ188009", "ΑΠ454875");
 
 -- event table
 INSERT INTO event VALUES(2, "2022-12-31 22:30:00", "2023-01-01 05:00:00", "Η γαλλική πρακτική να πυρπολούν αυτοκίνητα στις αρχές του νέου έτους ξεκίνησε τη δεκαετία του 1990 στην περιοχή γύρω από το Στρασβούργο, σε γειτονιές με χαμηλό εισόδημα. Στη συνέχεια το «έθιμο» εξαπλώθηκε στην υπόλοιπη χώρα ως ένδειξη διαμαρτυρίας. Κατά τη διάρκεια των διαδηλώσεωντο φθινόπωρο του 2005, η αστυνομία ανακοίνωσε ότι σχεδόν 9.000 οχήματα πυρπολήθηκαν κατά τη διάρκεια των αναταραχών.");
@@ -317,3 +335,21 @@ INSERT INTO travel_to VALUES(3, 5, "2022-12-27 17:45:00", "2022-12-26 09:30:00")
 -- reservation table
 INSERT INTO reservation VALUES(1, 7, "Τζίτζι", "Χαντίντ", "ADULT");
 INSERT INTO reservation VALUES(1, 4, "Μαριάννα", "Ντούβλη", "ADULT");
+INSERT INTO reservation VALUES(2, 5, "Μαρία", "Χρυσάντζου", "ADULT");
+INSERT INTO reservation VALUES(3, 6, "Kυριακή", "Μαρκάτου", "ADULT");
+INSERT INTO reservation VALUES(4, 4, "Ελένη", "Παπαδοπούλου", "MINOR");
+INSERT INTO reservation VALUES(5, 7, "Αλεξάνδρα", "Αργυρού", "ADULT");
+INSERT INTO reservation VALUES(6, 3, "Βάσια", "Μαυρίκου", "ADULT");
+INSERT INTO reservation VALUES(7, 2, "Zωή", "Χατζηκώστα", "MINOR");
+INSERT INTO reservation VALUES(7, 1, "Κατερίνα", "Ευαγγελάτου", "ADULT");
+INSERT INTO reservation VALUES(8, 9, "Αλίκη", "Βουγιουκλάκη", "ADULT");
+INSERT INTO reservation VALUES(9, 2, "Γιώργος", "Χατζηγιάννης", "ADULT");
+INSERT INTO reservation VALUES(10, 3, "Φίλλιπος", "Γεωργίου", "MINOR");
+INSERT INTO reservation VALUES(11, 4, "Γιάννης", "Ξένος", "ADULT"); 
+INSERT INTO reservation VALUES(12, 2, "Άντζελα", "Μακρυπούλια", "ADULT");
+INSERT INTO reservation VALUES(13, 3, "Λουκάς", "Οικονομόπουλος", "ADULT");
+INSERT INTO reservation VALUES(14, 8, "Πέτρος", "Πετράκης", "ADULT");
+INSERT INTO reservation VALUES(15, 9, "Παναγιώτης", "Πέτρου", "ADULT");
+INSERT INTO reservation VALUES(16, 2, "Xρήστος", "Βασιλόπουλος", "MINOR");
+INSERT INTO reservation VALUES(17, 3, "Στέφανος", "Σαράντης", "ADULT");
+INSERT INTO reservation VALUES(18, 6, "Άννα", "Οικονόμου", "ADULT");
