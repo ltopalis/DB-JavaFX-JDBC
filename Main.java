@@ -1,5 +1,4 @@
 import javafx.application.*;
-import javafx.event.Event;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.layout.*;
