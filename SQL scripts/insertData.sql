@@ -419,6 +419,7 @@ INSERT INTO event VALUES(15, "2023-03-09 09:55:00", "2023-03-09 13:45:00", "Βό
 INSERT INTO event VALUES(15, "2023-03-10 16:10:00", "2023-03-10 20:00:00", "Βόλτα στην Ερμού");
 INSERT INTO event VALUES(16, "2023-04-09 10:38:00", "2023-04-09 17:35:00", "Eπίσκεψη στα γραφικά χωριά");
 INSERT INTO event VALUES(17, "2023-08-10 10:00:00", "2023-08-10 13:00:00", "Bόλτα στο Πυθαγόρειο");
+INSERT INTO event VALUES(17, "2023-08-12 21:30:00", "2023-08-13 00:30:00", "Πάω για Βίσση να ακούσω 'Τσούλες΄και 'Αλήτισσα ψυχή' μαζί με την πιο ανατρεπτική μπάντα της χώρας, απόψε η Άννα τα κάνει...");
 INSERT INTO event VALUES(18, "2023-08-01 10:55:00", "2023-08-01 13:26:00", "Εξερεύνηση των φυσικών τοπίων");
 INSERT INTO event VALUES(18, "2023-08-06 10:00:00", "2023-08-06 12:56:00", "Eπίσκεψη στο μουσείο της Ακρόπολης");
 INSERT INTO event VALUES(19, "2023-02-02 10:45:00", "2023-02-02 11:45:00", "Eπίσκεψη σε βουδιστικό ναό");
@@ -450,16 +451,19 @@ INSERT INTO reservation VALUES(5, 7, "Αλεξάνδρα", "Αργυρού", "AD
 INSERT INTO reservation VALUES(5, 8, "Εθνικός", "Σταρ", "MINOR");
 INSERT INTO reservation VALUES(6, 3, "Βάσια", "Μαυρίκου", "ADULT");
 INSERT INTO reservation VALUES(6, 8, "Τζούλια", "Μπάρκα", "MINOR");
-INSERT INTO reservation VALUES(7, 2, "Zωή", "Χατζηκώστα", "MINOR");
 INSERT INTO reservation VALUES(7, 1, "Κατερίνα", "Ευαγγελάτου", "ADULT");
+INSERT INTO reservation VALUES(7, 2, "Zωή", "Χατζηκώστα", "MINOR");
+INSERT INTO reservation VALUES(7, 9, "James", "Ιακώβου", "ADULT");
 INSERT INTO reservation VALUES(8, 9, "Αλίκη", "Βουγιουκλάκη", "ADULT");
 INSERT INTO reservation VALUES(9, 2, "Γιώργος", "Χατζηγιάννης", "ADULT");
 INSERT INTO reservation VALUES(10, 3, "Φίλλιπος", "Γεωργίου", "MINOR");
 INSERT INTO reservation VALUES(11, 4, "Γιάννης", "Ξένος", "ADULT"); 
 INSERT INTO reservation VALUES(12, 2, "Άντζελα", "Μακρυπούλια", "ADULT");
+INSERT INTO reservation Values(12, 7, "Γωγώ", "Τσαμπά", "ADULT");
 INSERT INTO reservation VALUES(13, 3, "Λουκάς", "Οικονομόπουλος", "ADULT");
 INSERT INTO reservation VALUES(14, 8, "Πέτρος", "Πετράκης", "ADULT");
 INSERT INTO reservation VALUES(15, 9, "Παναγιώτης", "Πέτρου", "ADULT");
+INSERT INTO reservation VALUES(15, 20, "Sean", "Connery", "ADULT");
 INSERT INTO reservation VALUES(16, 2, "Xρήστος", "Βασιλόπουλος", "MINOR");
 INSERT INTO reservation VALUES(17, 3, "Στέφανος", "Σαράντης", "ADULT");
 INSERT INTO reservation VALUES(18, 6, "Άννα", "Οικονόμου", "ADULT");
