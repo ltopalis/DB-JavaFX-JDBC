@@ -1,0 +1,4 @@
+hello:
+	@javac --module-path ./libraries/WIN_javafx-sdk-19/lib --add-modules javafx.fxml,javafx.controls Main.java
+	@java --module-path ./libraries/WIN_javafx-sdk-19/lib --add-modules javafx.fxml,javafx.controls --enable-preview -XX:+ShowCodeDetailsInExceptionMessages -cp "$(CURDIR);./libraries/WIN_javafx-sdk-19/lib/javafx.graphics.jar;./libraries/WIN_javafx-sdk-19/lib/javafx-swt.jar;./libraries/WIN_javafx-sdk-19/lib/fontawesomefx-commons-9.1.2.jar;./libraries/WIN_javafx-sdk-19/lib/javafx.web.jar;./libraries/WIN_javafx-sdk-19/lib/javafx.fxml.jar;./libraries/WIN_javafx-sdk-19/lib/javafx.media.jar;./libraries/WIN_javafx-sdk-19/lib/javafx.swing.jar;./libraries/WIN_javafx-sdk-19/lib/fontawesomefx-fontawesome-4.7.0-9.1.2.jar;./libraries/WIN_javafx-sdk-19/lib/javafx.controls.jar;./libraries/WIN_javafx-sdk-19/lib/javafx.base.jar" Main
+	
