@@ -39,7 +39,6 @@ public class Main extends Application {
 
 
             stage.setScene(scene);
-            //stage.setResizable(false);
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.show();
         } catch (IOException e) {

@@ -1,13 +1,21 @@
+/*
+ * Color palette https://colorhunt.co/palette/f2d7d9d3cedf9cb4cc748da6
+ * #F2D7D9 rgb(242, 215, 217)
+ * #D3CEDF rgb(211, 206, 223)
+ * #9CB4CC rgb(156, 180, 204)
+ * #748DA6 748DA6
+ */
+
 #titleAgencyLabel {
     -fx-font-size: 30;
 }
 
 #leftSide {
-    -fx-background-color: linear-gradient(to bottom right, #FFB3B3, #FFDBA4);
+    -fx-background-color: linear-gradient(to bottom right, #9CB4CC, #748DA6);
 }
 
 #rightSide {
-    -fx-background-color: linear-gradient(to top right, #FFDBA4, #FFE9AE);
+    -fx-background-color: linear-gradient(to top right, #F2D7D9, #D3CEDF);
 }
 
 #minimizedBtn {
@@ -93,8 +101,9 @@
 }
 
 .textfield{
-    -fx-backround-color: linear-gradient(to bottom, #efefef, #eee);
-    -fx-background-radius: 2px;
+    -fx-backround-color: linear-gradient(to bottom, #c5d9ed, #eee);
+    -fx-background-radius: 7px;
+    -fx-border-radius: 7px;
     -fx-border-width: .2px;
     -fx-border-color: #000;
     -fx-font-size: 13px;
@@ -102,6 +111,8 @@
 }
 .textfield:focused{
     -fx-background-color: #fff;
-    -fx-border-color: linear-gradient(to bottom right, #bb1a3a, #722327);
-    -fx-border-width: .8px
+    -fx-border-color: linear-gradient(to bottom right, #9CB4CC, #748DA6);
+    -fx-border-width: .8px;
+    -fx-background-radius: 7px;
+    -fx-border-radius: 7px;
 }

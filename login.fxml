@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="loginControlers">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="loginControllers">
    <children>
       <AnchorPane fx:id="mainForm" prefHeight="900.0" prefWidth="1500.0">
          <children>
@@ -23,33 +22,23 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane id="rightSide" layoutX="450.0" prefHeight="900.0" prefWidth="1050.0" stylesheets="@login_style.css">
+            <AnchorPane id="rightSide" layoutX="450.0" prefHeight="900.0" prefWidth="519.0" stylesheets="@login_style.css">
                <children>
-                  <TextField fx:id="emailTF" layoutX="350.0" layoutY="387.0" prefHeight="36.0" prefWidth="350.0" styleClass="textfield" stylesheets="@login_style.css" />
+                  <TextField fx:id="emailTF" focusTraversable="false" layoutX="350.0" layoutY="382.0" prefHeight="36.0" prefWidth="350.0" promptText="example@email.com" styleClass="textfield" stylesheets="@login_style.css" />
                   <Label layoutX="434.0" layoutY="222.0" text="ΣΥΝΔΕΣΗ">
                      <font>
                         <Font name="Jokerman" size="43.0" />
                      </font>
                   </Label>
-                  <Label layoutX="438.0" layoutY="343.0" text="email σύνδεσης">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-                  <Button id="connectBtn" fx:id="loginBtn" layoutX="353.0" layoutY="474.0" mnemonicParsing="false" stylesheets="@login_style.css" text="Σύνδεση" />
-                  <Button id="cancelBtn" fx:id="cancelBtn" layoutX="445.0" layoutY="474.0" mnemonicParsing="false" stylesheets="@login_style.css" text="Ακύρωση" />
-                  <Button id="exitBtn" fx:id="exitBtn" layoutX="1023.0" layoutY="2.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="25.0" prefWidth="26.0" stylesheets="@login_style.css">
+                  <Button id="connectBtn" fx:id="loginBtn" layoutX="350.0" layoutY="469.0" mnemonicParsing="false" onAction="#connectButtonClicked" prefWidth="350.0" stylesheets="@login_style.css" text="Σύνδεση" />
+                  <Button id="cancelBtn" fx:id="cancelBtn" layoutX="350.0" layoutY="514.0" mnemonicParsing="false" onAction="#cancelButtonClicked" prefWidth="350.0" stylesheets="@login_style.css" text="Ακύρωση" />
+                  <Button id="exitBtn" fx:id="exitBtn" layoutX="1024.0" layoutY="2.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="10.0" prefWidth="10.0" stylesheets="@login_style.css">
                      <graphic>
                         <FontAwesomeIconView glyphName="CLOSE" size="10" />
                      </graphic>
                   </Button>
-                  <Button id="minimizedBtn" fx:id="minimizeBtn" layoutX="997.0" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" stylesheets="@login_style.css">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="MINUS" size="10" text="" />
-                     </graphic>
-                  </Button>
-                  <Label id="notificationLabel" fx:id="notificationLabel" alignment="TOP_LEFT" layoutX="350.0" layoutY="427.0" prefHeight="47.0" prefWidth="350.0" stylesheets="@login_style.css" text="Label" wrapText="true" />
-                  <FontAwesomeIconView glyphName="USERS" layoutX="445.0" layoutY="193.0" size="150" />
+                  <Label id="notificationLabel" fx:id="notificationLabel" alignment="TOP_LEFT" layoutX="350.0" layoutY="422.0" prefHeight="47.0" prefWidth="350.0" stylesheets="@login_style.css" text="Label" wrapText="true" />
+                  <FontAwesomeIconView glyphName="PLANE" layoutX="445.0" layoutY="193.0" size="150" />
                </children>
             </AnchorPane>
          </children>
