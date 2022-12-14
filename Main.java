@@ -4,10 +4,14 @@ import javafx.application.*;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.*;
 import javafx.scene.*;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
 public class Main extends Application {
+
+    private double x = 0;
+    private double y = 0;
 
     @Override
     public void start(Stage stage) {
@@ -15,11 +19,28 @@ public class Main extends Application {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
 
-            Scene scene = new Scene(root, 1500, 900);
+            Scene scene = new Scene(root);
+
+            root.setOnMousePressed((MouseEvent event) -> {
+                x = event.getSceneX();
+                y = event.getSceneY();
+            }); 
+
+            root.setOnMouseDragged((MouseEvent event) -> {
+                stage.setX(event.getScreenX() - x);
+                stage.setY(event.getSceneY() - y);
+
+                stage.setOpacity(.8);
+            });
+
+            root.setOnMouseReleased((MouseEvent event) -> {
+                stage.setOpacity(1);
+            });
+
 
             stage.setScene(scene);
-            stage.setResizable(false);
-            //stage.initStyle(StageStyle.UNDECORATED);
+            //stage.setResizable(false);
+            stage.initStyle(StageStyle.TRANSPARENT);
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
