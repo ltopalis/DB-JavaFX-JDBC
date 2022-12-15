@@ -22,9 +22,9 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane id="rightSide" layoutX="450.0" prefHeight="900.0" prefWidth="519.0" stylesheets="@login_style.css">
+            <AnchorPane id="rightSide" layoutX="450.0" prefHeight="900.0" prefWidth="1054.0" stylesheets="@login_style.css">
                <children>
-                  <TextField fx:id="emailTF" focusTraversable="false" layoutX="350.0" layoutY="382.0" prefHeight="36.0" prefWidth="350.0" promptText="example@email.com" styleClass="textfield" stylesheets="@login_style.css" />
+                  <TextField fx:id="emailTF" focusTraversable="false" layoutX="350.0" layoutY="382.0" prefHeight="36.0" prefWidth="350.0" promptText="example@domain.com" styleClass="textfield" stylesheets="@login_style.css" />
                   <Label layoutX="434.0" layoutY="222.0" text="ΣΥΝΔΕΣΗ">
                      <font>
                         <Font name="Jokerman" size="43.0" />
