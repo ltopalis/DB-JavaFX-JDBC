@@ -116,3 +116,18 @@
     -fx-background-radius: 7px;
     -fx-border-radius: 7px;
 }
+
+#initServer_layout{
+    -fx-background-color: linear-gradient(to top right, #CAF7E3, #EDFFEC);
+}
+
+#textField_initPage{
+    -fx-background-color: #FFF8EA;
+}
+#textField_initPage:focused{
+    -fx-background-color: #fff;
+}
+
+#serverStatus{
+    -fx-text-fill: red;
+}

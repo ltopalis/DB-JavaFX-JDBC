@@ -30,8 +30,8 @@
                         <Font name="Jokerman" size="43.0" />
                      </font>
                   </Label>
-                  <Button id="connectBtn" fx:id="loginBtn" layoutX="350.0" layoutY="469.0" mnemonicParsing="false" onAction="#connectButtonClicked" prefWidth="350.0" stylesheets="@login_style.css" text="Σύνδεση" />
-                  <Button id="cancelBtn" fx:id="cancelBtn" layoutX="350.0" layoutY="514.0" mnemonicParsing="false" onAction="#cancelButtonClicked" prefWidth="350.0" stylesheets="@login_style.css" text="Ακύρωση" />
+                  <Button id="connectBtn" fx:id="loginBtn" defaultButton="true" layoutX="350.0" layoutY="469.0" mnemonicParsing="false" onAction="#connectButtonClicked" prefWidth="350.0" stylesheets="@login_style.css" text="Σύνδεση" />
+                  <Button id="cancelBtn" fx:id="cancelBtn" cancelButton="true" layoutX="350.0" layoutY="514.0" mnemonicParsing="false" onAction="#cancelButtonClicked" prefWidth="350.0" stylesheets="@login_style.css" text="Ακύρωση" />
                   <Button id="exitBtn" fx:id="exitBtn" layoutX="1024.0" layoutY="2.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="10.0" prefWidth="10.0" stylesheets="@login_style.css">
                      <graphic>
                         <FontAwesomeIconView glyphName="CLOSE" size="10" />

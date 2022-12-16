@@ -1,18 +1,14 @@
-import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
 public class loginControllers implements Initializable{
     @FXML
@@ -39,7 +35,11 @@ public class loginControllers implements Initializable{
         Pattern pattern = Pattern.compile("^[a-z1-9._]{3,}@[a-z1-9._]+.[a-z1-9._]+$", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(email);
 
-        if(matcher.find()) {
+        if(email.isEmpty()){
+            notificationLabel.setText("Το πεδίο είναι υποχρεωτικό!");
+            notificationLabel.setVisible(true);
+        }
+        else if(matcher.find()) {
             notificationLabel.setText("Success: " + email);
             notificationLabel.setVisible(true);
         }
@@ -50,6 +50,7 @@ public class loginControllers implements Initializable{
     }
 
     public void cancelButtonClicked(ActionEvent event){
+        notificationLabel.setVisible(false);
         emailTF.clear();
     }
 

@@ -7,6 +7,7 @@ import javafx.scene.*;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class Main extends Application {
 
@@ -17,7 +18,7 @@ public class Main extends Application {
     public void start(Stage stage) {
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("initServer.fxml"));
 
             Scene scene = new Scene(root);
 
