@@ -1,5 +1,5 @@
 **Version: 2.0**
-**Writer: Lazaros Topalis**
+**Author: Lazaros Topalis**
 **Date: 17.12.2022**
 
 # Execute Instructions
