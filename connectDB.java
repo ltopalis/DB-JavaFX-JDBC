@@ -1,5 +1,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class connectDB {
@@ -52,5 +54,20 @@ public class connectDB {
     public static Connection getConnection() throws SQLException {
         String url = "jdbc:mysql://" + server + ":" + port + "/" + database;
         return DriverManager.getConnection(url, username, password);
+    }
+
+    public static String getAccess(String username, String password) throws SQLException {
+        String query = "SELECT w.wrk_AT FROM worker w JOIN it ON w.wrk_AT = it.IT_AT WHERE w.wrk_name = ? AND it.password = ?";
+
+        try (Connection conn = connectDB.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            ResultSet result = stmt.executeQuery();
+            while(result.next()){
+                return result.getString("wrk_AT");
+            }
+        }
+        return null;
     }
 }
