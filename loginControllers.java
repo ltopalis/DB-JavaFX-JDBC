@@ -1,8 +1,5 @@
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,7 +12,10 @@ public class loginControllers implements Initializable{
     private Button cancelBtn;
 
     @FXML
-    private TextField emailTF;
+    private TextField usernameTF;
+
+    @FXML
+    private TextField passwordTF;
 
     @FXML
     private Button exitBtn;
@@ -31,11 +31,13 @@ public class loginControllers implements Initializable{
     }
 
     public void connectButtonClicked(ActionEvent event){
-        String email = emailTF.getText();
-        Pattern pattern = Pattern.compile("^[a-z1-9._]{3,}@[a-z1-9._]+.[a-z1-9._]+$", Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(email);
+        String username = usernameTF.getText();
+        String password = passwordTF.getText();
 
-        if(email.isEmpty()){
+        notificationLabel.setText(username + " " + password);
+        notificationLabel.setVisible(true);
+
+        /*if(email.isEmpty()){
             notificationLabel.setText("Το πεδίο είναι υποχρεωτικό!");
             notificationLabel.setVisible(true);
         }
@@ -46,18 +48,20 @@ public class loginControllers implements Initializable{
         else {
             notificationLabel.setText("Λάθος μορφή email. Ξαναπροσπαθείστε!");
             notificationLabel.setVisible(true);
-        }
+        }*/
     }
 
     public void cancelButtonClicked(ActionEvent event){
         notificationLabel.setVisible(false);
-        emailTF.clear();
+        usernameTF.clear();
+        passwordTF.clear();
     }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         notificationLabel.setVisible(false);
+        
     }
 
 }

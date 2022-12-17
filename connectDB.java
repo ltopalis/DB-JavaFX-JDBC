@@ -5,7 +5,7 @@ import java.sql.SQLException;
 public class connectDB {
     private static String server = "localhost";
     private static String port = "3306";
-    private static String database = null;
+    private static String database = "travel_agency";
     private static String username = null;
     private static String password = null;
 

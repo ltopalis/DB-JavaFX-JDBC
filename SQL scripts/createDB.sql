@@ -92,7 +92,6 @@ CREATE TABLE IF NOT EXISTS trip (
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-
 CREATE TABLE IF NOT EXISTS event (
     ev_tr_id INT(11) NOT NULL,
     ev_start TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP (),
@@ -125,7 +124,7 @@ CREATE TABLE IF NOT EXISTS trip (
         REFERENCES driver (drv_AT)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
-      
+
 CREATE TABLE IF NOT EXISTS languages (
     lng_gui_AT CHAR(10) NOT NULL,
     lng_language VARCHAR(30) NOT NULL,
@@ -134,6 +133,7 @@ CREATE TABLE IF NOT EXISTS languages (
         REFERENCES guide (gui_AT)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 CREATE TABLE IF NOT EXISTS destination (
     dst_id INT(11) NOT NULL AUTO_INCREMENT,
     dst_name VARCHAR(50) NOT NULL DEFAULT 'UNKWOWN',
@@ -156,11 +156,11 @@ CREATE TABLE IF NOT EXISTS travel_to (
     CONSTRAINT to_tr_id_ FOREIGN KEY (to_tr_id)
         REFERENCES trip (tr_id)
         ON DELETE CASCADE ON UPDATE CASCADE,
-      CONSTRAINT to_dst_id_ FOREIGN KEY (to_dst_id)
+    CONSTRAINT to_dst_id_ FOREIGN KEY (to_dst_id)
         REFERENCES destination (dst_id)
         ON DELETE CASCADE ON UPDATE CASCADE   
 );
-         
+
 CREATE TABLE IF NOT EXISTS reservation (
     res_tr_id INT(11) NOT NULL,
     res_seatnum TINYINT(4) NOT NULL,

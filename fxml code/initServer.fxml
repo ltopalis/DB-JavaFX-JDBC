@@ -23,19 +23,19 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="TFserverip" layoutX="251.0" layoutY="154.0" prefHeight="26.0" prefWidth="224.0" styleClass="textField" stylesheets="@../CSS%20code/initServer_style.css" />
+            <TextField fx:id="TFserverip" focusTraversable="false" layoutX="251.0" layoutY="154.0" prefHeight="26.0" prefWidth="224.0" styleClass="textField" stylesheets="@../CSS%20code/initServer_style.css" />
             <Label layoutX="487.0" layoutY="157.0" text="Port">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="TFport" alignment="CENTER" layoutX="524.0" layoutY="154.0" prefHeight="26.0" prefWidth="60.0" styleClass="textField" stylesheets="@../CSS%20code/initServer_style.css" />
+            <TextField fx:id="TFport" alignment="CENTER" focusTraversable="false" layoutX="524.0" layoutY="154.0" prefHeight="26.0" prefWidth="60.0" styleClass="textField" stylesheets="@../CSS%20code/initServer_style.css" />
             <Label layoutX="137.0" layoutY="213.0" prefHeight="20.0" prefWidth="98.0" text="Database">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="TFdatabase" layoutX="251.0" layoutY="210.0" prefHeight="26.0" prefWidth="338.0" styleClass="textField" stylesheets="@../CSS%20code/initServer_style.css" />
+            <TextField fx:id="TFdatabase" focusTraversable="false" layoutX="251.0" layoutY="210.0" prefHeight="26.0" prefWidth="338.0" styleClass="textField" stylesheets="@../CSS%20code/initServer_style.css" />
             <Label layoutX="137.0" layoutY="277.0" prefHeight="20.0" prefWidth="98.0" text="Password">
                <font>
                   <Font size="14.0" />
