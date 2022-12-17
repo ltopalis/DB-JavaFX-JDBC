@@ -92,7 +92,6 @@ CREATE TABLE IF NOT EXISTS trip (
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-
 CREATE TABLE IF NOT EXISTS event (
     ev_tr_id INT(11) NOT NULL,
     ev_start TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP (),
@@ -125,7 +124,7 @@ CREATE TABLE IF NOT EXISTS trip (
         REFERENCES driver (drv_AT)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
-      
+
 CREATE TABLE IF NOT EXISTS languages (
     lng_gui_AT CHAR(10) NOT NULL,
     lng_language VARCHAR(30) NOT NULL,
@@ -134,6 +133,7 @@ CREATE TABLE IF NOT EXISTS languages (
         REFERENCES guide (gui_AT)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 CREATE TABLE IF NOT EXISTS destination (
     dst_id INT(11) NOT NULL AUTO_INCREMENT,
     dst_name VARCHAR(50) NOT NULL DEFAULT 'UNKWOWN',
@@ -156,11 +156,11 @@ CREATE TABLE IF NOT EXISTS travel_to (
     CONSTRAINT to_tr_id_ FOREIGN KEY (to_tr_id)
         REFERENCES trip (tr_id)
         ON DELETE CASCADE ON UPDATE CASCADE,
-      CONSTRAINT to_dst_id_ FOREIGN KEY (to_dst_id)
+    CONSTRAINT to_dst_id_ FOREIGN KEY (to_dst_id)
         REFERENCES destination (dst_id)
         ON DELETE CASCADE ON UPDATE CASCADE   
 );
-         
+
 CREATE TABLE IF NOT EXISTS reservation (
     res_tr_id INT(11) NOT NULL,
     res_seatnum TINYINT(4) NOT NULL,
@@ -179,8 +179,38 @@ CREATE TABLE IF NOT EXISTS IT(
     start_date DATE NOT NULL,
 	end_date DATE,
 	PRIMARY KEY(IT_AT),
-     CONSTRAINT IT_at FOREIGN KEY (IT_AT)
+    CONSTRAINT IT_at FOREIGN KEY (IT_AT)
         REFERENCES worker(wrk_AT)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS log (
+    user_AT CHAR(10)                           NOT NULL PRIMARY KEY,
+    action  ENUM('INSERT', 'DELETE', 'UPDATE') NOT NULL,
+    changes VARCHAR(200)                       NOT NULL,
+    stamp   TIMESTAMP                          DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS offers (
+    offer_id     INT        NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    offer_start  DATE       NOT NULL,
+    offer_finish DATE       NOT NULL,
+    offer_cost   FLOAT(5,2) NOT NULL,
+    offer_dst_id INT        NOT NULL,
+
+    CONSTRAINT ofr_fk_dst FOREIGN KEY (offer_dst_id)
+        REFERENCES destination(dst_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS reservation_offers (
+    res_off_tr_id  INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    res_off_lname  VARCHAR(20) NOT NULL,
+    res_off_name   VARCHAR(20) NOT NULL,
+    res_off_id     INT         NOT NULL,
+    res_off_depoit FLOAT(5,2)  NOT NULL,
+
+    CONSTRAINT res_off_fk_off FOREIGN KEY (res_off_id)
+        REFERENCES offers(offer_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
