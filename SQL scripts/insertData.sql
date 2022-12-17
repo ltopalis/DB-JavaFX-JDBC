@@ -433,7 +433,6 @@ INSERT INTO event VALUES(25, "2023-05-17 10:45:00", "2023-05-17 17:00:00", "Ελ
 INSERT INTO event VALUES(26, "2023-07-27 10:27:00", "2023-07-27 13:51:00", "Ελεύθερος Χρόνος");
 INSERT INTO event VALUES(26, "2023-08-08 10:43:00", "2023-08-08 15:56:00", "Περιήγηση στα στενά σοκάκια της Παλιάς Πόλης");
 
-
 -- reservation table
 INSERT INTO reservation VALUES(1, 7, "Τζίτζι", "Χαντίντ", "ADULT");
 INSERT INTO reservation VALUES(1, 4, "Μαριάννα", "Ντούβλη", "ADULT");
@@ -463,3 +462,11 @@ INSERT INTO reservation VALUES(17, 3, "Στέφανος", "Σαράντης", "A
 INSERT INTO reservation VALUES(18, 6, "Άννα", "Οικονόμου", "ADULT");
 INSERT INTO reservation VALUES(19, 15, "Τζούλια", "Αλεξανδράτου", "ADULT");
 INSERT INTO reservation VALUES(20, 7, "Mr.", "Μπούτιας", "MINOR");
+
+-- it table
+INSERT INTO it VALUES("Α4154822", "piranchas", "2022-08-25 08:00:00", NULL);
+
+-- offers table
+INSERT INTO offers VALUES (NULL, '2024-01-01', '2024-12-31', 255, 18);
+INSERT INTO offers VALUES (NULL, '2022-12-16', '2023-05-03', 652, 20);
+INSERT INTO offers VALUES (NULL, '2023-02-18', '2024-06-25', 420, 7);
