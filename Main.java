@@ -17,7 +17,7 @@ public class Main extends Application {
     public void start(Stage stage) {
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("initServer.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("fxml code/initServer.fxml"));
             Scene scene = new Scene(root);
 
             root.setOnMousePressed((MouseEvent event) -> {

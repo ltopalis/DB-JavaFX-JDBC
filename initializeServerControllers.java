@@ -65,7 +65,7 @@ public class initializeServerControllers implements Initializable {
         connectDB.setPassword(TFpassword.getText());
 
         try(Connection ignored = connectDB.getConnection()){
-            Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("fxml code/login.fxml"));
             Stage stage = new Stage();
             Scene scene = new Scene(root);
 
