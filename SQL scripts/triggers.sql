@@ -1,5 +1,42 @@
--- 3.1.4.3
+DROP TRIGGER IF EXISTS not_accept_changes;
 DROP TRIGGER IF EXISTS reduceSalary;
+
+-- 3.1.4.2
+DELIMITER $$
+CREATE TRIGGER not_accept_changes
+BEFORE UPDATE ON trip
+FOR EACH ROW
+BEGIN
+    DECLARE reservations INT;
+
+    SELECT COUNT(res.res_tr_id)
+    INTO reservations
+    FROM trip t LEFT JOIN reservation res 
+	    ON t.tr_id = res.res_tr_id
+    WHERE t.tr_id = OLD.tr_id;
+
+    IF reservations <> 0
+    THEN
+        SET NEW.tr_departure = OLD.tr_departure,
+            NEW.tr_return = OLD.tr_return,
+            NEW.tr_cost = OLD.tr_cost;
+    END IF;
+END$$
+DELIMITER ;
+
+SELECT tr_cost 
+FROM travel_agency.reservation res JOIN trip t 
+	ON res.res_tr_id = t.tr_id
+WHERE res_tr_id = 22; # 7
+
+UPDATE trip SET tr_cost = 1;
+
+SELECT tr_cost 
+FROM travel_agency.reservation res RIGHT JOIN trip t 
+	ON res.res_tr_id = t.tr_id
+WHERE tr_id = 22; # 7
+
+-- 3.1.4.3
 DELIMITER $
 CREATE TRIGGER reduceSalary BEFORE UPDATE ON worker
 FOR EACH ROW 
@@ -10,7 +47,7 @@ BEGIN
     
     IF(diff<0)
     THEN 
-       INSERT INTO branch(br_street) VALUES (NULL);
+        INSERT INTO branch(br_street) VALUES (NULL);
 	END IF;
 END $
 DELIMITER ;
