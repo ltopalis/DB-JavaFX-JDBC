@@ -1,5 +1,8 @@
--- 3.1.3.1
 DROP PROCEDURE IF EXISTS addNewDriver;
+DROP PROCEDURE IF EXISTS trip_details;
+DROP PROCEDURE IF EXISTS deleteWorker;
+
+-- 3.1.3.1
 DELIMITER $
 CREATE PROCEDURE addNewDriver(IN AT CHAR(10) , IN name VARCHAR(20), IN lastname VARCHAR(20),IN salary FLOAT(7,2), IN drv_license ENUM('A', 'B', 'C', 'D'), IN drv_route ENUM('LOCAL', 'ABROAD'), IN drv_experience TINYINT(4))     
 BEGIN   
@@ -26,16 +29,73 @@ BEGIN
     INSERT INTO worker 
     VALUES(AT, name, lastname, salary, branch);
     
-     INSERT INTO driver
-     VALUES( AT, drv_license, drv_route, drv_experience);
+    INSERT INTO driver
+    VALUES( AT, drv_license, drv_route, drv_experience);
 END$
 DELIMITER ;
 CALL addNewDriver('ΛΖ103412','Αλέκα','Λάλη',4582.78,'D','LOCAL',6);    
 SELECT * FROM worker;
 SELECT * FROM driver;    
 
+-- 3.1.3.2
+DELIMITER $$
+CREATE PROCEDURE trip_details(
+	IN branch_id_p INT,
+    IN departure_date_p TIMESTAMP,
+    IN arrival_date_p TIMESTAMP,
+    OUT tr_cost_p FLOAT(7,2),
+    OUT maxseats_p TINYINT,
+    OUT reservations_p INT,
+    OUT free_seats_p TINYINT,
+    OUT drv_name_p VARCHAR(20),
+    OUT drv_lname_p VARCHAR(20),
+    OUT gui_name_p VARCHAR(20),
+    OUT gui_lname_p VARCHAR(20),
+    OUT departure_p TIMESTAMP,
+    OUT arrival_p TIMESTAMP
+)
+BEGIN
+	DECLARE finished INT DEFAULT 0;
+    DECLARE guide CHAR(10);
+    DECLARE driver CHAR(10);
+    DECLARE cursor_trip_details CURSOR FOR
+		SELECT t.tr_cost, t.tr_maxseats, COUNT(res.res_tr_id),
+            t.tr_maxseats - COUNT(res.res_tr_id), t.tr_gui_AT, 
+            t.tr_drv_AT, t.tr_departure, t.tr_return
+        FROM trip t LEFT JOIN reservation res ON t.tr_id = res.res_tr_id
+        WHERE t.tr_br_code = branch_id_p AND
+			t.tr_departure BETWEEN departure_date_p AND arrival_date_p
+		GROUP BY t.tr_id;
+	
+    DECLARE CONTINUE HANDLER FOR NOT FOUND
+    SET finished = 1;
+        
+	OPEN cursor_trip_details;
+    
+    REPEAT
+		FETCH cursor_trip_details 
+        INTO tr_cost_p, maxseats_p, reservations_p, 
+            free_seats_p, guide, driver, departure_p, arrival_p;
+        IF finished = 0
+        THEN
+			SELECT wrk_name, wrk_lname
+			INTO gui_name_p, gui_lname_p 
+			FROM worker
+			WHERE wrk_AT = guide;
+			
+			SELECT wrk_name, wrk_lname
+			INTO drv_name_p, drv_lname_p 
+			FROM worker
+			WHERE wrk_AT = driver;
+        END IF;
+    UNTIL finished=1
+    END REPEAT;
+    
+	CLOSE cursor_trip_details;
+END$$
+DELIMITER ;
+
 -- 3.1.3.3
-DROP PROCEDURE IF EXISTS deleteWorker;
 DELIMITER $
 CREATE PROCEDURE deleteWorker(IN name VARCHAR(20), IN lastname VARCHAR(20))
 BEGIN 
@@ -52,9 +112,9 @@ BEGIN
     
     IF(type='ADMINISTRATIVE')
 	THEN
-       SELECT 'THIS WORKER IS AN ADMINISTRATIVE AND CAN NOT BE DELETED'as warning;
+        SELECT 'THIS WORKER IS AN ADMINISTRATIVE AND CAN NOT BE DELETED'as warning;
     ELSE DELETE FROM admin WHERE AT=adm_AT;
-		 DELETE FROM worker WHERE AT=wrk_AT;
+		DELETE FROM worker WHERE AT=wrk_AT;
 	END IF;
 END$
 DELIMITER ;
