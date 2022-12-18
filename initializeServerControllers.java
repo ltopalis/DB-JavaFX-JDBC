@@ -18,8 +18,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-
-
 public class initializeServerControllers implements Initializable {
 
     @FXML
@@ -44,11 +42,11 @@ public class initializeServerControllers implements Initializable {
     private double x;
     private double y;
 
-    public void exitButtonClicked(ActionEvent e){
+    public void exitButtonClicked(ActionEvent e) {
         System.exit(0);
     }
 
-    public void cancelButtonClicked(ActionEvent event){
+    public void cancelButtonClicked(ActionEvent event) {
         LBLstatus.setVisible(false);
         TFserverip.setText(connectDB.getServer());
         TFport.setText(connectDB.getPort());
@@ -64,7 +62,7 @@ public class initializeServerControllers implements Initializable {
         connectDB.setUsername(TFusername.getText());
         connectDB.setPassword(TFpassword.getText());
 
-        try(Connection ignored = connectDB.getConnection()){
+        try (Connection ignored = connectDB.getConnection()) {
             Parent root = FXMLLoader.load(getClass().getResource("fxml code/login.fxml"));
             Stage stage = new Stage();
             Scene scene = new Scene(root);
@@ -90,10 +88,10 @@ public class initializeServerControllers implements Initializable {
             stage.setScene(scene);
             BTNconnect.getScene().getWindow().hide();
             stage.show();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             LBLstatus.setText("Η σύνδεση με τον server δεν ήταν δυνατή. Ελέγξτε τα στοιχεία και ξαναπροσπαθείστε!");
             LBLstatus.setVisible(true);
-        }catch(IOException e){
+        } catch (IOException e) {
             System.err.println(e);
         }
     }

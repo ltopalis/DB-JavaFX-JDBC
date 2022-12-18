@@ -23,7 +23,7 @@ public class Main extends Application {
             root.setOnMousePressed((MouseEvent event) -> {
                 x = event.getSceneX();
                 y = event.getSceneY();
-            }); 
+            });
 
             root.setOnMouseDragged((MouseEvent event) -> {
                 stage.setX(event.getScreenX() - x);
@@ -35,7 +35,6 @@ public class Main extends Application {
             root.setOnMouseReleased((MouseEvent event) -> {
                 stage.setOpacity(1);
             });
-
 
             stage.setScene(scene);
             stage.initStyle(StageStyle.TRANSPARENT);

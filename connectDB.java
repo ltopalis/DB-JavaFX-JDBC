@@ -56,7 +56,7 @@ public class connectDB {
         return DriverManager.getConnection(url, username, password);
     }
 
-    public static String getAccess(String username, String password){
+    public static String getAccess(String username, String password) {
         String query = "SELECT w.wrk_AT FROM worker w JOIN it ON w.wrk_AT = it.IT_AT WHERE w.wrk_lname = ? AND it.password = ?";
 
         try (Connection conn = connectDB.getConnection()) {
@@ -64,10 +64,10 @@ public class connectDB {
             stmt.setString(1, username);
             stmt.setString(2, password);
             ResultSet result = stmt.executeQuery();
-            while(result.next()){
+            while (result.next()) {
                 return result.getString("wrk_AT");
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.err.println(e.getSQLState());
         }
         return null;
