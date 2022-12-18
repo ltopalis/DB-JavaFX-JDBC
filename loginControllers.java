@@ -7,8 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.sql.SQLException;
-
 public class loginControllers implements Initializable {
     @FXML
     private Button cancelBtn;
@@ -33,19 +31,15 @@ public class loginControllers implements Initializable {
     }
 
     public void connectButtonClicked(ActionEvent event) {
-        try {
-            String username = usernameTF.getText();
-            String password = passwordTF.getText();
-            String result = connectDB.getAccess(username, password);
-            if (result != null) {
-                notificationLabel.setText(result);
-                notificationLabel.setVisible(true);
-            } else {
-                notificationLabel.setText("Ο χρήστης δεν υπάρχει, δεν έχει πρόσβαση ή τα στοιχεία είναι λάθος!");
-                notificationLabel.setVisible(true);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        String username = usernameTF.getText();
+        String password = passwordTF.getText();
+        String result = connectDB.getAccess(username, password);
+        if (result != null) {
+            notificationLabel.setText(result);
+            notificationLabel.setVisible(true);
+        } else {
+            notificationLabel.setText("Ο χρήστης δεν υπάρχει, δεν έχει πρόσβαση ή τα στοιχεία είναι λάθος!");
+            notificationLabel.setVisible(true);
         }
     }
 

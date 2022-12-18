@@ -175,9 +175,9 @@ CREATE TABLE IF NOT EXISTS reservation (
 
 CREATE TABLE IF NOT EXISTS IT(
 	IT_AT CHAR(10)  NOT NULL,
-    password CHAR(10)  DEFAULT 'password',
+    password CHAR(10)  NOT NULL DEFAULT 'password',
     start_date DATE NOT NULL,
-	end_date DATE,
+	end_date DATE NULL DEFAULT NULL,
 	PRIMARY KEY(IT_AT),
     CONSTRAINT IT_at FOREIGN KEY (IT_AT)
         REFERENCES worker(wrk_AT)
