@@ -23,7 +23,7 @@ BEGIN
     END IF;
 END$$
 DELIMITER ;
-
+/*
 SELECT tr_cost 
 FROM travel_agency.reservation res JOIN trip t 
 	ON res.res_tr_id = t.tr_id
@@ -35,7 +35,7 @@ SELECT tr_cost
 FROM travel_agency.reservation res RIGHT JOIN trip t 
 	ON res.res_tr_id = t.tr_id
 WHERE tr_id = 22; # 7
-
+*/
 -- 3.1.4.3
 DELIMITER $
 CREATE TRIGGER reduceSalary BEFORE UPDATE ON worker
@@ -51,7 +51,7 @@ BEGIN
 	END IF;
 END $
 DELIMITER ;
-
+/*
 INSERT INTO worker VALUES('ΧΨ109234','Πόπη','Παπακαλιάτη',5000.32,15);
 SELECT * FROM worker;
 UPDATE worker
@@ -61,3 +61,4 @@ WHERE wrk_AT='ΧΨ109234';
 UPDATE worker
 SET wrk_salary=6000.00
 WHERE wrk_AT='ΧΨ109234';
+*/

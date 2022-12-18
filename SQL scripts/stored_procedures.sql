@@ -33,9 +33,9 @@ BEGIN
     VALUES( AT, drv_license, drv_route, drv_experience);
 END$
 DELIMITER ;
-CALL addNewDriver('ΛΖ103412','Αλέκα','Λάλη',4582.78,'D','LOCAL',6);    
-SELECT * FROM worker;
-SELECT * FROM driver;    
+# CALL addNewDriver('ΛΖ103412','Αλέκα','Λάλη',4582.78,'D','LOCAL',6);    
+# SELECT * FROM worker;
+# SELECT * FROM driver;    
 
 -- 3.1.3.2
 DELIMITER $$
@@ -119,7 +119,7 @@ BEGIN
 END$
 DELIMITER ;
 
-SELECT * FROM admin;
-SELECT * FROM worker;
-CALL deleteWorker('Μήτσος','Παυλάτος');
-CALL deleteWorker('Μανωλία','Μπούρνοβα');
+# SELECT * FROM admin;
+# SELECT * FROM worker;
+# CALL deleteWorker('Μήτσος','Παυλάτος');
+# CALL deleteWorker('Μανωλία','Μπούρνοβα');
