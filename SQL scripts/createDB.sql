@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS reservation (
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS IT(
+CREATE TABLE IF NOT EXISTS it(
 	IT_AT CHAR(10)  NOT NULL,
     password CHAR(10)  NOT NULL DEFAULT 'password',
     start_date DATE NOT NULL,
@@ -185,7 +185,7 @@ CREATE TABLE IF NOT EXISTS IT(
 );
 
 CREATE TABLE IF NOT EXISTS log (
-    user_AT CHAR(10)                           NOT NULL PRIMARY KEY,
+    user_AT VARCHAR(20)                        NOT NULL,
     action  ENUM('INSERT', 'DELETE', 'UPDATE') NOT NULL,
     changes VARCHAR(200)                       NOT NULL,
     stamp   TIMESTAMP                          DEFAULT CURRENT_TIMESTAMP
