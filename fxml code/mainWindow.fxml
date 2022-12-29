@@ -3,6 +3,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
@@ -45,19 +46,28 @@
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <Button fx:id="tripButton" layoutY="356.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="269.0" text="MENOY ΤΑΞΙΔΙΟΥ" />
-                        <Button fx:id="workerButton" layoutY="417.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="269.0" text="ΜΕΝΟΥ ΥΠΑΛΛΗΛΩΝ" />
-                        <Button fx:id="signoutButton" layoutX="7.0" layoutY="822.0" mnemonicParsing="false" onAction="#logout">
+                        <Button fx:id="tripButton" layoutY="326.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="269.0" text="MENOY ΤΑΞΙΔΙΩΝ" />
+                        <Button fx:id="workerButton" layoutY="387.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="269.0" text="ΜΕΝΟΥ ΥΠΑΛΛΗΛΩΝ" />
+                        <Button fx:id="signoutButton" layoutX="14.0" layoutY="827.0" mnemonicParsing="false" onAction="#logout">
                            <graphic>
-                              <FontAwesomeIconView glyphName="SIGN_OUT" size="25" />
+                              <FontAwesomeIconView glyphName="SIGN_OUT" size="20" />
                            </graphic>
                         </Button>
-                        <Button fx:id="offerButton" layoutY="478.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="269.0" text="ΜΕΝΟΥ ΠΡΟΣΦΟΡΩΝ" />
+                        <Button fx:id="offerButton" layoutY="448.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="269.0" text="ΜΕΝΟΥ ΠΡΟΣΦΟΡΩΝ" />
+                        <Button fx:id="workerButton1" layoutY="509.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="269.0" text="ΝΕΑ ΚΡΑΤΗΣΗ" />
+                        <Button layoutX="201.0" layoutY="827.0" mnemonicParsing="false">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="COG" size="20" />
+                           </graphic>
+                        </Button>
                      </children>
                   </Pane>
                </left>
                <center>
-                  <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <ToggleButton layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="ToggleButton" />
+                     </children></Pane>
                </center>
             </BorderPane>
          </children></AnchorPane>
