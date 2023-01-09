@@ -1,0 +1,36 @@
+#leftSide {
+    -fx-background-color: linear-gradient(to bottom right, #cc9cbc, #d294ee);
+}
+
+#rightSide {
+    -fx-background-color: linear-gradient(to bottom right, #F2D7D9, #D3CEDF, #9CB4CC, #748DA6);
+    -fx-background-size: 400% 400%;
+}
+
+#exitBtn {
+    -fx-background-radius:20px;
+    -fx-border-radius: 20px;
+    -fx-background-color: transparent;
+}
+
+#exitBtn:hover {
+    -fx-background-radius:20px;
+    -fx-border-radius: 20px;
+    -fx-background-color: #ff80bf;
+}
+
+#header{
+    -fx-background-color: #ececec
+}
+
+.botton {
+    -fx-background-radius:20px;
+    -fx-border-radius: 20px;
+    -fx-background-color: transparent;
+}
+
+.botton:hover{
+    -fx-background-radius:20px;
+    -fx-border-radius: 20px;
+    -fx-background-color: #F2D7D9;
+}

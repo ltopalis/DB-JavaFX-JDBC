@@ -4,7 +4,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -15,19 +14,19 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboardContollers">
    <children>
-      <AnchorPane prefHeight="900.0" prefWidth="1500.0">
+      <AnchorPane fx:id="dashboard" prefHeight="900.0" prefWidth="1500.0">
          <children>
             <BorderPane prefHeight="900.0" prefWidth="1500.0">
                <top>
-                  <Pane prefHeight="25.0" prefWidth="1500.0" BorderPane.alignment="CENTER">
+                  <Pane id="header" prefHeight="25.0" prefWidth="1500.0" stylesheets="@../CSS%20code/dasboard.css" BorderPane.alignment="CENTER">
                      <children>
                         <FontAwesomeIconView glyphName="PLANE" layoutX="11.0" layoutY="19.0" size="20" />
-                        <Label layoutX="36.0" layoutY="2.0" text="Stella Stellats Agency">
+                        <Label layoutX="35.0" layoutY="-2.0" text="Stella Stellats Agency">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Button fx:id="exitButton" layoutX="1485.0" layoutY="1.0" minWidth="16.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="22.0" prefWidth="16.0">
+                        <Button id="exitBtn" fx:id="exitButton" layoutX="1485.0" layoutY="1.0" minWidth="16.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="14.0" prefWidth="16.0" stylesheets="@../CSS%20code/dasboard.css">
                            <graphic>
                               <FontAwesomeIconView glyphName="CLOSE" size="10" />
                            </graphic>
@@ -36,7 +35,7 @@
                   </Pane>
                </top>
                <left>
-                  <Pane prefHeight="875.0" prefWidth="269.0" BorderPane.alignment="CENTER">
+                  <Pane id="leftSide" prefHeight="875.0" prefWidth="269.0" stylesheets="@../CSS%20code/dasboard.css" BorderPane.alignment="CENTER">
                      <children>
                         <FontAwesomeIconView glyphName="USER" layoutX="106.0" layoutY="162.0" size="80" />
                         <Label alignment="CENTER" contentDisplay="CENTER" layoutY="173.0" prefWidth="269.0" text="Καλωσήρθες," textAlignment="CENTER">
@@ -49,16 +48,16 @@
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <Button fx:id="tripButton" layoutY="326.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="269.0" text="MENOY ΤΑΞΙΔΙΩΝ" />
-                        <Button fx:id="workerButton" layoutY="387.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="269.0" text="ΜΕΝΟΥ ΥΠΑΛΛΗΛΩΝ" />
-                        <Button fx:id="signoutButton" layoutX="14.0" layoutY="827.0" mnemonicParsing="false" onAction="#logout">
+                        <Button fx:id="tripButton" layoutY="326.0" mnemonicParsing="false" onAction="#tripButtonPressed" prefHeight="41.0" prefWidth="269.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="MENOY ΤΑΞΙΔΙΩΝ" />
+                        <Button fx:id="workerButton" layoutY="387.0" mnemonicParsing="false" onAction="#workerButtonPressed" prefHeight="41.0" prefWidth="269.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="ΜΕΝΟΥ ΥΠΑΛΛΗΛΩΝ" />
+                        <Button fx:id="signoutButton" layoutX="14.0" layoutY="827.0" mnemonicParsing="false" onAction="#logout" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css">
                            <graphic>
                               <FontAwesomeIconView glyphName="SIGN_OUT" size="20" />
                            </graphic>
                         </Button>
-                        <Button fx:id="offerButton" layoutY="448.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="269.0" text="ΜΕΝΟΥ ΠΡΟΣΦΟΡΩΝ" />
-                        <Button fx:id="workerButton1" layoutY="509.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="269.0" text="ΝΕΑ ΚΡΑΤΗΣΗ" />
-                        <Button layoutX="201.0" layoutY="827.0" mnemonicParsing="false">
+                        <Button fx:id="offerButton" layoutY="448.0" mnemonicParsing="false" onAction="#offerButtonPressed" prefHeight="41.0" prefWidth="269.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="ΜΕΝΟΥ ΠΡΟΣΦΟΡΩΝ" />
+                        <Button fx:id="newReservationButton" layoutY="509.0" mnemonicParsing="false" onAction="#reservationButtonPressed" prefHeight="41.0" prefWidth="269.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="ΝΕΑ ΚΡΑΤΗΣΗ" />
+                        <Button fx:id="settingsButton" layoutX="221.0" layoutY="827.0" mnemonicParsing="false" onAction="#settingsButtonPressed" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css">
                            <graphic>
                               <FontAwesomeIconView glyphName="COG" size="20" />
                            </graphic>
@@ -67,14 +66,14 @@
                   </Pane>
                </left>
                <center>
-                  <Pane BorderPane.alignment="CENTER">
+                  <Pane id="rightSide" stylesheets="@../CSS%20code/dasboard.css" BorderPane.alignment="CENTER">
                      <children>
-                        <ToggleButton layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="ToggleButton" />
-                        <HBox layoutY="58.0" prefHeight="132.0" prefWidth="1231.0">
+                        <HBox layoutX="28.0" layoutY="467.0" prefHeight="100.0" prefWidth="200.0" />
+                        <HBox layoutY="132.0" prefHeight="132.0" prefWidth="1231.0">
                            <children>
                               <AnchorPane prefHeight="138.0" prefWidth="292.0">
                                  <children>
-                                    <Label layoutY="14.0" prefHeight="30.0" prefWidth="292.0" text="Συνολικο κερδος (€)">
+                                    <Label layoutY="14.0" prefHeight="30.0" prefWidth="292.0" text="Συνολικό κέρδος (€)">
                                        <font>
                                           <Font size="25.0" />
                                        </font>
@@ -89,7 +88,7 @@
                               <Pane prefHeight="200.0" prefWidth="200.0" />
                               <AnchorPane prefHeight="138.0" prefWidth="292.0">
                                  <children>
-                                    <Label layoutY="14.0" prefWidth="292.0" text="Συνολικα εσοδα (€)">
+                                    <Label layoutY="14.0" prefWidth="292.0" text="Συνολικά έσοδα (€)">
                                        <font>
                                           <Font size="25.0" />
                                        </font>
@@ -104,7 +103,7 @@
                               <Pane prefHeight="200.0" prefWidth="200.0" />
                               <AnchorPane prefHeight="138.0" prefWidth="292.0">
                                  <children>
-                                    <Label layoutY="14.0" prefHeight="30.0" prefWidth="292.0" text="Συνολικα εξοδα (€)">
+                                    <Label layoutY="14.0" prefHeight="30.0" prefWidth="292.0" text="Συνολικά έξοδα (€)">
                                        <font>
                                           <Font size="25.0" />
                                        </font>
@@ -121,77 +120,114 @@
                               <Insets left="10.0" right="10.0" />
                            </padding>
                         </HBox>
-                        <AnchorPane fx:id="workers_summary" layoutX="14.0" layoutY="256.0" prefHeight="152.0" prefWidth="178.0">
+                        <HBox layoutY="380.0" prefHeight="100.0" prefWidth="1231.0">
                            <children>
-                              <Label alignment="CENTER" layoutY="14.0" prefHeight="30.0" prefWidth="178.0" text="Υπαλληλοι">
-                                 <font>
-                                    <Font size="25.0" />
-                                 </font>
-                              </Label>
-                              <HBox layoutY="44.0" prefHeight="108.0" prefWidth="178.0">
+                              <AnchorPane fx:id="workers_summary" prefHeight="152.0" prefWidth="178.0">
                                  <children>
-                                    <VBox prefHeight="176.0" prefWidth="117.0">
+                                    <Label alignment="CENTER" layoutY="14.0" prefHeight="30.0" prefWidth="178.0" text="Υπάλληλοι">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox layoutY="44.0" prefHeight="108.0" prefWidth="178.0">
                                        <children>
-                                          <Label prefHeight="18.0" prefWidth="117.0" text="Οδηγοι">
-                                             <font>
-                                                <Font size="17.0" />
-                                             </font>
-                                          </Label>
-                                          <Label prefHeight="18.0" prefWidth="117.0" text="Ξεναγοι">
-                                             <font>
-                                                <Font size="17.0" />
-                                             </font>
-                                          </Label>
-                                          <Label prefHeight="18.0" prefWidth="117.0" text="Λογιστες">
-                                             <font>
-                                                <Font size="17.0" />
-                                             </font>
-                                          </Label>
-                                          <Label prefHeight="21.0" prefWidth="117.0" text="Διαχειριστες">
-                                             <font>
-                                                <Font size="17.0" />
-                                             </font>
-                                          </Label>
-                                          <Label prefHeight="21.0" prefWidth="117.0" text="Επιμελητεις">
-                                             <font>
-                                                <Font size="17.0" />
-                                             </font>
-                                          </Label>
+                                          <VBox prefHeight="176.0" prefWidth="117.0">
+                                             <children>
+                                                <Label prefHeight="18.0" prefWidth="117.0" text="Οδηγοί">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label prefHeight="18.0" prefWidth="117.0" text="Ξεναγοί">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label prefHeight="18.0" prefWidth="117.0" text="Λογιστές">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label prefHeight="21.0" prefWidth="117.0" text="Διαχειριστές">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label prefHeight="21.0" prefWidth="117.0" text="Επιμελητές">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <VBox prefHeight="176.0" prefWidth="61.0">
+                                             <children>
+                                                <Label fx:id="drivers_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="61.0" text="7">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="guide_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="61.0" text="6">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="accounting_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="61.0" text="5">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="admin_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="61.0" text="4">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="logistics_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="61.0" text="3">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
                                        </children>
-                                    </VBox>
-                                    <VBox prefHeight="176.0" prefWidth="61.0">
-                                       <children>
-                                          <Label fx:id="drivers_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="61.0" text="7">
-                                             <font>
-                                                <Font size="17.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="guide_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="61.0" text="6">
-                                             <font>
-                                                <Font size="17.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="accounting_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="61.0" text="5">
-                                             <font>
-                                                <Font size="17.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="admin_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="61.0" text="4">
-                                             <font>
-                                                <Font size="17.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="logistics_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="61.0" text="3">
-                                             <font>
-                                                <Font size="17.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </VBox>
+                                    </HBox>
                                  </children>
-                              </HBox>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="174.0" prefWidth="228.0" />
+                              <AnchorPane prefHeight="174.0" prefWidth="314.0">
+                                 <children>
+                                    <Label alignment="CENTER" layoutY="14.0" prefHeight="36.0" prefWidth="314.0" text="Πλήθος Προορισμών">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="destinationNumber" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutY="54.0" prefHeight="78.0" prefWidth="314.0" text="7" textAlignment="RIGHT" textOverrun="CENTER_ELLIPSIS">
+                                       <font>
+                                          <Font size="45.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="174.0" prefWidth="228.0" />
+                              <AnchorPane prefHeight="174.0" prefWidth="314.0">
+                                 <children>
+                                    <Label alignment="CENTER" layoutY="14.0" prefHeight="36.0" prefWidth="314.0" text="Πλήθος Κρατήσεων">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="reservationNumber" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutY="54.0" prefHeight="78.0" prefWidth="314.0" text="9" textAlignment="RIGHT" textOverrun="CENTER_ELLIPSIS">
+                                       <font>
+                                          <Font size="45.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
                            </children>
-                        </AnchorPane>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
                      </children></Pane>
                </center>
             </BorderPane>
