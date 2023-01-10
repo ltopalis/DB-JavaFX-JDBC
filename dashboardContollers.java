@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -176,7 +177,7 @@ public class dashboardContollers implements Initializable {
         float costs = 0;
         while (result.next()) {
             costs = result.getFloat("SUM(wrk_salary)");
-            outcomes.setText(Float.toString(costs));
+            outcomes.setText(String.format(Locale.GERMAN,"%,.2f",costs));
         }
 
         query = "SELECT SUM(res_off_depoit) FROM reservation_offers";
@@ -190,10 +191,10 @@ public class dashboardContollers implements Initializable {
         while (result.next()) {
             incomesVariable += result.getFloat("SUM(tr_cost)");
         }
-        incomes.setText(Float.toString(incomesVariable));
+        incomes.setText(String.format(Locale.GERMAN,"%,.2f",incomesVariable));
 
         float profitVariable = incomesVariable - costs;
-        profit.setText(Float.toString(profitVariable));
+        profit.setText(String.format(Locale.GERMAN,"%,.2f",profitVariable));
         if (profitVariable < 0) {
             profit.setStyle("-fx-text-fill: red;");
         } else {
@@ -203,31 +204,32 @@ public class dashboardContollers implements Initializable {
         query = "SELECT COUNT(*) FROM driver";
         result = stmt.executeQuery(query);
         while (result.next()) {
-            drivers_number_summary.setText(Integer.toString(result.getInt("COUNT(*)")));
+            
+            drivers_number_summary.setText(String.format(Locale.GERMAN,"%,d",result.getInt("COUNT(*)")));
         }
 
         query = "SELECT COUNT(*) FROM guide";
         result = stmt.executeQuery(query);
         while (result.next()) {
-            guide_number_summary.setText(Integer.toString(result.getInt("COUNT(*)")));
+            guide_number_summary.setText(String.format(Locale.GERMAN,"%,d",result.getInt("COUNT(*)")));
         }
 
         query = "SELECT COUNT(*) FROM admin WHERE adm_type = 'LOGISTICS'";
         result = stmt.executeQuery(query);
         while (result.next()) {
-            logistics_number_summary.setText(Integer.toString(result.getInt("COUNT(*)")));
+            logistics_number_summary.setText(String.format(Locale.GERMAN,"%,d",result.getInt("COUNT(*)")));
         }
 
         query = "SELECT COUNT(*) FROM admin WHERE adm_type = 'ADMINISTRATIVE'";
         result = stmt.executeQuery(query);
         while (result.next()) {
-            admin_number_summary.setText(Integer.toString(result.getInt("COUNT(*)")));
+            admin_number_summary.setText(String.format(Locale.GERMAN,"%,d",result.getInt("COUNT(*)")));
         }
 
         query = "SELECT COUNT(*) FROM admin WHERE adm_type = 'ACCOUNTING'";
         result = stmt.executeQuery(query);
         while (result.next()) {
-            admin_number_summary.setText(Integer.toString(result.getInt("COUNT(*)")));
+            admin_number_summary.setText(String.format(Locale.GERMAN,"%,d",result.getInt("COUNT(*)")));
         }
 
         query = "SELECT COUNT(*) FROM reservation";
@@ -241,12 +243,12 @@ public class dashboardContollers implements Initializable {
         while (result.next()) {
             reserv += result.getInt("COUNT(*)");
         }
-        reservationNumber.setText(Integer.toString(reserv));
+        reservationNumber.setText(String.format(Locale.GERMAN,"%,d",reserv));
 
         query = "SELECT COUNT(DISTINCT dst_name) FROM destination WHERE dst_location IS NOT NULL";
         result = stmt.executeQuery(query);
         while (result.next()) {
-            destinationNumber.setText(Integer.toString(result.getInt("COUNT(DISTINCT dst_name)")));
+            destinationNumber.setText(String.format(Locale.GERMAN, "%,d",result.getInt("COUNT(DISTINCT dst_name)")));
         }
 
     }
