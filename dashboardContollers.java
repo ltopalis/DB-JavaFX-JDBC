@@ -78,7 +78,16 @@ public class dashboardContollers implements Initializable {
     private Label usernameLabel;
 
     @FXML
+    private Label usernameLabel1;
+
+    @FXML
     private Button workerButton;
+
+    @FXML
+    private Button tripButtonTRAVEL;
+
+    @FXML
+    private AnchorPane travelWindow;
 
     @FXML
     private AnchorPane workers_summary;
@@ -145,8 +154,8 @@ public class dashboardContollers implements Initializable {
     }
 
     public void tripButtonPressed(ActionEvent e){
-        tripButton.getScene().getWindow().hide();
-        System.out.println("to trip");
+        dashboard.setVisible(false);
+        travelWindow.setVisible(true);
     }
 
     public void workerButtonPressed(ActionEvent e){
@@ -256,6 +265,9 @@ public class dashboardContollers implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         usernameLabel.setText(userInformation.getLastname());
+        usernameLabel1.setText(userInformation.getLastname());
+        dashboard.setVisible(true);
+        travelWindow.setVisible(false);
 
         try (Connection conn = connectDB.getConnection()) {
             initDashboardData(conn);
