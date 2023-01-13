@@ -45,13 +45,12 @@
                <left>
                   <Pane id="leftSide" prefHeight="575.0" prefWidth="175.0" stylesheets="@../CSS%20code/dasboard.css" BorderPane.alignment="CENTER">
                      <children>
-                        <FontAwesomeIconView glyphName="USER" layoutX="59.0" layoutY="98.0" size="80" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="112.0" prefWidth="175.0" text="Καλωσήρθες," textAlignment="CENTER">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutY="110.0" prefWidth="175.0" text="Καλωσήρθες," textAlignment="CENTER">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label fx:id="usernameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="2.0" layoutY="148.0" prefHeight="36.0" prefWidth="175.0" text="USER" textAlignment="CENTER">
+                        <Label fx:id="usernameLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="148.0" prefHeight="36.0" prefWidth="175.0" text="USER" textAlignment="CENTER">
                            <font>
                               <Font size="30.0" />
                            </font>
@@ -70,13 +69,18 @@
                               <FontAwesomeIconView glyphName="COG" size="20" />
                            </graphic>
                         </Button>
+                        <Button fx:id="dashbordButton" layoutX="49.0" layoutY="9.0" mnemonicParsing="false" onAction="#dashboardBottonClicked" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="USER" size="80" />
+                           </graphic>
+                        </Button>
                      </children>
                   </Pane>
                </left>
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Pane id="rightSide" fx:id="dashboard" prefHeight="575.0" prefWidth="725.0" stylesheets="@../CSS%20code/dasboard.css" visible="false">
+                        <Pane id="rightSide" fx:id="dashboard" prefHeight="575.0" prefWidth="725.0" stylesheets="@../CSS%20code/dasboard.css">
                            <children>
                               <HBox layoutX="3.0" layoutY="81.0" prefHeight="132.0" prefWidth="725.0">
                                  <children>
@@ -247,29 +251,29 @@
                                     <content>
                                       <AnchorPane id="rightSide" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../CSS%20code/dasboard.css">
                                              <children>
-                                                <TableView layoutX="57.0" layoutY="305.0" prefHeight="227.0" prefWidth="600.0" styleClass="table" stylesheets="@../CSS%20code/dasboard.css">
+                                                <TableView fx:id="tableTrip" layoutX="57.0" layoutY="305.0" prefHeight="227.0" prefWidth="600.0" styleClass="table" stylesheets="@../CSS%20code/dasboard.css">
                                                   <columns>
-                                                    <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="trip id" />
-                                                    <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="departure" />
-                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="return" />
-                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="seats" />
-                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="price" />
-                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="branch" />
-                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="guide" />
-                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="driver" />
+                                                    <TableColumn fx:id="tripidTableTrips" prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="trip id" />
+                                                    <TableColumn fx:id="departureTableTrips" prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="departure" />
+                                                      <TableColumn fx:id="returnTableTrips" prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="return" />
+                                                      <TableColumn fx:id="seatsTableTrips" prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="seats" />
+                                                      <TableColumn fx:id="priceTableTrips" prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="price" />
+                                                      <TableColumn fx:id="branchTableTrip" prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="branch" />
+                                                      <TableColumn fx:id="guideTableTrip" prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="guide" />
+                                                      <TableColumn fx:id="driverTableTrips" prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="driver" />
                                                   </columns>
                                                 </TableView>
-                                                <TextField layoutX="579.0" layoutY="97.0" prefHeight="26.0" prefWidth="70.0" promptText="seats" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css" />
-                                                <TextField layoutX="462.0" layoutY="97.0" prefHeight="26.0" prefWidth="74.0" promptText="cost" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css" />
-                                                <DatePicker layoutX="163.0" layoutY="97.0" prefHeight="26.0" prefWidth="117.0" promptText="departure" styleClass="datepicker" stylesheets="@../CSS%20code/dasboard.css" />
-                                                <DatePicker layoutX="309.0" layoutY="97.0" prefHeight="26.0" prefWidth="117.0" promptText="return" styleClass="datepicker" stylesheets="@../CSS%20code/dasboard.css" />
-                                                <ComboBox layoutX="53.0" layoutY="97.0" prefHeight="26.0" prefWidth="84.0" promptText="trip id" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
-                                                <ComboBox layoutX="52.0" layoutY="161.0" prefHeight="26.0" prefWidth="163.0" promptText="branch" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
-                                                <ComboBox layoutX="269.0" layoutY="161.0" prefWidth="163.0" promptText="guide" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
-                                                <ComboBox layoutX="497.0" layoutY="161.0" prefWidth="163.0" promptText="driver" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
-                                                <Button id="search" layoutX="81.0" layoutY="247.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="search" />
-                                                <Button id="add" layoutX="493.0" layoutY="247.0" mnemonicParsing="false" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="add" />
-                                                <Button id="clear" layoutX="292.0" layoutY="246.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="clear" />
+                                                <TextField fx:id="seatTextTrip" layoutX="579.0" layoutY="97.0" prefHeight="26.0" prefWidth="70.0" promptText="seats" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <TextField fx:id="costTextTrips" layoutX="462.0" layoutY="97.0" prefHeight="26.0" prefWidth="74.0" promptText="cost" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <DatePicker fx:id="departureDateTrips" layoutX="163.0" layoutY="97.0" prefHeight="26.0" prefWidth="117.0" promptText="departure" styleClass="datepicker" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <DatePicker fx:id="returnDateTrip" layoutX="309.0" layoutY="97.0" prefHeight="26.0" prefWidth="117.0" promptText="return" styleClass="datepicker" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <ComboBox fx:id="tripidListTrips" layoutX="53.0" layoutY="97.0" prefHeight="26.0" prefWidth="84.0" promptText="trip id" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <ComboBox fx:id="branchListTrip" layoutX="52.0" layoutY="161.0" prefHeight="26.0" prefWidth="163.0" promptText="branch" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <ComboBox fx:id="guideListTrips" layoutX="269.0" layoutY="161.0" prefWidth="163.0" promptText="guide" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <ComboBox fx:id="driverListTrips" layoutX="497.0" layoutY="161.0" prefWidth="163.0" promptText="driver" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <Button id="search" fx:id="searchBottonTrip" layoutX="81.0" layoutY="247.0" mnemonicParsing="false" onAction="#searchTrip" prefHeight="26.0" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="search" />
+                                                <Button id="clear" fx:id="clearBottonTrip" layoutX="493.0" layoutY="247.0" mnemonicParsing="false" onAction="#clearBottonTrips" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="clear" />
+                                                <Button id="add" fx:id="addBottonTrip" layoutX="292.0" layoutY="246.0" mnemonicParsing="false" onAction="#addTrip" prefHeight="26.0" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="add" />
                                                 <Label alignment="CENTER" contentDisplay="CENTER" layoutX="98.0" layoutY="14.0" prefHeight="54.0" prefWidth="506.0" text="Please enter your trip details">
                                                    <font>
                                                       <Font name="Baskerville Old Face" size="36.0" />
