@@ -22,7 +22,7 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboardContollers">
    <children>
-      <AnchorPane fx:id="dashboard" prefHeight="600.0" prefWidth="900.0" visible="false">
+      <AnchorPane prefHeight="600.0" prefWidth="900.0">
          <children>
             <BorderPane prefHeight="600.0" prefWidth="900.0">
                <top>
@@ -74,334 +74,283 @@
                   </Pane>
                </left>
                <center>
-                  <Pane id="rightSide" prefHeight="575.0" prefWidth="725.0" stylesheets="@../CSS%20code/dasboard.css" BorderPane.alignment="CENTER">
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <HBox layoutX="3.0" layoutY="81.0" prefHeight="132.0" prefWidth="725.0">
+                        <Pane id="rightSide" fx:id="dashboard" prefHeight="575.0" prefWidth="725.0" stylesheets="@../CSS%20code/dasboard.css" visible="false">
                            <children>
-                              <AnchorPane prefHeight="138.0" prefWidth="220.0">
+                              <HBox layoutX="3.0" layoutY="81.0" prefHeight="132.0" prefWidth="725.0">
                                  <children>
-                                    <Label layoutY="14.0" prefHeight="30.0" prefWidth="220.0" text="Συνολικό κέρδος (€)">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="profit" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutY="54.0" prefHeight="78.0" prefWidth="220.0" text="1500,00" textAlignment="RIGHT" textOverrun="CENTER_ELLIPSIS">
-                                       <font>
-                                          <Font size="36.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <Pane prefHeight="200.0" prefWidth="200.0" />
-                              <AnchorPane prefHeight="138.0" prefWidth="220.0">
-                                 <children>
-                                    <Label layoutY="14.0" prefWidth="220.0" text="Συνολικά έσοδα (€)">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="incomes" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutY="54.0" prefHeight="78.0" prefWidth="220.0" text="1500,00" textAlignment="RIGHT" textOverrun="CENTER_ELLIPSIS">
-                                       <font>
-                                          <Font size="36.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <Pane prefHeight="200.0" prefWidth="200.0" />
-                              <AnchorPane prefHeight="138.0" prefWidth="292.0">
-                                 <children>
-                                    <Label layoutY="14.0" prefHeight="30.0" prefWidth="220.0" text="Συνολικά έξοδα (€)">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="outcomes" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutY="54.0" prefHeight="78.0" prefWidth="220.0" text="1500,00" textAlignment="RIGHT" textOverrun="CENTER_ELLIPSIS">
-                                       <font>
-                                          <Font size="36.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                           <padding>
-                              <Insets left="10.0" right="10.0" />
-                           </padding>
-                        </HBox>
-                        <HBox layoutY="328.0" prefHeight="100.0" prefWidth="725.0">
-                           <children>
-                              <AnchorPane fx:id="workers_summary" prefHeight="152.0" prefWidth="178.0">
-                                 <children>
-                                    <Label alignment="CENTER" layoutY="14.0" prefHeight="30.0" prefWidth="178.0" text="Υπάλληλοι">
-                                       <font>
-                                          <Font size="25.0" />
-                                       </font>
-                                    </Label>
-                                    <HBox layoutY="44.0" prefHeight="108.0" prefWidth="178.0">
+                                    <AnchorPane prefHeight="138.0" prefWidth="220.0">
                                        <children>
-                                          <VBox prefHeight="176.0" prefWidth="117.0">
+                                          <Label layoutY="14.0" prefHeight="30.0" prefWidth="220.0" text="Συνολικό κέρδος (€)">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="profit" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutY="54.0" prefHeight="78.0" prefWidth="220.0" text="1500,00" textAlignment="RIGHT" textOverrun="CENTER_ELLIPSIS">
+                                             <font>
+                                                <Font size="36.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <Pane prefHeight="200.0" prefWidth="200.0" />
+                                    <AnchorPane prefHeight="138.0" prefWidth="220.0">
+                                       <children>
+                                          <Label layoutY="14.0" prefWidth="220.0" text="Συνολικά έσοδα (€)">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="incomes" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutY="54.0" prefHeight="78.0" prefWidth="220.0" text="1500,00" textAlignment="RIGHT" textOverrun="CENTER_ELLIPSIS">
+                                             <font>
+                                                <Font size="36.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <Pane prefHeight="200.0" prefWidth="200.0" />
+                                    <AnchorPane prefHeight="138.0" prefWidth="292.0">
+                                       <children>
+                                          <Label layoutY="14.0" prefHeight="30.0" prefWidth="220.0" text="Συνολικά έξοδα (€)">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="outcomes" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutY="54.0" prefHeight="78.0" prefWidth="220.0" text="1500,00" textAlignment="RIGHT" textOverrun="CENTER_ELLIPSIS">
+                                             <font>
+                                                <Font size="36.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox layoutY="328.0" prefHeight="100.0" prefWidth="725.0">
+                                 <children>
+                                    <AnchorPane fx:id="workers_summary" prefHeight="152.0" prefWidth="178.0">
+                                       <children>
+                                          <Label alignment="CENTER" layoutY="14.0" prefHeight="30.0" prefWidth="178.0" text="Υπάλληλοι">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
+                                          </Label>
+                                          <HBox layoutY="44.0" prefHeight="108.0" prefWidth="178.0">
                                              <children>
-                                                <Label prefHeight="18.0" prefWidth="117.0" text="Οδηγοί">
+                                                <VBox prefHeight="176.0" prefWidth="117.0">
+                                                   <children>
+                                                      <Label prefHeight="18.0" prefWidth="117.0" text="Οδηγοί">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label prefHeight="18.0" prefWidth="117.0" text="Ξεναγοί">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label prefHeight="18.0" prefWidth="117.0" text="Λογιστές">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label prefHeight="21.0" prefWidth="117.0" text="Διαχειριστές">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label prefHeight="21.0" prefWidth="117.0" text="Επιμελητές">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="176.0" prefWidth="61.0">
+                                                   <children>
+                                                      <Label fx:id="drivers_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="61.0" text="7">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="guide_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="61.0" text="6">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="accounting_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="61.0" text="5">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="admin_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="61.0" text="4">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="logistics_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="61.0" text="3">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="174.0" prefWidth="228.0" />
+                                    <AnchorPane prefHeight="174.0" prefWidth="270.0">
+                                       <children>
+                                          <Label alignment="CENTER" layoutY="14.0" prefHeight="36.0" prefWidth="250.0" text="Πλήθος Προορισμών">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="destinationNumber" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutY="54.0" prefHeight="78.0" prefWidth="250.0" text="7" textAlignment="RIGHT" textOverrun="CENTER_ELLIPSIS">
+                                             <font>
+                                                <Font size="45.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="174.0" prefWidth="228.0" />
+                                    <AnchorPane prefHeight="174.0" prefWidth="314.0">
+                                       <children>
+                                          <Label alignment="CENTER" layoutY="14.0" prefHeight="36.0" prefWidth="250.0" text="Πλήθος Κρατήσεων">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="reservationNumber" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutY="54.0" prefHeight="78.0" prefWidth="250.0" text="9" textAlignment="RIGHT" textOverrun="CENTER_ELLIPSIS">
+                                             <font>
+                                                <Font size="45.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </Pane>
+                        <AnchorPane id="rightSideBackground" fx:id="travelMenu" prefHeight="575.0" prefWidth="575.0" stylesheets="@../CSS%20code/dasboard.css">
+                           <children>
+                              <TabPane id="rightSideBackground" prefHeight="575.0" prefWidth="725.0" stylesheets="@../CSS%20code/dasboard.css" tabClosingPolicy="UNAVAILABLE">
+                                <tabs>
+                                  <Tab text="Trips">
+                                    <content>
+                                      <AnchorPane id="rightSide" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../CSS%20code/dasboard.css">
+                                             <children>
+                                                <TableView layoutX="57.0" layoutY="305.0" prefHeight="227.0" prefWidth="600.0" styleClass="table" stylesheets="@../CSS%20code/dasboard.css">
+                                                  <columns>
+                                                    <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="trip id" />
+                                                    <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="departure" />
+                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="return" />
+                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="seats" />
+                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="price" />
+                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="branch" />
+                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="guide" />
+                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="driver" />
+                                                  </columns>
+                                                </TableView>
+                                                <TextField layoutX="579.0" layoutY="97.0" prefHeight="26.0" prefWidth="70.0" promptText="seats" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <TextField layoutX="462.0" layoutY="97.0" prefHeight="26.0" prefWidth="74.0" promptText="cost" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <DatePicker layoutX="163.0" layoutY="97.0" prefHeight="26.0" prefWidth="117.0" promptText="departure" styleClass="datepicker" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <DatePicker layoutX="309.0" layoutY="97.0" prefHeight="26.0" prefWidth="117.0" promptText="return" styleClass="datepicker" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <ComboBox layoutX="53.0" layoutY="97.0" prefHeight="26.0" prefWidth="84.0" promptText="trip id" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <ComboBox layoutX="52.0" layoutY="161.0" prefHeight="26.0" prefWidth="163.0" promptText="branch" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <ComboBox layoutX="269.0" layoutY="161.0" prefWidth="163.0" promptText="guide" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <ComboBox layoutX="497.0" layoutY="161.0" prefWidth="163.0" promptText="driver" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <Button id="search" layoutX="81.0" layoutY="247.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="search" />
+                                                <Button id="add" layoutX="493.0" layoutY="247.0" mnemonicParsing="false" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="add" />
+                                                <Button id="clear" layoutX="292.0" layoutY="246.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="clear" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="98.0" layoutY="14.0" prefHeight="54.0" prefWidth="506.0" text="Please enter your trip details">
                                                    <font>
-                                                      <Font size="17.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="18.0" prefWidth="117.0" text="Ξεναγοί">
-                                                   <font>
-                                                      <Font size="17.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="18.0" prefWidth="117.0" text="Λογιστές">
-                                                   <font>
-                                                      <Font size="17.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="21.0" prefWidth="117.0" text="Διαχειριστές">
-                                                   <font>
-                                                      <Font size="17.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="21.0" prefWidth="117.0" text="Επιμελητές">
-                                                   <font>
-                                                      <Font size="17.0" />
+                                                      <Font name="Baskerville Old Face" size="36.0" />
                                                    </font>
                                                 </Label>
                                              </children>
-                                          </VBox>
-                                          <VBox prefHeight="176.0" prefWidth="61.0">
+                                          </AnchorPane>
+                                    </content>
+                                  </Tab>
+                                  <Tab text="Events">
+                                    <content>
+                                      <AnchorPane id="rightSide" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../CSS%20code/dasboard.css">
                                              <children>
-                                                <Label fx:id="drivers_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="61.0" text="7">
+                                                <Button id="search" layoutX="47.0" layoutY="245.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="search" />
+                                                <Button id="add" layoutX="291.0" layoutY="248.0" mnemonicParsing="false" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="add" />
+                                                <Button id="clear" layoutX="536.0" layoutY="245.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="clear" />
+                                                <DatePicker layoutX="250.0" layoutY="65.0" prefHeight="26.0" prefWidth="162.0" promptText="departure" styleClass="datepicker" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <DatePicker layoutX="471.0" layoutY="64.0" prefHeight="26.0" prefWidth="154.0" promptText="return" styleClass="datepicker" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <ComboBox layoutX="100.0" layoutY="65.0" prefHeight="26.0" prefWidth="84.0" promptText="trip id" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <TextArea layoutX="47.0" layoutY="107.0" prefHeight="117.0" prefWidth="640.0" promptText="Description" styleClass="TEXT" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <Label alignment="CENTER" layoutX="101.0" layoutY="7.0" prefHeight="42.0" prefWidth="528.0" text="Please enter your event details">
                                                    <font>
-                                                      <Font size="17.0" />
+                                                      <Font name="Baskerville Old Face" size="36.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="guide_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="61.0" text="6">
+                                                <TableView layoutX="47.0" layoutY="305.0" prefHeight="227.0" prefWidth="640.0" styleClass="table" stylesheets="@../CSS%20code/dasboard.css">
+                                                   <columns>
+                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="trip id" />
+                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="departure" />
+                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="return" />
+                                                      <TableColumn prefWidth="413.6000061035156" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="description" />
+                                                   </columns>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                    </content>
+                                  </Tab>
+                                    <Tab text="Destinations">
+                                      <content>
+                                        <AnchorPane id="rightSide" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../CSS%20code/dasboard.css">
+                                             <children>
+                                                <TableView layoutX="8.0" layoutY="305.0" prefHeight="227.0" prefWidth="704.0" styleClass="table" stylesheets="@../CSS%20code/dasboard.css">
+                                                   <columns>
+                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="trip id" />
+                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="name" />
+                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="departure" />
+                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="arrival" />
+                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="type" />
+                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="location" />
+                                                      <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="language" />
+                                                      <TableColumn prefWidth="179.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="description" />
+                                                   </columns>
+                                                </TableView>
+                                                <DatePicker layoutX="342.0" layoutY="65.0" prefHeight="20.0" prefWidth="154.0" promptText="departure" styleClass="datepicker" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <DatePicker layoutX="515.0" layoutY="64.0" prefHeight="26.0" prefWidth="154.0" promptText="arrival" styleClass="datepicker" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <ComboBox layoutX="71.0" layoutY="65.0" prefHeight="26.0" prefWidth="84.0" promptText="trip id" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <TextArea layoutX="9.0" layoutY="163.0" prefHeight="123.0" prefWidth="523.0" promptText="Description" styleClass="TEXT" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <TextField layoutX="170.0" layoutY="65.0" promptText="name" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <ComboBox layoutX="113.0" layoutY="110.0" prefHeight="26.0" prefWidth="84.0" promptText="type" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <ComboBox layoutX="482.0" layoutY="110.0" prefHeight="26.0" prefWidth="109.0" promptText="language" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <ComboBox layoutX="287.0" layoutY="110.0" prefHeight="26.0" prefWidth="109.0" promptText="location" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <Button id="search" layoutX="561.0" layoutY="163.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="search" />
+                                                <Button id="add" layoutX="561.0" layoutY="211.0" mnemonicParsing="false" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="add" />
+                                                <Button layoutX="561.0" layoutY="260.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="clear" />
+                                                <Label alignment="CENTER" layoutX="96.0" layoutY="14.0" prefHeight="42.0" prefWidth="528.0" text="Please enter your destination details">
                                                    <font>
-                                                      <Font size="17.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label fx:id="accounting_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="61.0" text="5">
-                                                   <font>
-                                                      <Font size="17.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label fx:id="admin_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="61.0" text="4">
-                                                   <font>
-                                                      <Font size="17.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label fx:id="logistics_number_summary" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="61.0" text="3">
-                                                   <font>
-                                                      <Font size="17.0" />
+                                                      <Font name="Baskerville Old Face" size="36.0" />
                                                    </font>
                                                 </Label>
                                              </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="174.0" prefWidth="228.0" />
-                              <AnchorPane prefHeight="174.0" prefWidth="270.0">
-                                 <children>
-                                    <Label alignment="CENTER" layoutY="14.0" prefHeight="36.0" prefWidth="250.0" text="Πλήθος Προορισμών">
-                                       <font>
-                                          <Font size="25.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="destinationNumber" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutY="54.0" prefHeight="78.0" prefWidth="250.0" text="7" textAlignment="RIGHT" textOverrun="CENTER_ELLIPSIS">
-                                       <font>
-                                          <Font size="45.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="174.0" prefWidth="228.0" />
-                              <AnchorPane prefHeight="174.0" prefWidth="314.0">
-                                 <children>
-                                    <Label alignment="CENTER" layoutY="14.0" prefHeight="36.0" prefWidth="250.0" text="Πλήθος Κρατήσεων">
-                                       <font>
-                                          <Font size="25.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="reservationNumber" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutY="54.0" prefHeight="78.0" prefWidth="250.0" text="9" textAlignment="RIGHT" textOverrun="CENTER_ELLIPSIS">
-                                       <font>
-                                          <Font size="45.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
+                                          </AnchorPane>
+                                      </content>
+                                    </Tab>
+                                </tabs>
+                              </TabPane>
                            </children>
-                           <padding>
-                              <Insets left="10.0" right="10.0" />
-                           </padding>
-                        </HBox>
-                     </children></Pane>
-               </center>
-            </BorderPane>
-         </children></AnchorPane>
-      <AnchorPane fx:id="travelWindow" prefHeight="200.0" prefWidth="200.0">
-         <children>
-            <BorderPane prefHeight="600.0" prefWidth="900.0">
-               <top>
-                  <Pane id="header" prefHeight="25.0" prefWidth="900.0" stylesheets="@../CSS%20code/dasboard.css" BorderPane.alignment="CENTER">
-                     <children>
-                        <FontAwesomeIconView glyphName="PLANE" layoutX="11.0" layoutY="19.0" size="20" />
-                        <Label layoutX="35.0" layoutY="-2.0" text="Stella Stellats Agency">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Button id="exitBtn" fx:id="exitButton1" layoutX="880.0" layoutY="2.0" minWidth="16.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="20.0" prefWidth="20.0" stylesheets="@../CSS%20code/dasboard.css">
-                           <graphic>
-                              <FontAwesomeIconView glyphName="CLOSE" size="10" />
-                           </graphic>
-                        </Button>
-                     </children>
-                  </Pane>
-               </top>
-               <left>
-                  <Pane id="leftSide" prefHeight="575.0" prefWidth="175.0" stylesheets="@../CSS%20code/dasboard.css" BorderPane.alignment="CENTER">
-                     <children>
-                        <FontAwesomeIconView glyphName="USER" layoutX="59.0" layoutY="98.0" size="80" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="112.0" prefWidth="175.0" text="Καλωσήρθες," textAlignment="CENTER">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="usernameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="2.0" layoutY="148.0" prefHeight="36.0" prefWidth="175.0" text="USER" textAlignment="CENTER">
-                           <font>
-                              <Font size="30.0" />
-                           </font>
-                        </Label>
-                        <Button fx:id="tripButtonTRAVEL" layoutY="228.0" mnemonicParsing="false" onAction="#tripButtonPressed" prefHeight="20.0" prefWidth="175.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="MENOY ΤΑΞΙΔΙΩΝ" />
-                        <Button fx:id="workerButton1" layoutY="257.0" mnemonicParsing="false" onAction="#workerButtonPressed" prefHeight="20.0" prefWidth="175.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="ΜΕΝΟΥ ΥΠΑΛΛΗΛΩΝ" />
-                        <Button fx:id="signoutButton1" layoutX="12.0" layoutY="532.0" mnemonicParsing="false" onAction="#logout" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css">
-                           <graphic>
-                              <FontAwesomeIconView glyphName="SIGN_OUT" size="20" />
-                           </graphic>
-                        </Button>
-                        <Button fx:id="offerButton1" layoutY="290.0" mnemonicParsing="false" onAction="#offerButtonPressed" prefHeight="20.0" prefWidth="175.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="ΜΕΝΟΥ ΠΡΟΣΦΟΡΩΝ" />
-                        <Button fx:id="newReservationButton1" layoutY="322.0" mnemonicParsing="false" onAction="#reservationButtonPressed" prefHeight="20.0" prefWidth="175.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="ΝΕΑ ΚΡΑΤΗΣΗ" />
-                        <Button fx:id="settingsButton1" layoutX="129.0" layoutY="532.0" mnemonicParsing="false" onAction="#settingsButtonPressed" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css">
-                           <graphic>
-                              <FontAwesomeIconView glyphName="COG" size="20" />
-                           </graphic>
-                        </Button>
-                     </children>
-                  </Pane>
-               </left>
-               <center>
-                  <AnchorPane id="rightSideBackground" prefHeight="575.0" prefWidth="575.0" stylesheets="@../CSS%20code/dasboard.css" BorderPane.alignment="CENTER">
-                     <children>
-                        <TabPane id="rightSideBackground" prefHeight="575.0" prefWidth="725.0" stylesheets="@../CSS%20code/dasboard.css" tabClosingPolicy="UNAVAILABLE">
-                          <tabs>
-                            <Tab text="Trips">
-                              <content>
-                                <AnchorPane id="rightSide" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../CSS%20code/dasboard.css">
-                                       <children>
-                                          <TableView layoutX="57.0" layoutY="305.0" prefHeight="227.0" prefWidth="600.0" styleClass="table" stylesheets="@../CSS%20code/dasboard.css">
-                                            <columns>
-                                              <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="trip id" />
-                                              <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="departure" />
-                                                <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="return" />
-                                                <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="seats" />
-                                                <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="price" />
-                                                <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="branch" />
-                                                <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="guide" />
-                                                <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="driver" />
-                                            </columns>
-                                          </TableView>
-                                          <TextField layoutX="579.0" layoutY="97.0" prefHeight="26.0" prefWidth="70.0" promptText="seats" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <TextField layoutX="462.0" layoutY="97.0" prefHeight="26.0" prefWidth="74.0" promptText="cost" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <DatePicker layoutX="163.0" layoutY="97.0" prefHeight="26.0" prefWidth="117.0" promptText="departure" styleClass="datepicker" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <DatePicker layoutX="309.0" layoutY="97.0" prefHeight="26.0" prefWidth="117.0" promptText="return" styleClass="datepicker" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <ComboBox layoutX="53.0" layoutY="97.0" prefHeight="26.0" prefWidth="84.0" promptText="trip id" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <ComboBox layoutX="52.0" layoutY="161.0" prefHeight="26.0" prefWidth="163.0" promptText="branch" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <ComboBox layoutX="269.0" layoutY="161.0" prefWidth="163.0" promptText="guide" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <ComboBox layoutX="497.0" layoutY="161.0" prefWidth="163.0" promptText="driver" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <Button id="search" layoutX="81.0" layoutY="247.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="search" />
-                                          <Button id="add" layoutX="493.0" layoutY="247.0" mnemonicParsing="false" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="add" />
-                                          <Button id="clear" layoutX="292.0" layoutY="246.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="clear" />
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="98.0" layoutY="14.0" prefHeight="54.0" prefWidth="506.0" text="Please enter your trip details">
-                                             <font>
-                                                <Font name="Baskerville Old Face" size="36.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </AnchorPane>
-                              </content>
-                            </Tab>
-                            <Tab text="Events">
-                              <content>
-                                <AnchorPane id="rightSide" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../CSS%20code/dasboard.css">
-                                       <children>
-                                          <Button id="search" layoutX="47.0" layoutY="245.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="search" />
-                                          <Button id="add" layoutX="291.0" layoutY="248.0" mnemonicParsing="false" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="add" />
-                                          <Button id="clear" layoutX="536.0" layoutY="245.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="clear" />
-                                          <DatePicker layoutX="250.0" layoutY="65.0" prefHeight="26.0" prefWidth="162.0" promptText="departure" styleClass="datepicker" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <DatePicker layoutX="471.0" layoutY="64.0" prefHeight="26.0" prefWidth="154.0" promptText="return" styleClass="datepicker" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <ComboBox layoutX="100.0" layoutY="65.0" prefHeight="26.0" prefWidth="84.0" promptText="trip id" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <TextArea layoutX="47.0" layoutY="107.0" prefHeight="117.0" prefWidth="640.0" promptText="Description" styleClass="TEXT" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <Label alignment="CENTER" layoutX="101.0" layoutY="7.0" prefHeight="42.0" prefWidth="528.0" text="Please enter your event details">
-                                             <font>
-                                                <Font name="Baskerville Old Face" size="36.0" />
-                                             </font>
-                                          </Label>
-                                          <TableView layoutX="47.0" layoutY="305.0" prefHeight="227.0" prefWidth="640.0" styleClass="table" stylesheets="@../CSS%20code/dasboard.css">
-                                             <columns>
-                                                <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="trip id" />
-                                                <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="departure" />
-                                                <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="return" />
-                                                <TableColumn prefWidth="413.6000061035156" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="description" />
-                                             </columns>
-                                          </TableView>
-                                       </children>
-                                    </AnchorPane>
-                              </content>
-                            </Tab>
-                              <Tab text="Destinations">
-                                <content>
-                                  <AnchorPane id="rightSide" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../CSS%20code/dasboard.css">
-                                       <children>
-                                          <TableView layoutX="8.0" layoutY="305.0" prefHeight="227.0" prefWidth="704.0" styleClass="table" stylesheets="@../CSS%20code/dasboard.css">
-                                             <columns>
-                                                <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="trip id" />
-                                                <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="name" />
-                                                <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="departure" />
-                                                <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="arrival" />
-                                                <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="type" />
-                                                <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="location" />
-                                                <TableColumn prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="language" />
-                                                <TableColumn prefWidth="179.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" text="description" />
-                                             </columns>
-                                          </TableView>
-                                          <DatePicker layoutX="342.0" layoutY="65.0" prefHeight="20.0" prefWidth="154.0" promptText="departure" styleClass="datepicker" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <DatePicker layoutX="515.0" layoutY="64.0" prefHeight="26.0" prefWidth="154.0" promptText="arrival" styleClass="datepicker" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <ComboBox layoutX="71.0" layoutY="65.0" prefHeight="26.0" prefWidth="84.0" promptText="trip id" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <TextArea layoutX="9.0" layoutY="163.0" prefHeight="123.0" prefWidth="523.0" promptText="Description" styleClass="TEXT" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <TextField layoutX="170.0" layoutY="65.0" promptText="name" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <ComboBox layoutX="113.0" layoutY="110.0" prefHeight="26.0" prefWidth="84.0" promptText="type" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <ComboBox layoutX="482.0" layoutY="110.0" prefHeight="26.0" prefWidth="109.0" promptText="language" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <ComboBox layoutX="287.0" layoutY="110.0" prefHeight="26.0" prefWidth="109.0" promptText="location" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
-                                          <Button id="search" layoutX="561.0" layoutY="163.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="search" />
-                                          <Button id="add" layoutX="561.0" layoutY="211.0" mnemonicParsing="false" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="add" />
-                                          <Button layoutX="561.0" layoutY="260.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="clear" />
-                                          <Label alignment="CENTER" layoutX="96.0" layoutY="14.0" prefHeight="42.0" prefWidth="528.0" text="Please enter your destination details">
-                                             <font>
-                                                <Font name="Baskerville Old Face" size="36.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </AnchorPane>
-                                </content>
-                              </Tab>
-                          </tabs>
-                        </TabPane>
+                        </AnchorPane>
                      </children>
                   </AnchorPane>
                </center>
             </BorderPane>
-         </children>
-      </AnchorPane>
+         </children></AnchorPane>
    </children>
 </StackPane>

@@ -19,18 +19,19 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class dashboardContollers implements Initializable {
     @FXML
-    private AnchorPane dashboard;
-    
-    @FXML
     private Label accounting_number_summary;
 
     @FXML
     private Label admin_number_summary;
+
+    @FXML
+    private Pane dashboard;
 
     @FXML
     private Label destinationNumber;
@@ -72,22 +73,16 @@ public class dashboardContollers implements Initializable {
     private Button signoutButton;
 
     @FXML
+    private AnchorPane travelMenu;
+
+    @FXML
     private Button tripButton;
 
     @FXML
     private Label usernameLabel;
 
     @FXML
-    private Label usernameLabel1;
-
-    @FXML
     private Button workerButton;
-
-    @FXML
-    private Button tripButtonTRAVEL;
-
-    @FXML
-    private AnchorPane travelWindow;
 
     @FXML
     private AnchorPane workers_summary;
@@ -153,27 +148,28 @@ public class dashboardContollers implements Initializable {
             }
     }
 
-    public void tripButtonPressed(ActionEvent e){
+    public void tripButtonPressed(ActionEvent e) {
         dashboard.setVisible(false);
-        travelWindow.setVisible(true);
+        travelMenu.setVisible(true);
+        tripButton.setStyle("-fx-border: solid 10px black");
     }
 
-    public void workerButtonPressed(ActionEvent e){
+    public void workerButtonPressed(ActionEvent e) {
         workerButton.getScene().getWindow().hide();
         System.out.println("to worker");
     }
 
-    public void offerButtonPressed(ActionEvent e){
+    public void offerButtonPressed(ActionEvent e) {
         offerButton.getScene().getWindow().hide();
         System.out.println("to offer");
     }
 
-    public void reservationButtonPressed(ActionEvent e){
+    public void reservationButtonPressed(ActionEvent e) {
         newReservationButton.getScene().getWindow().hide();
         System.out.println("to trip");
     }
 
-    public void settingsButtonPressed(ActionEvent e){
+    public void settingsButtonPressed(ActionEvent e) {
         settingsButton.getScene().getWindow().hide();
         System.out.println("to settings");
     }
@@ -186,7 +182,7 @@ public class dashboardContollers implements Initializable {
         float costs = 0;
         while (result.next()) {
             costs = result.getFloat("SUM(wrk_salary)");
-            outcomes.setText(String.format(Locale.GERMAN,"%,.2f",costs));
+            outcomes.setText(String.format(Locale.GERMAN, "%,.2f", costs));
         }
 
         query = "SELECT SUM(res_off_depoit) FROM reservation_offers";
@@ -200,10 +196,10 @@ public class dashboardContollers implements Initializable {
         while (result.next()) {
             incomesVariable += result.getFloat("SUM(tr_cost)");
         }
-        incomes.setText(String.format(Locale.GERMAN,"%,.2f",incomesVariable));
+        incomes.setText(String.format(Locale.GERMAN, "%,.2f", incomesVariable));
 
         float profitVariable = incomesVariable - costs;
-        profit.setText(String.format(Locale.GERMAN,"%,.2f",profitVariable));
+        profit.setText(String.format(Locale.GERMAN, "%,.2f", profitVariable));
         if (profitVariable < 0) {
             profit.setStyle("-fx-text-fill: red;");
         } else {
@@ -213,32 +209,32 @@ public class dashboardContollers implements Initializable {
         query = "SELECT COUNT(*) FROM driver";
         result = stmt.executeQuery(query);
         while (result.next()) {
-            
-            drivers_number_summary.setText(String.format(Locale.GERMAN,"%,d",result.getInt("COUNT(*)")));
+
+            drivers_number_summary.setText(String.format(Locale.GERMAN, "%,d", result.getInt("COUNT(*)")));
         }
 
         query = "SELECT COUNT(*) FROM guide";
         result = stmt.executeQuery(query);
         while (result.next()) {
-            guide_number_summary.setText(String.format(Locale.GERMAN,"%,d",result.getInt("COUNT(*)")));
+            guide_number_summary.setText(String.format(Locale.GERMAN, "%,d", result.getInt("COUNT(*)")));
         }
 
         query = "SELECT COUNT(*) FROM admin WHERE adm_type = 'LOGISTICS'";
         result = stmt.executeQuery(query);
         while (result.next()) {
-            logistics_number_summary.setText(String.format(Locale.GERMAN,"%,d",result.getInt("COUNT(*)")));
+            logistics_number_summary.setText(String.format(Locale.GERMAN, "%,d", result.getInt("COUNT(*)")));
         }
 
         query = "SELECT COUNT(*) FROM admin WHERE adm_type = 'ADMINISTRATIVE'";
         result = stmt.executeQuery(query);
         while (result.next()) {
-            admin_number_summary.setText(String.format(Locale.GERMAN,"%,d",result.getInt("COUNT(*)")));
+            admin_number_summary.setText(String.format(Locale.GERMAN, "%,d", result.getInt("COUNT(*)")));
         }
 
         query = "SELECT COUNT(*) FROM admin WHERE adm_type = 'ACCOUNTING'";
         result = stmt.executeQuery(query);
         while (result.next()) {
-            admin_number_summary.setText(String.format(Locale.GERMAN,"%,d",result.getInt("COUNT(*)")));
+            admin_number_summary.setText(String.format(Locale.GERMAN, "%,d", result.getInt("COUNT(*)")));
         }
 
         query = "SELECT COUNT(*) FROM reservation";
@@ -252,12 +248,12 @@ public class dashboardContollers implements Initializable {
         while (result.next()) {
             reserv += result.getInt("COUNT(*)");
         }
-        reservationNumber.setText(String.format(Locale.GERMAN,"%,d",reserv));
+        reservationNumber.setText(String.format(Locale.GERMAN, "%,d", reserv));
 
         query = "SELECT COUNT(DISTINCT dst_name) FROM destination WHERE dst_location IS NOT NULL";
         result = stmt.executeQuery(query);
         while (result.next()) {
-            destinationNumber.setText(String.format(Locale.GERMAN, "%,d",result.getInt("COUNT(DISTINCT dst_name)")));
+            destinationNumber.setText(String.format(Locale.GERMAN, "%,d", result.getInt("COUNT(DISTINCT dst_name)")));
         }
 
     }
@@ -265,9 +261,8 @@ public class dashboardContollers implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         usernameLabel.setText(userInformation.getLastname());
-        usernameLabel1.setText(userInformation.getLastname());
         dashboard.setVisible(true);
-        travelWindow.setVisible(false);
+        travelMenu.setVisible(false);
 
         try (Connection conn = connectDB.getConnection()) {
             initDashboardData(conn);
