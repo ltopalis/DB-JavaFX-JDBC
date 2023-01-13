@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class userInformation{
+public class userInformation {
     private static String AT;
     private static String name;
     private static String lastname;

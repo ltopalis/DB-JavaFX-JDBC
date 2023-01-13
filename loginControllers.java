@@ -67,14 +67,14 @@ public class loginControllers implements Initializable {
         if (result != null) {
             String query = "SELECT w.wrk_lname, w.wrk_name, w.wrk_salary, w.wrk_br_code, it.password, it.start_date " +
                     "FROM worker w JOIN it " +
-                        "ON w.wrk_AT=it.IT_AT " +
+                    "ON w.wrk_AT=it.IT_AT " +
                     "WHERE it.IT_AT = ?";
 
-            try(Connection conn = connectDB.getConnection()){
+            try (Connection conn = connectDB.getConnection()) {
                 PreparedStatement stmt = conn.prepareStatement(query);
                 stmt.setString(1, result);
                 ResultSet info = stmt.executeQuery();
-                if(info.next()){
+                if (info.next()) {
                     userInformation.setAT(result);
                     userInformation.setLastname(info.getString("wrk_lname"));
                     userInformation.setName(info.getString("wrk_name"));
@@ -84,7 +84,7 @@ public class loginControllers implements Initializable {
                     userInformation.setStart_date(info.getDate("start_date").toLocalDate());
                     notificationLabel.setText("Επιτυχής σύνδεση!");
 
-                    try{
+                    try {
                         Parent root = FXMLLoader.load(getClass().getResource("fxml code/mainWindow.fxml"));
                         Stage stage = new Stage();
                         Scene scene = new Scene(root);
@@ -110,14 +110,14 @@ public class loginControllers implements Initializable {
                         stage.setScene(scene);
                         loginBtn.getScene().getWindow().hide();
                         stage.show();
-                    }catch(IOException e){
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }else
+                } else
                     notificationLabel.setText("Προέκυψε πρόβλημα. Ξαναπροσπαθείστε!");
                 notificationLabel.setVisible(true);
 
-            }catch(SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else {
