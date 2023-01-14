@@ -93,7 +93,7 @@ public class dashboardContollers implements Initializable {
     private TableColumn<?, ?> departureTableDest;
 
     @FXML
-    private TableColumn<?, ?> departureTableEvents;
+    private TableColumn<Event, String> departureTableEvents;
 
     @FXML
     private TableColumn<Trip, String> departureTableTrips;
@@ -102,7 +102,7 @@ public class dashboardContollers implements Initializable {
     private TableColumn<?, ?> descriptionTableDest;
 
     @FXML
-    private TableColumn<?, ?> descriptionTableEvents;
+    private TableColumn<Event, String> descriptionTableEvents;
 
     @FXML
     private TextArea descriptionTextDest;
@@ -183,7 +183,7 @@ public class dashboardContollers implements Initializable {
     private DatePicker returnPickerEvents;
 
     @FXML
-    private TableColumn<?, ?> returnTableEvents;
+    private TableColumn<Event, String> returnTableEvents;
 
     @FXML
     private TableColumn<Trip, String> returnTableTrips;
@@ -213,7 +213,7 @@ public class dashboardContollers implements Initializable {
     private TableView<?> tableDest;
 
     @FXML
-    private TableView<?> tableEvents;
+    private TableView<Event> tableEvents;
 
     @FXML
     private TableView<Trip> tableTrip;
@@ -225,7 +225,7 @@ public class dashboardContollers implements Initializable {
     private Button tripButton;
 
     @FXML
-    private TableColumn<?, ?> tripIdTableEvents;
+    private TableColumn<Event, Integer> tripIdTableEvents;
 
     @FXML
     private ComboBox<?> tripidListDest;
@@ -706,6 +706,57 @@ public class dashboardContollers implements Initializable {
         }
     }
 
+    public void searchEvents(ActionEvent e) {
+        tableEvents.getItems().clear();
+        try (Connection conn = connectDB.getConnection()) {
+            String tripId = tripidListEvents.getValue();
+            LocalDate departure = departurePickerEvents.getValue();
+            LocalDate ret = returnPickerEvents.getValue();
+            String description = descriptionTextEvents.getText();
+
+            ArrayList<String> listWhereClause = new ArrayList<>();
+            if (tripId != null)
+                listWhereClause.add("ev_tr_id = " + tripId);
+            if (departure != null && ret != null)
+                listWhereClause.add("ev_start BETWEEN '" + departure + " 00:00:00' " + " AND '" + departure
+                        + " 23:59:59' AND ev_end BETWEEN " + ret + " 00:00:00' AND '" + ret + " 23:59:59'");
+            else if (departure != null)
+                listWhereClause
+                        .add("ev_start BETWEEN '" + departure + " 00:00:00' AND '" + departure + " 23:59:59'");
+            else if (ret != null)
+                listWhereClause.add("ev_end BETWEEN '" + ret + " 00:00:00'" + " AND  '" + ret + " 23:59:59'");
+            if (!descriptionTextDest.getText().isEmpty())
+                listWhereClause.add("ev_descr = '" + description + "'");
+
+            String whereClause = String.join(" AND ", listWhereClause);
+
+            String query = "SELECT * FROM event";
+
+            if (!whereClause.isEmpty())
+                query += " WHERE " + whereClause;
+
+            Statement stmt = conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+
+            tripIdTableEvents.setCellValueFactory(new PropertyValueFactory<Event, Integer>("tripId"));
+            departureTableEvents.setCellValueFactory(new PropertyValueFactory<Event, String>("start"));
+            returnTableEvents.setCellValueFactory(new PropertyValueFactory<Event, String>("end"));
+            descriptionTableEvents.setCellValueFactory(new PropertyValueFactory<Event, String>("description"));
+
+            while (result.next()) {
+                int trip_id = result.getInt("ev_tr_id");
+                String start = result.getString("ev_start");
+                String end = result.getString("ev_end");
+                String desc = result.getString("ev_descr");
+
+                tableEvents.getItems().add(new Event(trip_id, start, end, desc));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
     public void addEventsClicked(ActionEvent e) {
         try (Connection conn = connectDB.getConnection()) {
             String tripId = tripidListEvents.getValue();
@@ -723,7 +774,7 @@ public class dashboardContollers implements Initializable {
             stmt.setTimestamp(3, ret);
             stmt.setString(4, description);
             stmt.executeUpdate();
-            
+
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setContentText("Επιτυχής εισαγωγή εκδήλωσης!");
             alert.setTitle("Επιβεβαίωση Εισαγωγής εκδήλωσης");

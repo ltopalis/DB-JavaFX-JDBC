@@ -287,7 +287,7 @@
                                     <content>
                                       <AnchorPane id="rightSide" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../CSS%20code/dasboard.css">
                                              <children>
-                                                <Button id="search" fx:id="searchBottonEvents" layoutX="47.0" layoutY="245.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="search" />
+                                                <Button id="search" fx:id="searchBottonEvents" layoutX="47.0" layoutY="245.0" mnemonicParsing="false" onAction="#searchEvents" prefHeight="26.0" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="search" />
                                                 <Button id="add" fx:id="addBottonEvents" layoutX="291.0" layoutY="248.0" mnemonicParsing="false" onAction="#addEventsClicked" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="add" />
                                                 <Button id="clear" fx:id="clearBottonEvents" layoutX="536.0" layoutY="245.0" mnemonicParsing="false" onAction="#clearEventsClicked" prefHeight="26.0" prefWidth="150.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="clear" />
                                                 <DatePicker fx:id="departurePickerEvents" layoutX="250.0" layoutY="65.0" prefHeight="26.0" prefWidth="162.0" promptText="departure" styleClass="datepicker" stylesheets="@../CSS%20code/dasboard.css" />
