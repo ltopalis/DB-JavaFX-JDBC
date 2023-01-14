@@ -7,11 +7,6 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import javax.lang.model.util.ElementScanner14;
-import javax.swing.Action;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -442,17 +437,17 @@ public class dashboardContollers implements Initializable {
             if (!seatTextTrip.getText().isEmpty())
                 listOfWhereClause.add("tr_maxseats=" + seats);
             if(branch_code != null)
-                listOfWhereClause.add("tr_branch_code="+branch_code);
+                listOfWhereClause.add("tr_branch_code='"+branch_code + "'");
             if(guiAT != null)
-                listOfWhereClause.add("tr_gui_AT="  + guiAT);
+                listOfWhereClause.add("tr_gui_AT='"  + guiAT + "'");
             if(drvAT != null)
-                listOfWhereClause.add("tr_drv_AT=" + drvAT);
+                listOfWhereClause.add("tr_drv_AT='" + drvAT + "'");
             if(departure != null && ret != null)
-                listOfWhereClause.add("tr_departure = " + departure + " tr_return = " + ret);
+                listOfWhereClause.add("tr_departure = '" + departure + "' tr_return = '" + ret + "'");
             else if(departure != null)
-                listOfWhereClause.add("tr_departure = " + departure);
+                listOfWhereClause.add("tr_departure = '" + departure + "'");
             else if(ret != null)
-                listOfWhereClause.add("tr_return = " + ret);
+                listOfWhereClause.add("tr_return = '" + ret + "'");
 
             String whereClause = String.join(" AND ", listOfWhereClause);
 
@@ -469,12 +464,14 @@ public class dashboardContollers implements Initializable {
             
             result = stmt.executeQuery(query);
 
-            tripidTableTrips.setCellValueFactory(new PropertyValueFactory<>("trip_id"));
+            System.out.println(query);
+
+            tripidTableTrips.setCellValueFactory(new PropertyValueFactory<Trip, Integer>("trip_id"));
             departureTableTrips.setCellValueFactory(new PropertyValueFactory<>("departure"));
             returnTableTrips.setCellValueFactory(new PropertyValueFactory<>("return_"));
             priceTableTrips.setCellValueFactory(new PropertyValueFactory<>("cost"));
             seatsTableTrips.setCellValueFactory(new PropertyValueFactory<>("seats"));
-            branchTableTrip.setCellValueFactory(new PropertyValueFactory<>("branch"));
+            branchTableTrip.setCellValueFactory(new PropertyValueFactory<Trip, String>("branch"));
             guideTableTrip.setCellValueFactory(new PropertyValueFactory<>("guide"));
             driverTableTrips.setCellValueFactory(new PropertyValueFactory<>("driver"));
             
@@ -490,9 +487,7 @@ public class dashboardContollers implements Initializable {
                 String driver_temp = result.getString("driver"); 
                 
                 tableTrip.getItems().add(new Trip(trip_id_temp, departure_temp, return__temp, cost_temp, seats_temp, branch_temp, guide_temp, driver_temp));
-            }
-            
-            
+            }            
 
         } catch (SQLException ex) {
             ex.getSQLState();
