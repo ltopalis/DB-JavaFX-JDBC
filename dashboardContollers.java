@@ -19,8 +19,10 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -32,8 +34,15 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class dashboardContollers implements Initializable {
+
     @FXML
     private Label accounting_number_summary;
+
+    @FXML
+    private Button addBottonDest;
+
+    @FXML
+    private Button addBottonEvents;
 
     @FXML
     private Button addBottonTrip;
@@ -42,10 +51,22 @@ public class dashboardContollers implements Initializable {
     private Label admin_number_summary;
 
     @FXML
+    private DatePicker arrivalPickerDest;
+
+    @FXML
+    private TableColumn<?, ?> arrivalTableDest;
+
+    @FXML
     private ComboBox<String> branchListTrip;
 
     @FXML
     private TableColumn<Trip, String> branchTableTrip;
+
+    @FXML
+    private Button clearBottonDest;
+
+    @FXML
+    private Button clearBottonEvents;
 
     @FXML
     private Button clearBottonTrip;
@@ -63,7 +84,31 @@ public class dashboardContollers implements Initializable {
     private DatePicker departureDateTrips;
 
     @FXML
+    private DatePicker departurePickerDest;
+
+    @FXML
+    private DatePicker departurePickerEvents;
+
+    @FXML
+    private TableColumn<?, ?> departureTableDest;
+
+    @FXML
+    private TableColumn<?, ?> departureTableEvents;
+
+    @FXML
     private TableColumn<Trip, String> departureTableTrips;
+
+    @FXML
+    private TableColumn<?, ?> descriptionTableDest;
+
+    @FXML
+    private TableColumn<?, ?> descriptionTableEvents;
+
+    @FXML
+    private TextArea descriptionTextDest;
+
+    @FXML
+    private TextArea descriptionTextEvents;
 
     @FXML
     private Label destinationNumber;
@@ -93,7 +138,25 @@ public class dashboardContollers implements Initializable {
     private Label incomes;
 
     @FXML
+    private ComboBox<?> languageListDest;
+
+    @FXML
+    private TableColumn<?, ?> languageTableDest;
+
+    @FXML
+    private ComboBox<?> locationListDest;
+
+    @FXML
+    private TableColumn<?, ?> locationTableDest;
+
+    @FXML
     private Label logistics_number_summary;
+
+    @FXML
+    private TextField nameFieldDest;
+
+    @FXML
+    private TableColumn<?, ?> nameTableDest;
 
     @FXML
     private Button newReservationButton;
@@ -117,7 +180,19 @@ public class dashboardContollers implements Initializable {
     private DatePicker returnDateTrip;
 
     @FXML
+    private DatePicker returnPickerEvents;
+
+    @FXML
+    private TableColumn<?, ?> returnTableEvents;
+
+    @FXML
     private TableColumn<Trip, String> returnTableTrips;
+
+    @FXML
+    private Button searchBottonDest;
+
+    @FXML
+    private Button searchBottonEvents;
 
     @FXML
     private Button searchBottonTrip;
@@ -135,16 +210,43 @@ public class dashboardContollers implements Initializable {
     private Button signoutButton;
 
     @FXML
+    private TableView<?> tableDest;
+
+    @FXML
+    private TableView<?> tableEvents;
+
+    @FXML
+    private TableView<Trip> tableTrip;
+
+    @FXML
     private AnchorPane travelMenu;
 
     @FXML
     private Button tripButton;
 
     @FXML
+    private TableColumn<?, ?> tripIdTableEvents;
+
+    @FXML
+    private ComboBox<?> tripidListDest;
+
+    @FXML
+    private ComboBox<String> tripidListEvents;
+
+    @FXML
     private ComboBox<String> tripidListTrips;
 
     @FXML
+    private TableColumn<?, ?> tripidTableDest;
+
+    @FXML
     private TableColumn<Trip, Integer> tripidTableTrips;
+
+    @FXML
+    private ComboBox<?> typeListDest;
+
+    @FXML
+    private TableColumn<?, ?> typeTableDest;
 
     @FXML
     private Label usernameLabel;
@@ -156,7 +258,8 @@ public class dashboardContollers implements Initializable {
     private AnchorPane workers_summary;
 
     @FXML
-    private TableView<Trip> tableTrip;
+    private Tab eventTabTrip;
+
     private double x, y;
 
     public void dashboardBottonClicked(ActionEvent e) {
@@ -230,6 +333,7 @@ public class dashboardContollers implements Initializable {
             initGuidetrips(conn);
             initDrivertrips(conn);
             initBranchtrips(conn);
+            initTripIdEvents(conn);
             dashboard.setVisible(false);
             travelMenu.setVisible(true);
         } catch (SQLException exception) {
@@ -341,6 +445,8 @@ public class dashboardContollers implements Initializable {
 
     }
 
+    /* TRIP TAB */
+
     private void initTripIdTrips(Connection conn) throws SQLException {
         tripidListTrips.getItems().clear();
         String query = "SELECT tr_id FROM trip ORDER BY tr_id";
@@ -436,47 +542,46 @@ public class dashboardContollers implements Initializable {
                 listOfWhereClause.add("tr_cost=" + cost);
             if (!seatTextTrip.getText().isEmpty())
                 listOfWhereClause.add("tr_maxseats=" + seats);
-            if(branch_code != null)
-                listOfWhereClause.add("tr_branch_code='"+branch_code + "'");
-            if(guiAT != null)
-                listOfWhereClause.add("tr_gui_AT='"  + guiAT + "'");
-            if(drvAT != null)
+            if (branch_code != null)
+                listOfWhereClause.add("tr_br_code='" + branch_code + "'");
+            if (guiAT != null)
+                listOfWhereClause.add("tr_gui_AT='" + guiAT + "'");
+            if (drvAT != null)
                 listOfWhereClause.add("tr_drv_AT='" + drvAT + "'");
-            if(departure != null && ret != null)
-                listOfWhereClause.add("tr_departure BETWEEN '" + departure + " 00:00:00' " + " AND '" + departure + " 23:59:59' AND tr_return BETWEEN " + ret + " 00:00:00' AND '" + ret + " 23:59:59'");
-            else if(departure != null)
-                listOfWhereClause.add("tr_departure BETWEEN '" + departure + " 00:00:00' AND '" + departure + " 23:59:59'");
-            else if(ret != null)
+            if (departure != null && ret != null)
+                listOfWhereClause.add("tr_departure BETWEEN '" + departure + " 00:00:00' " + " AND '" + departure
+                        + " 23:59:59' AND tr_return BETWEEN " + ret + " 00:00:00' AND '" + ret + " 23:59:59'");
+            else if (departure != null)
+                listOfWhereClause
+                        .add("tr_departure BETWEEN '" + departure + " 00:00:00' AND '" + departure + " 23:59:59'");
+            else if (ret != null)
                 listOfWhereClause.add("tr_return BETWEEN '" + ret + " 00:00:00'" + " AND  '" + ret + " 23:59:59'");
 
             String whereClause = String.join(" AND ", listOfWhereClause);
 
             query = "SELECT t.tr_id, t.tr_departure, t.tr_return, t.tr_maxseats, t.tr_cost, " +
-                "CONCAT(b.br_city, ', ', b.br_street, ' ', b.br_num) AS address,"+
-                " CONCAT(w.wrk_name, ' ', w.wrk_lname) AS guide, " + 
-                "CONCAT(w1.wrk_name, ' ', w1.wrk_lname) AS driver " + 
-            "FROM trip t JOIN branch b ON t.tr_br_code = b.br_code" +
-                " JOIN worker w ON t.tr_gui_AT = w.wrk_AT " + 
-                "JOIN worker w1 ON t.tr_drv_AT = w1.wrk_AT";
+                    "CONCAT(b.br_city, ', ', b.br_street, ' ', b.br_num) AS address," +
+                    " CONCAT(w.wrk_name, ' ', w.wrk_lname) AS guide, " +
+                    "CONCAT(w1.wrk_name, ' ', w1.wrk_lname) AS driver " +
+                    "FROM trip t JOIN branch b ON t.tr_br_code = b.br_code" +
+                    " JOIN worker w ON t.tr_gui_AT = w.wrk_AT " +
+                    "JOIN worker w1 ON t.tr_drv_AT = w1.wrk_AT";
 
-            if(!whereClause.isEmpty())
-                query +=  " WHERE " + whereClause;
-            
+            if (!whereClause.isEmpty())
+                query += " WHERE " + whereClause;
+
             result = stmt.executeQuery(query);
 
-            System.out.println(query);
-
             tripidTableTrips.setCellValueFactory(new PropertyValueFactory<Trip, Integer>("trip_id"));
-            departureTableTrips.setCellValueFactory(new PropertyValueFactory<>("departure"));
-            returnTableTrips.setCellValueFactory(new PropertyValueFactory<>("return_"));
-            priceTableTrips.setCellValueFactory(new PropertyValueFactory<>("cost"));
-            seatsTableTrips.setCellValueFactory(new PropertyValueFactory<>("seats"));
+            departureTableTrips.setCellValueFactory(new PropertyValueFactory<Trip, String>("departure"));
+            returnTableTrips.setCellValueFactory(new PropertyValueFactory<Trip, String>("return_"));
+            priceTableTrips.setCellValueFactory(new PropertyValueFactory<Trip, Float>("cost"));
+            seatsTableTrips.setCellValueFactory(new PropertyValueFactory<Trip, Integer>("seats"));
             branchTableTrip.setCellValueFactory(new PropertyValueFactory<Trip, String>("branch"));
-            guideTableTrip.setCellValueFactory(new PropertyValueFactory<>("guide"));
-            driverTableTrips.setCellValueFactory(new PropertyValueFactory<>("driver"));
-            
+            guideTableTrip.setCellValueFactory(new PropertyValueFactory<Trip, String>("guide"));
+            driverTableTrips.setCellValueFactory(new PropertyValueFactory<Trip, String>("driver"));
 
-            while(result.next()){
+            while (result.next()) {
                 int trip_id_temp = result.getInt("t.tr_id");
                 String departure_temp = result.getString("t.tr_departure");
                 String return__temp = result.getString("t.tr_return");
@@ -484,10 +589,11 @@ public class dashboardContollers implements Initializable {
                 int seats_temp = result.getInt("t.tr_maxseats");
                 String branch_temp = result.getString("address");
                 String guide_temp = result.getString("guide");
-                String driver_temp = result.getString("driver"); 
-                
-                tableTrip.getItems().add(new Trip(trip_id_temp, departure_temp, return__temp, cost_temp, seats_temp, branch_temp, guide_temp, driver_temp));
-            }            
+                String driver_temp = result.getString("driver");
+
+                tableTrip.getItems().add(new Trip(trip_id_temp, departure_temp, return__temp, cost_temp, seats_temp,
+                        branch_temp, guide_temp, driver_temp));
+            }
 
         } catch (SQLException ex) {
             ex.getSQLState();
@@ -586,6 +692,71 @@ public class dashboardContollers implements Initializable {
         costTextTrips.clear();
         seatTextTrip.clear();
         tableTrip.getItems().clear();
+    }
+
+    /* EVENTS TAB */
+
+    private void initTripIdEvents(Connection conn) throws SQLException {
+        tripidListEvents.getItems().clear();
+        String query = "SELECT DISTINCT ev_tr_id FROM event ORDER BY ev_tr_id";
+        Statement stmt = conn.createStatement();
+        ResultSet result = stmt.executeQuery(query);
+        while (result.next()) {
+            tripidListEvents.getItems().add(Integer.toString(result.getInt("ev_tr_id")));
+        }
+    }
+
+    public void addEventsClicked(ActionEvent e) {
+        try (Connection conn = connectDB.getConnection()) {
+            String tripId = tripidListEvents.getValue();
+            java.sql.Timestamp departure = java.sql.Timestamp.from(
+                    departurePickerEvents.getValue().atStartOfDay().atZone(java.time.ZoneId.systemDefault())
+                            .toInstant());
+            java.sql.Timestamp ret = java.sql.Timestamp.from(
+                    returnPickerEvents.getValue().atStartOfDay().atZone(java.time.ZoneId.systemDefault()).toInstant());
+            String description = descriptionTextEvents.getText();
+
+            String query = "INSERT INTO event VALUES(?, ?, ?, ?)";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, Integer.parseInt(tripId));
+            stmt.setTimestamp(2, departure);
+            stmt.setTimestamp(3, ret);
+            stmt.setString(4, description);
+            stmt.executeUpdate();
+            
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setContentText("Επιτυχής εισαγωγή εκδήλωσης!");
+            alert.setTitle("Επιβεβαίωση Εισαγωγής εκδήλωσης");
+            alert.setHeaderText("Επιτυχία");
+            alert.showAndWait();
+
+        } catch (SQLException ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setContentText(ex.toString());
+            alert.setHeaderText("Σφάλμα " + ex.getErrorCode());
+            alert.setTitle("Σφάλμα");
+            alert.showAndWait();
+        } catch (NullPointerException ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setContentText("Η ημερομηνία είναι υποχρεωτική");
+            alert.setTitle("Σφάλμα");
+            alert.setHeaderText("Σφάλμα");
+            alert.showAndWait();
+        } catch (Exception ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setContentText(ex.toString());
+            alert.setTitle("Σφάλμα");
+            alert.setHeaderText("Σφάλμα");
+            alert.showAndWait();
+        }
+    }
+
+    public void clearEventsClicked(ActionEvent e) {
+        tripidListEvents.setValue(null);
+        departurePickerEvents.setValue(null);
+        returnPickerEvents.setValue(null);
+        descriptionTextEvents.clear();
+        ;
     }
 
     @Override

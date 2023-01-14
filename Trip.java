@@ -8,7 +8,8 @@ public class Trip {
     private String guide;
     private String driver;
 
-    public Trip(int trip_id, String departure, String return_, float cost, int seats, String branch, String guide, String driver) {
+    public Trip(int trip_id, String departure, String return_, float cost, int seats, String branch, String guide,
+            String driver) {
         this.trip_id = trip_id;
         this.departure = departure;
         this.return_ = return_;
@@ -59,11 +60,11 @@ public class Trip {
         this.seats = seats;
     }
 
-    public String getbranch() {
+    public String getBranch() {
         return branch;
     }
 
-    public void setbranch(String branch) {
+    public void setBranch(String branch) {
         this.branch = branch;
     }
 
