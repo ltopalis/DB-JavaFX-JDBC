@@ -54,7 +54,7 @@ public class dashboardContollers implements Initializable {
     private DatePicker arrivalPickerDest;
 
     @FXML
-    private TableColumn<?, ?> arrivalTableDest;
+    private TableColumn<Destination, String> arrivalTableDest;
 
     @FXML
     private ComboBox<String> branchListTrip;
@@ -90,7 +90,7 @@ public class dashboardContollers implements Initializable {
     private DatePicker departurePickerEvents;
 
     @FXML
-    private TableColumn<?, ?> departureTableDest;
+    private TableColumn<Destination, String> departureTableDest;
 
     @FXML
     private TableColumn<Event, String> departureTableEvents;
@@ -99,7 +99,7 @@ public class dashboardContollers implements Initializable {
     private TableColumn<Trip, String> departureTableTrips;
 
     @FXML
-    private TableColumn<?, ?> descriptionTableDest;
+    private TableColumn<Destination, String> descriptionTableDest;
 
     @FXML
     private TableColumn<Event, String> descriptionTableEvents;
@@ -141,13 +141,13 @@ public class dashboardContollers implements Initializable {
     private ComboBox<String> languageListDest;
 
     @FXML
-    private TableColumn<?, ?> languageTableDest;
+    private TableColumn<Destination, String> languageTableDest;
 
     @FXML
     private ComboBox<String> locationListDest;
 
     @FXML
-    private TableColumn<?, ?> locationTableDest;
+    private TableColumn<Destination, String> locationTableDest;
 
     @FXML
     private Label logistics_number_summary;
@@ -156,7 +156,7 @@ public class dashboardContollers implements Initializable {
     private TextField nameFieldDest;
 
     @FXML
-    private TableColumn<?, ?> nameTableDest;
+    private TableColumn<Destination, String> nameTableDest;
 
     @FXML
     private Button newReservationButton;
@@ -210,7 +210,7 @@ public class dashboardContollers implements Initializable {
     private Button signoutButton;
 
     @FXML
-    private TableView<?> tableDest;
+    private TableView<Destination> tableDest;
 
     @FXML
     private TableView<Event> tableEvents;
@@ -237,7 +237,7 @@ public class dashboardContollers implements Initializable {
     private ComboBox<String> tripidListTrips;
 
     @FXML
-    private TableColumn<?, ?> tripidTableDest;
+    private TableColumn<Destination, Integer> tripidTableDest;
 
     @FXML
     private TableColumn<Trip, Integer> tripidTableTrips;
@@ -246,7 +246,7 @@ public class dashboardContollers implements Initializable {
     private ComboBox<String> typeListDest;
 
     @FXML
-    private TableColumn<?, ?> typeTableDest;
+    private TableColumn<Destination, String> typeTableDest;
 
     @FXML
     private Label usernameLabel;
@@ -864,7 +864,77 @@ public class dashboardContollers implements Initializable {
     }
 
     public void searchDest(ActionEvent e) {
-        
+        tableDest.getItems().clear();
+        try (Connection conn = connectDB.getConnection()) {
+            String trip_id = tripidListDest.getValue();
+            String name = nameFieldDest.getText();
+            LocalDate departure = departurePickerDest.getValue();
+            LocalDate ret = arrivalPickerDest.getValue();
+            String type = typeListDest.getValue();
+            String location = locationListDest.getValue();
+            String language = languageListDest.getValue();
+            String description = descriptionTextDest.getText();
+
+            String query = "SELECT tro.to_tr_id, d.dst_name, tro.to_departure, tro.to_arrival," +
+                    " d.dsrt_type, d.dst_language, d.dst_descr, d1.dst_name FROM destination d JOIN " +
+                    "travel_to tro ON d.dst_id = tro.to_dst_id JOIN destination d1 ON d.dst_location = d1.dst_id";
+
+            ArrayList<String> listWhereClause = new ArrayList<>();
+            if (trip_id != null)
+                listWhereClause.add("tro.to_tr_id = " + trip_id);
+            if (!nameFieldDest.getText().isEmpty())
+                listWhereClause.add("d.dst_name = '" + name + "'");
+            if (departure != null && ret != null)
+                listWhereClause.add("ev_start BETWEEN '" + departure + " 00:00:00' " + " AND '" + departure
+                        + " 23:59:59' AND ev_end BETWEEN " + ret + " 00:00:00' AND '" + ret + " 23:59:59'");
+            else if (departure != null)
+                listWhereClause
+                        .add("ev_start BETWEEN '" + departure + " 00:00:00' AND '" + departure + " 23:59:59'");
+            else if (ret != null)
+                listWhereClause.add("ev_end BETWEEN '" + ret + " 00:00:00'" + " AND  '" + ret + " 23:59:59'");
+            if (type != null)
+                listWhereClause.add("d.dsrt_type = " + type);
+            if (location != null)
+                listWhereClause.add("d1.dst_name = " + location);
+            if (language != null)
+                listWhereClause.add("d.dst_language = " + language);
+            if (!descriptionTextDest.getText().isEmpty())
+                listWhereClause.add("d.dst_descr LIKE " + description);
+
+            String whereClause = String.join(" AND ", listWhereClause);
+
+            if (!whereClause.isEmpty())
+                query += " WHERE " + whereClause;
+
+            Statement stmt = conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+
+            tripidTableDest.setCellValueFactory(new PropertyValueFactory<Destination, Integer>("trip_id"));
+            nameTableDest.setCellValueFactory(new PropertyValueFactory<Destination, String>("name"));
+            departureTableDest.setCellValueFactory(new PropertyValueFactory<Destination, String>("departure"));
+            arrivalTableDest.setCellValueFactory(new PropertyValueFactory<Destination, String>("arrival"));
+            typeTableDest.setCellValueFactory(new PropertyValueFactory<Destination, String>("type"));
+            locationTableDest.setCellValueFactory(new PropertyValueFactory<Destination, String>("location"));
+            languageTableDest.setCellValueFactory(new PropertyValueFactory<Destination, String>("language"));
+            descriptionTableDest.setCellValueFactory(new PropertyValueFactory<Destination, String>("description"));
+
+            while (result.next()) {
+                int tripID = result.getInt("tro.to_tr_id");
+                String nameString = result.getString("d.dst_name");
+                String departureString = result.getString("tro.to_departure");
+                String arrivalString = result.getString("tro.to_arrival");
+                String typeString = result.getString("d.dsrt_type");
+                String locationString = result.getString("d1.dst_name");
+                String languageString = result.getString("d.dst_language");
+                String descriptionString = result.getString("d.dst_descr");
+
+                tableDest.getItems().add(new Destination(tripID, nameString, departureString, arrivalString, typeString,
+                        locationString, languageString, descriptionString));
+            }
+            stmt.close();
+        } catch (SQLException ex) {
+            ex.getSQLState();
+        }
     }
 
     public void addDest(ActionEvent e) {
