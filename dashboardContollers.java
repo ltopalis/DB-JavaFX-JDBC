@@ -443,11 +443,11 @@ public class dashboardContollers implements Initializable {
             if(drvAT != null)
                 listOfWhereClause.add("tr_drv_AT='" + drvAT + "'");
             if(departure != null && ret != null)
-                listOfWhereClause.add("tr_departure = '" + departure + "' tr_return = '" + ret + "'");
+                listOfWhereClause.add("tr_departure BETWEEN '" + departure + " 00:00:00' " + " AND '" + departure + " 23:59:59' AND tr_return BETWEEN " + ret + " 00:00:00' AND '" + ret + " 23:59:59'");
             else if(departure != null)
-                listOfWhereClause.add("tr_departure = '" + departure + "'");
+                listOfWhereClause.add("tr_departure BETWEEN '" + departure + " 00:00:00' AND '" + departure + " 23:59:59'");
             else if(ret != null)
-                listOfWhereClause.add("tr_return = '" + ret + "'");
+                listOfWhereClause.add("tr_return BETWEEN '" + ret + " 00:00:00'" + " AND  '" + ret + " 23:59:59'");
 
             String whereClause = String.join(" AND ", listOfWhereClause);
 
@@ -581,8 +581,8 @@ public class dashboardContollers implements Initializable {
         guideListTrips.setValue(null);
         driverListTrips.setValue(null);
         branchListTrip.setValue(null);
-        departureDateTrips.getEditor().clear();
-        returnDateTrip.getEditor().clear();
+        departureDateTrips.setValue(null);
+        returnDateTrip.setValue(null);
         costTextTrips.clear();
         seatTextTrip.clear();
         tableTrip.getItems().clear();
