@@ -138,13 +138,13 @@ public class dashboardContollers implements Initializable {
     private Label incomes;
 
     @FXML
-    private ComboBox<?> languageListDest;
+    private ComboBox<String> languageListDest;
 
     @FXML
     private TableColumn<?, ?> languageTableDest;
 
     @FXML
-    private ComboBox<?> locationListDest;
+    private ComboBox<String> locationListDest;
 
     @FXML
     private TableColumn<?, ?> locationTableDest;
@@ -228,7 +228,7 @@ public class dashboardContollers implements Initializable {
     private TableColumn<Event, Integer> tripIdTableEvents;
 
     @FXML
-    private ComboBox<?> tripidListDest;
+    private ComboBox<String> tripidListDest;
 
     @FXML
     private ComboBox<String> tripidListEvents;
@@ -243,7 +243,7 @@ public class dashboardContollers implements Initializable {
     private TableColumn<Trip, Integer> tripidTableTrips;
 
     @FXML
-    private ComboBox<?> typeListDest;
+    private ComboBox<String> typeListDest;
 
     @FXML
     private TableColumn<?, ?> typeTableDest;
@@ -334,6 +334,10 @@ public class dashboardContollers implements Initializable {
             initDrivertrips(conn);
             initBranchtrips(conn);
             initTripIdEvents(conn);
+            initTypeDestination(conn);
+            initLocationDestination(conn);
+            initLanguageDestination(conn);
+            initTripIdDestination(conn);
             dashboard.setVisible(false);
             travelMenu.setVisible(true);
         } catch (SQLException exception) {
@@ -775,6 +779,8 @@ public class dashboardContollers implements Initializable {
             stmt.setString(4, description);
             stmt.executeUpdate();
 
+            stmt.close();
+
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setContentText("Επιτυχής εισαγωγή εκδήλωσης!");
             alert.setTitle("Επιβεβαίωση Εισαγωγής εκδήλωσης");
@@ -808,6 +814,149 @@ public class dashboardContollers implements Initializable {
         returnPickerEvents.setValue(null);
         descriptionTextEvents.clear();
         ;
+    }
+
+    /* DESTINATION TAB */
+
+    private void initTripIdDestination(Connection conn) throws SQLException {
+        tripidListDest.getItems().clear();
+        String query = "SELECT DISTINCT to_tr_id FROM destination dest JOIN travel_to tro ON dest.dst_id = tro.to_dst_id ORDER BY to_tr_id";
+        Statement stmt = conn.createStatement();
+        ResultSet result = stmt.executeQuery(query);
+
+        while (result.next()) {
+            tripidListDest.getItems().add(Integer.toString(result.getInt("to_tr_id")));
+        }
+    }
+
+    private void initTypeDestination(Connection conn) throws SQLException {
+        typeListDest.getItems().clear();
+        String query = "SELECT DISTINCT dsrt_type FROM destination";
+        Statement stmt = conn.createStatement();
+        ResultSet result = stmt.executeQuery(query);
+
+        while (result.next()) {
+            typeListDest.getItems().add(result.getString("dsrt_type"));
+        }
+    }
+
+    private void initLocationDestination(Connection conn) throws SQLException {
+        locationListDest.getItems().clear();
+        String query = "SELECT DISTINCT dst_name FROM destination WHERE dst_location IS NULL";
+        Statement stmt = conn.createStatement();
+        ResultSet result = stmt.executeQuery(query);
+
+        locationListDest.getItems().add("");
+        while (result.next()) {
+            locationListDest.getItems().add(result.getString("dst_name"));
+        }
+    }
+
+    private void initLanguageDestination(Connection conn) throws SQLException {
+        languageListDest.getItems().clear();
+        String query = "SELECT DISTINCT dst_language FROM destination ORDER BY dst_language";
+        Statement stmt = conn.createStatement();
+        ResultSet result = stmt.executeQuery(query);
+
+        while (result.next()) {
+            languageListDest.getItems().add(result.getString("dst_language"));
+        }
+    }
+
+    public void searchDest(ActionEvent e) {
+        
+    }
+
+    public void addDest(ActionEvent e) {
+        try (Connection conn = connectDB.getConnection()) {
+            String trip_id = tripidListDest.getValue();
+            String name = nameFieldDest.getText();
+            java.sql.Timestamp departure = java.sql.Timestamp.from(
+                    departurePickerDest.getValue().atStartOfDay().atZone(java.time.ZoneId.systemDefault())
+                            .toInstant());
+            java.sql.Timestamp arrival = java.sql.Timestamp.from(
+                    arrivalPickerDest.getValue().atStartOfDay().atZone(java.time.ZoneId.systemDefault()).toInstant());
+            String type = typeListDest.getValue();
+            String location = locationListDest.getValue();
+            String language = languageListDest.getValue();
+            String description = descriptionTextDest.getText();
+
+            Integer location_id = null;
+            String query = "SELECT dst_id FROM destination WHERE dst_name LIKE ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, location);
+            ResultSet result = stmt.executeQuery();
+            if (result.next())
+                location_id = result.getInt("dst_id");
+
+            if (location_id != null) {
+                query = "INSERT INTO destination(dst_name, dst_descr, dsrt_type, dst_language, dst_location) VALUES (?, ?, ?, ?, ?)";
+                stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+                stmt.setString(1, name);
+                stmt.setString(2, description);
+                stmt.setString(3, type);
+                stmt.setString(4, language);
+                stmt.setInt(5, location_id);
+            } else {
+                query = "INSERT INTO destination(dst_name, dst_descr, dsrt_type, dst_language, dst_location) VALUES (?, ?, ?, ?, NULL)";
+                stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+                stmt.setString(1, name);
+                stmt.setString(2, description);
+                stmt.setString(3, type);
+                stmt.setString(4, language);
+            }
+
+            stmt.executeUpdate();
+
+            ResultSet genKeys = stmt.getGeneratedKeys();
+
+            query = "INSERT INTO travel_to VALUES (?, ?, ?, ?)";
+            stmt = conn.prepareStatement(query);
+            stmt.setInt(1, Integer.parseInt(trip_id));
+            genKeys.next();
+            stmt.setInt(2, genKeys.getInt(1));
+            stmt.setTimestamp(3, arrival);
+            stmt.setTimestamp(4, departure);
+
+            stmt.executeUpdate();
+            stmt.close();
+
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setContentText("Επιτυχής εισαγωγή προορισμού!");
+            alert.setTitle("Επιβεβαίωση Εισαγωγής προορισμού");
+            alert.setHeaderText("Επιτυχία");
+            alert.showAndWait();
+
+        } catch (SQLException ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setContentText(ex.toString());
+            alert.setHeaderText("Σφάλμα " + ex.getErrorCode());
+            alert.setTitle("Σφάλμα");
+            alert.showAndWait();
+        } catch (NullPointerException ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setContentText("Η ημερομηνία είναι υποχρεωτική");
+            alert.setTitle("Σφάλμα");
+            alert.setHeaderText("Σφάλμα");
+            alert.showAndWait();
+        } catch (Exception ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setContentText(ex.toString());
+            alert.setTitle("Σφάλμα");
+            alert.setHeaderText("Σφάλμα");
+            alert.showAndWait();
+        }
+    }
+
+    public void clearDest(ActionEvent e) {
+        tripidListDest.setValue(null);
+        nameFieldDest.setText(null);
+        departurePickerDest.setValue(null);
+        arrivalPickerDest.setValue(null);
+        typeListDest.setValue(null);
+        locationListDest.setValue(null);
+        languageListDest.setValue(null);
+        descriptionTextDest.clear();
     }
 
     @Override

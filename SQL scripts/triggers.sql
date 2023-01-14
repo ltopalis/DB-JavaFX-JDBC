@@ -108,7 +108,7 @@ BEGIN
         NEW.dst_descr,',',
         NEW.dsrt_type,',',
         NEW.dst_language,',',
-        NEW.dst_location);
+        IF(NEW.dst_location IS NULL, "", NEW.dst_location));
         
 	INSERT INTO log
     VALUES(CURRENT_USER(),'INSERT',changes, CURRENT_TIMESTAMP());
