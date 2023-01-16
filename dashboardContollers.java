@@ -260,11 +260,27 @@ public class dashboardContollers implements Initializable {
     @FXML
     private Tab eventTabTrip;
 
+    @FXML
+    private Pane addOffersMenu;
+
+    @FXML
+    private Pane reservationMenu;
+
+    @FXML
+    private Pane userInformationScene;
+
+    @FXML
+    private Pane workersManagerMenu;
+
     private double x, y;
 
     public void dashboardBottonClicked(ActionEvent e) {
         dashboard.setVisible(true);
         travelMenu.setVisible(false);
+        addOffersMenu.setVisible(false);
+        reservationMenu.setVisible(false);
+        userInformationScene.setVisible(false);
+        workersManagerMenu.setVisible(false);
     }
 
     public void exitButtonClicked(ActionEvent e) {
@@ -340,29 +356,49 @@ public class dashboardContollers implements Initializable {
             initTripIdDestination(conn);
             dashboard.setVisible(false);
             travelMenu.setVisible(true);
+            addOffersMenu.setVisible(false);
+            reservationMenu.setVisible(false);
+            userInformationScene.setVisible(false);
+            workersManagerMenu.setVisible(false);
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
     }
 
     public void workerButtonPressed(ActionEvent e) {
-        workerButton.getScene().getWindow().hide();
-        System.out.println("to worker");
+        dashboard.setVisible(false);
+        travelMenu.setVisible(false);
+        addOffersMenu.setVisible(false);
+        reservationMenu.setVisible(false);
+        userInformationScene.setVisible(false);
+        workersManagerMenu.setVisible(true);
     }
 
     public void offerButtonPressed(ActionEvent e) {
-        offerButton.getScene().getWindow().hide();
-        System.out.println("to offer");
+        dashboard.setVisible(false);
+        travelMenu.setVisible(false);
+        addOffersMenu.setVisible(true);
+        reservationMenu.setVisible(false);
+        userInformationScene.setVisible(false);
+        workersManagerMenu.setVisible(false);
     }
 
     public void reservationButtonPressed(ActionEvent e) {
-        newReservationButton.getScene().getWindow().hide();
-        System.out.println("to trip");
+        dashboard.setVisible(false);
+        travelMenu.setVisible(false);
+        addOffersMenu.setVisible(false);
+        reservationMenu.setVisible(true);
+        userInformationScene.setVisible(false);
+        workersManagerMenu.setVisible(false);
     }
 
     public void settingsButtonPressed(ActionEvent e) {
-        settingsButton.getScene().getWindow().hide();
-        System.out.println("to settings");
+        dashboard.setVisible(false);
+        travelMenu.setVisible(false);
+        addOffersMenu.setVisible(false);
+        reservationMenu.setVisible(false);
+        userInformationScene.setVisible(true);
+        workersManagerMenu.setVisible(false);
     }
 
     private void initDashboardData(Connection conn) throws SQLException {
@@ -931,7 +967,7 @@ public class dashboardContollers implements Initializable {
                 tableDest.getItems().add(new Destination(tripID, nameString, departureString, arrivalString, typeString,
                         locationString, languageString, descriptionString));
             }
-            stmt.close();
+            // stmt.close();
         } catch (SQLException ex) {
             ex.getSQLState();
         }
@@ -1020,13 +1056,14 @@ public class dashboardContollers implements Initializable {
 
     public void clearDest(ActionEvent e) {
         tripidListDest.setValue(null);
-        nameFieldDest.setText(null);
+        nameFieldDest.setText("");
         departurePickerDest.setValue(null);
         arrivalPickerDest.setValue(null);
         typeListDest.setValue(null);
         locationListDest.setValue(null);
         languageListDest.setValue(null);
         descriptionTextDest.clear();
+        tableDest.getItems().clear();
     }
 
     @Override
@@ -1034,6 +1071,10 @@ public class dashboardContollers implements Initializable {
         usernameLabel.setText(userInformation.getLastname());
         dashboard.setVisible(true);
         travelMenu.setVisible(false);
+        addOffersMenu.setVisible(false);
+        reservationMenu.setVisible(false);
+        userInformationScene.setVisible(false);
+        workersManagerMenu.setVisible(false);
 
         try (Connection conn = connectDB.getConnection()) {
             initDashboardData(conn);
