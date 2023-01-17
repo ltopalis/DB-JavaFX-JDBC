@@ -2,10 +2,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import javax.swing.text.DateFormatter;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +22,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -27,6 +31,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -272,6 +277,48 @@ public class dashboardContollers implements Initializable {
     @FXML
     private Pane workersManagerMenu;
 
+    @FXML
+    private TableColumn<settings, String> ACTIONCOLUMNSET;
+
+    @FXML
+    private TextField ATTEXTSET;
+
+    @FXML
+    private ComboBox<String> BRANCHLISTSET;
+
+    @FXML
+    private TableColumn<settings, String> CHANGESCOLUMNSET;
+
+    @FXML
+    private Label DATETEXTSET;
+
+    @FXML
+    private TextField LNAMETEXTSET;
+
+    @FXML
+    private TextField NAMETEXTSET;
+
+    @FXML
+    private PasswordField PASSTEXTSET;
+
+    @FXML
+    private ImageView PHOTOUSERSET;
+
+    @FXML
+    private TextField SALARYTEXTSET;
+
+    @FXML
+    private TableView<settings> TABLESET;
+
+    @FXML
+    private TableColumn<settings, String> TIMECOLUMNSET;
+
+    @FXML
+    private Button UPDATESET;
+
+    @FXML
+    private TableColumn<settings, String> USERCOLUMNSET;
+
     private double x, y;
 
     public void dashboardBottonClicked(ActionEvent e) {
@@ -393,12 +440,17 @@ public class dashboardContollers implements Initializable {
     }
 
     public void settingsButtonPressed(ActionEvent e) {
-        dashboard.setVisible(false);
-        travelMenu.setVisible(false);
-        addOffersMenu.setVisible(false);
-        reservationMenu.setVisible(false);
-        userInformationScene.setVisible(true);
-        workersManagerMenu.setVisible(false);
+        try (Connection conn = connectDB.getConnection()) {
+            dashboard.setVisible(false);
+            travelMenu.setVisible(false);
+            addOffersMenu.setVisible(false);
+            reservationMenu.setVisible(false);
+            userInformationScene.setVisible(true);
+            workersManagerMenu.setVisible(false);
+            initSETTINGS(conn);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void initDashboardData(Connection conn) throws SQLException {
@@ -1064,6 +1116,46 @@ public class dashboardContollers implements Initializable {
         languageListDest.setValue(null);
         descriptionTextDest.clear();
         tableDest.getItems().clear();
+    }
+
+    // SETTINGS SCENE
+
+    private void initSETTINGS(Connection conn) throws SQLException{
+            ATTEXTSET.setText(userInformation.getAT());
+            NAMETEXTSET.setText(userInformation.getName());
+            LNAMETEXTSET.setText(userInformation.getLastname());
+            SALARYTEXTSET.setText(Double.toString(userInformation.getSalary()));
+            PASSTEXTSET.setText(userInformation.getPassword());
+            DATETEXTSET.setText(userInformation.getStart_date().format(DateTimeFormatter.ofPattern("dd/MM/yy")));
+            ATTEXTSET.setEditable(false);
+            
+            Statement stmt=conn.createStatement();
+            String query = "SELECT CONCAT(br_city, ', ', br_street,' ', IF(br_num IS NULL, '-', br_num)) FROM branch ORDER BY 1 ";
+            ResultSet result = stmt.executeQuery(query);
+           
+            while (result.next()) {
+
+                BRANCHLISTSET.getItems().add( result.getString(1));
+            }        
+            
+        USERCOLUMNSET.setCellValueFactory(new PropertyValueFactory<settings, String>("user"));
+        CHANGESCOLUMNSET.setCellValueFactory(new PropertyValueFactory<settings, String>("changes"));
+        ACTIONCOLUMNSET.setCellValueFactory(new PropertyValueFactory<settings, String>("action"));
+        TIMECOLUMNSET.setCellValueFactory(new PropertyValueFactory<settings, String>("date"));
+
+        query="SELECT user_AT, action,changes,stamp FROM log";
+        result=stmt.executeQuery(query);
+
+        while(result.next()) {
+            String user=result.getString("user_AT");
+            String action=result.getString("action");
+            String changes=result.getString("changes");
+            String date=result.getString("stamp");
+
+            TABLESET.getItems().add(new settings(user, changes, action, date));
+        }
+
+           
     }
 
     @Override

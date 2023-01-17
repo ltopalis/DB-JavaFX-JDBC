@@ -246,7 +246,7 @@
                               </HBox>
                            </children>
                         </Pane>
-                        <AnchorPane fx:id="travelMenu" prefHeight="575.0" prefWidth="575.0">
+                        <AnchorPane fx:id="travelMenu" prefHeight="575.0" prefWidth="575.0" visible="false">
                            <children>
                               <TabPane prefHeight="575.0" prefWidth="725.0" tabClosingPolicy="UNAVAILABLE">
                                 <tabs>
@@ -740,14 +740,14 @@
                               </TabPane>
                            </children>
                         </Pane>
-                        <Pane fx:id="userInformationScene" prefHeight="575.0" prefWidth="725.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Pane fx:id="userInformationScene" prefHeight="575.0" prefWidth="725.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <TableView layoutX="46.0" layoutY="294.0" prefHeight="200.0" prefWidth="625.0">
+                              <TableView fx:id="TABLESET" layoutX="46.0" layoutY="294.0" prefHeight="200.0" prefWidth="625.0">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="USER" />
-                                  <TableColumn prefWidth="79.5" text="ACTION" />
-                                    <TableColumn prefWidth="150.5" text="TIME" />
-                                    <TableColumn prefWidth="319.5" text="CHANGES" />
+                                  <TableColumn fx:id="USERCOLUMNSET" prefWidth="75.0" text="USER" />
+                                  <TableColumn fx:id="ACTIONCOLUMNSET" prefWidth="79.5" text="ACTION" />
+                                    <TableColumn fx:id="TIMECOLUMNSET" prefWidth="150.5" text="TIME" />
+                                    <TableColumn fx:id="CHANGESCOLUMNSET" prefWidth="319.5" text="CHANGES" />
                                 </columns>
                               </TableView>
                               <HBox layoutX="90.0" layoutY="33.0" prefHeight="100.0" prefWidth="500.0">
@@ -765,19 +765,20 @@
                                     </VBox>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <TextField />
-                                          <TextField />
-                                          <TextField />
-                                          <TextField />
-                                          <ComboBox prefWidth="150.0" />
-                                          <PasswordField />
-                                          <Label prefHeight="25.0" prefWidth="100.0" text="Label" />
+                                          <TextField fx:id="ATTEXTSET" />
+                                          <TextField fx:id="NAMETEXTSET" />
+                                          <TextField fx:id="LNAMETEXTSET" />
+                                          <TextField fx:id="SALARYTEXTSET" />
+                                          <ComboBox fx:id="BRANCHLISTSET" prefWidth="150.0" />
+                                          <PasswordField fx:id="PASSTEXTSET" />
+                                          <Label fx:id="DATETEXTSET" prefHeight="25.0" prefWidth="100.0" text="Label" />
                                        </children>
                                     </VBox>
                                     <AnchorPane prefHeight="167.0" prefWidth="142.0" />
-                                    <ImageView fitHeight="122.0" fitWidth="161.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="PHOTOUSERSET" fitHeight="122.0" fitWidth="161.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </HBox>
+                              <Button fx:id="UPDATESET" layoutX="90.0" layoutY="221.0" mnemonicParsing="false" prefWidth="200.0" text="update" />
                            </children>
                         </Pane>
                      </children>
