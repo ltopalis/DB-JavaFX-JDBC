@@ -8,8 +8,6 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import javax.swing.text.DateFormatter;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -284,7 +282,7 @@ public class dashboardContollers implements Initializable {
     private TextField ATTEXTSET;
 
     @FXML
-    private ComboBox<String> BRANCHLISTSET;
+    private TextField BRANCHTEXTSET;
 
     @FXML
     private TableColumn<settings, String> CHANGESCOLUMNSET;
@@ -318,6 +316,105 @@ public class dashboardContollers implements Initializable {
 
     @FXML
     private TableColumn<settings, String> USERCOLUMNSET;
+
+    @FXML
+    private Button addButtonAddWorker;
+
+    @FXML
+    private ComboBox<String> adminBranchAddWorker;
+
+    @FXML
+    private ComboBox<String> adminTypeAddWorker;
+
+    @FXML
+    private ComboBox<String> branchAddWorker;
+
+    @FXML
+    private Button clearButtonAddWorker;
+
+    @FXML
+    private TextArea cvAddWorker;
+
+    @FXML
+    private TextField diplomaAddWorker;
+
+    @FXML
+    private TextField experienceAddWorker;
+
+    @FXML
+    private TextField idAddWorker;
+
+    @FXML
+    private TextField languageAddWorker;
+
+    @FXML
+    private ComboBox<String> licenseAddWorker;
+
+    @FXML
+    private TextField lnameAddWorker;
+
+    @FXML
+    private TextField nameAddWorker;
+
+    @FXML
+    private ComboBox<String> routeAddWorker;
+
+    @FXML
+    private TextField salaryAddWorker;
+
+    @FXML
+    private ComboBox<String> typeAddWorker;
+
+    @FXML
+    private Label adminLabel;
+
+    @FXML
+    private Label typeLabel;
+
+    @FXML
+    private Label branchLabel;
+
+    @FXML
+    private Label diplomaLabel;
+
+    @FXML
+    private Label licenseLabel;
+
+    @FXML
+    private Label routeLabel;
+
+    @FXML
+    private Label experienceLabel;
+
+    @FXML
+    private Label driverLabel;
+
+    @FXML
+    private Label guideLabel;
+
+    @FXML
+    private Label languageLabel;
+
+    @FXML
+    private TableView<Worker> tableWorker;
+
+    @FXML
+    private TableColumn<Worker, String> atColumnWorker;
+
+    @FXML
+    private TableColumn<Worker, String> branchColumnWorker;
+
+    @FXML
+    private TableColumn<Worker, String> lnameColumnWorker;
+
+    @FXML
+    private TableColumn<Worker, String> nameColumnWorker;
+
+    @FXML
+    private TableColumn<Worker, Float> salaryColumnWorker;
+
+    @FXML
+    private TableColumn<Worker, String> typeColumnWorker;
 
     private double x, y;
 
@@ -413,12 +510,17 @@ public class dashboardContollers implements Initializable {
     }
 
     public void workerButtonPressed(ActionEvent e) {
-        dashboard.setVisible(false);
-        travelMenu.setVisible(false);
-        addOffersMenu.setVisible(false);
-        reservationMenu.setVisible(false);
-        userInformationScene.setVisible(false);
-        workersManagerMenu.setVisible(true);
+        try (Connection conn = connectDB.getConnection()) {
+            dashboard.setVisible(false);
+            travelMenu.setVisible(false);
+            addOffersMenu.setVisible(false);
+            reservationMenu.setVisible(false);
+            userInformationScene.setVisible(false);
+            workersManagerMenu.setVisible(true);
+            initWorker(conn);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void offerButtonPressed(ActionEvent e) {
@@ -1118,44 +1220,303 @@ public class dashboardContollers implements Initializable {
         tableDest.getItems().clear();
     }
 
+    // WORKERS SCENE
+    private void initTableOfWorker(Connection conn) throws SQLException{
+        String query = "SELECT w.wrk_AT, " + 
+        "w.wrk_name, " +
+        "w.wrk_lname, " +
+        "w.wrk_salary, " +
+        "CONCAT(b.br_city, ', ', b.br_street, ' ', IF(b.br_num IS NULL, '-', b.br_num)) AS branchName, " +
+        "'DRIVER' AS type " + 
+    "FROM worker w JOIN branch b	ON w.wrk_br_code = b.br_code " + 
+        "JOIN driver d ON d.drv_AT = w.wrk_AT " +
+    "UNION " +
+    "SELECT w.wrk_AT, " + 
+        "w.wrk_name, " +
+        "w.wrk_lname, " +
+        "w.wrk_salary, " +
+        "CONCAT(b.br_city, ', ', b.br_street, ' ', IF(b.br_num IS NULL, '-', b.br_num)) AS branchName, " +
+        "'GUIDE' " +
+    "FROM worker w JOIN branch b ON w.wrk_br_code = b.br_code " + 
+        "JOIN guide g ON g.gui_AT = w.wrk_AT " +
+    "UNION " +
+    "SELECT w.wrk_AT, " +
+        "w.wrk_name, " +
+        "w.wrk_lname, " +
+        "w.wrk_salary, " +
+        "CONCAT(b.br_city, ', ', b.br_street, ' ', IF(b.br_num IS NULL, '-', b.br_num)) AS branchName, " +
+        "ad.adm_type " +
+    "FROM worker w JOIN branch b	ON w.wrk_br_code = b.br_code " + 
+        "JOIN admin ad ON ad.adm_AT = w.wrk_AT " +
+    "UNION " +
+    "SELECT w.wrk_AT, " + 
+        "w.wrk_name, " +
+        "w.wrk_lname, " +
+        "w.wrk_salary, " +
+        "CONCAT(b.br_city, ', ', b.br_street, ' ', IF(b.br_num IS NULL, '-', b.br_num)) AS branchName, "+ 
+        "'WORKER'" +
+    "FROM worker w JOIN branch b	"+
+        "ON w.wrk_br_code = b.br_code " +
+    "WHERE w.wrk_AT NOT IN ( " +
+        "SELECT w.wrk_AT "+
+        "FROM worker w JOIN driver d ON d.drv_AT = w.wrk_AT " +
+        "UNION " +
+        "SELECT w.wrk_AT "+ 
+        "FROM worker w JOIN guide g ON g.gui_AT = w.wrk_AT " +
+        "UNION " +
+        "SELECT w.wrk_AT " +
+        "FROM worker w JOIN admin ad ON ad.adm_AT = w.wrk_AT " +
+        ") ORDER BY wrk_AT";
+
+        atColumnWorker.setCellValueFactory(new PropertyValueFactory<Worker, String>("at"));
+        nameColumnWorker.setCellValueFactory(new PropertyValueFactory<Worker, String>("name"));
+        lnameColumnWorker.setCellValueFactory(new PropertyValueFactory<Worker, String>("lname"));
+        salaryColumnWorker.setCellValueFactory(new PropertyValueFactory<Worker, Float>("salry"));
+        branchColumnWorker.setCellValueFactory(new PropertyValueFactory<Worker, String>("branch"));
+        typeColumnWorker.setCellValueFactory(new PropertyValueFactory<Worker, String>("type"));
+
+
+        Statement stmt = conn.createStatement();
+        ResultSet result = stmt.executeQuery(query);
+        while(result.next()){
+            String AT = result.getString("wrk_AT");
+            String name = result.getString("wrk_name");
+            String lastname = result.getString("wrk_lname");
+            float salary = result.getFloat("wrk_salary");
+            String branch = result.getString("branchName");
+            String type = result.getString("type");
+
+            tableWorker.getItems().add(new Worker(AT, name, lastname, branch, salary, type));
+        }
+        stmt.close();
+    }
+
+    private void initWorker(Connection conn) throws SQLException {
+        String query = "SELECT CONCAT(br_city, ', ', br_street,' ', IF(br_num IS NULL, '-', br_num)) FROM branch";
+        Statement stmt = conn.createStatement();
+        ResultSet result = stmt.executeQuery(query);
+        // final String selectedValue;
+        while (result.next()) {
+            branchAddWorker.getItems().add(result.getString(1));
+            adminBranchAddWorker.getItems().add(result.getString(1));
+        }
+        initTableOfWorker(conn);
+
+        typeAddWorker.getItems().add("Worker");
+        typeAddWorker.getItems().add("Driver");
+        typeAddWorker.getItems().add("Administrator");
+        typeAddWorker.getItems().add("Guide");
+
+        licenseAddWorker.getItems().add("A");
+        licenseAddWorker.getItems().add("B");
+        licenseAddWorker.getItems().add("C");
+        licenseAddWorker.getItems().add("D");
+
+        routeAddWorker.getItems().add("LOCAL");
+        routeAddWorker.getItems().add("ABROAD");
+
+        adminTypeAddWorker.getItems().add("LOGISTICS");
+        adminTypeAddWorker.getItems().add("ADMINISTRATIVE");
+        adminTypeAddWorker.getItems().add("ACCOUNTING");
+
+        guideLabel.setVisible(false);
+        languageLabel.setVisible(false);
+        cvAddWorker.setVisible(false);
+        languageAddWorker.setVisible(false);
+
+        licenseLabel.setVisible(false);
+        routeLabel.setVisible(false);
+        experienceLabel.setVisible(false);
+        driverLabel.setVisible(false);
+        licenseAddWorker.setVisible(false);
+        routeAddWorker.setVisible(false);
+        experienceAddWorker.setVisible(false);
+
+        adminLabel.setVisible(false);
+        typeLabel.setVisible(false);
+        branchLabel.setVisible(false);
+        diplomaLabel.setVisible(false);
+        adminTypeAddWorker.setVisible(false);
+        adminBranchAddWorker.setVisible(false);
+        diplomaAddWorker.setVisible(false);
+
+        typeAddWorker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            String selectedValue = newValue;
+            switch (selectedValue) {
+                case "Worker":
+                    guideLabel.setVisible(false);
+                    languageLabel.setVisible(false);
+                    cvAddWorker.setVisible(false);
+                    languageAddWorker.setVisible(false);
+
+                    licenseLabel.setVisible(false);
+                    routeLabel.setVisible(false);
+                    experienceLabel.setVisible(false);
+                    driverLabel.setVisible(false);
+                    licenseAddWorker.setVisible(false);
+                    routeAddWorker.setVisible(false);
+                    experienceAddWorker.setVisible(false);
+
+                    adminLabel.setVisible(false);
+                    typeLabel.setVisible(false);
+                    branchLabel.setVisible(false);
+                    diplomaLabel.setVisible(false);
+                    adminTypeAddWorker.setVisible(false);
+                    adminBranchAddWorker.setVisible(false);
+                    diplomaAddWorker.setVisible(false);
+                    break;
+                case "Driver":
+                    guideLabel.setVisible(false);
+                    languageLabel.setVisible(false);
+                    cvAddWorker.setVisible(false);
+                    languageAddWorker.setVisible(false);
+
+                    adminLabel.setVisible(false);
+                    typeLabel.setVisible(false);
+                    branchLabel.setVisible(false);
+                    diplomaLabel.setVisible(false);
+                    adminTypeAddWorker.setVisible(false);
+                    adminBranchAddWorker.setVisible(false);
+                    diplomaAddWorker.setVisible(false);
+
+                    licenseLabel.setVisible(true);
+                    routeLabel.setVisible(true);
+                    experienceLabel.setVisible(true);
+                    driverLabel.setVisible(true);
+                    licenseAddWorker.setVisible(true);
+                    routeAddWorker.setVisible(true);
+                    experienceAddWorker.setVisible(true);
+                    break;
+                case "Administrator":
+                    guideLabel.setVisible(false);
+                    languageLabel.setVisible(false);
+                    cvAddWorker.setVisible(false);
+                    languageAddWorker.setVisible(false);
+
+                    adminLabel.setVisible(true);
+                    typeLabel.setVisible(true);
+                    branchLabel.setVisible(true);
+                    diplomaLabel.setVisible(true);
+                    adminTypeAddWorker.setVisible(true);
+                    adminBranchAddWorker.setVisible(true);
+                    diplomaAddWorker.setVisible(true);
+
+                    licenseLabel.setVisible(false);
+                    routeLabel.setVisible(false);
+                    experienceLabel.setVisible(false);
+                    driverLabel.setVisible(false);
+                    licenseAddWorker.setVisible(false);
+                    routeAddWorker.setVisible(false);
+                    experienceAddWorker.setVisible(false);
+                    break;
+                case "Guide":
+                    guideLabel.setVisible(true);
+                    languageLabel.setVisible(true);
+                    cvAddWorker.setVisible(true);
+                    languageAddWorker.setVisible(true);
+
+                    adminLabel.setVisible(false);
+                    typeLabel.setVisible(false);
+                    branchLabel.setVisible(false);
+                    diplomaLabel.setVisible(false);
+                    adminTypeAddWorker.setVisible(false);
+                    adminBranchAddWorker.setVisible(false);
+                    diplomaAddWorker.setVisible(false);
+
+                    licenseLabel.setVisible(false);
+                    routeLabel.setVisible(false);
+                    experienceLabel.setVisible(false);
+                    driverLabel.setVisible(false);
+                    licenseAddWorker.setVisible(false);
+                    routeAddWorker.setVisible(false);
+                    experienceAddWorker.setVisible(false);
+                    break;
+            }
+        });
+
+        stmt.close();
+    }
+
+    public void addWorkerButtonClicked(ActionEvent e) {
+        String name = nameAddWorker.getText();
+        String lname = lnameAddWorker.getText();
+        String idNumber = idAddWorker.getText();
+        Float salary = Float.parseFloat(salaryAddWorker.getText());
+        String branch = branchAddWorker.getValue();
+        String worker_type = typeAddWorker.getValue();
+
+    }
+
     // SETTINGS SCENE
 
-    private void initSETTINGS(Connection conn) throws SQLException{
-            ATTEXTSET.setText(userInformation.getAT());
-            NAMETEXTSET.setText(userInformation.getName());
-            LNAMETEXTSET.setText(userInformation.getLastname());
-            SALARYTEXTSET.setText(Double.toString(userInformation.getSalary()));
-            PASSTEXTSET.setText(userInformation.getPassword());
-            DATETEXTSET.setText(userInformation.getStart_date().format(DateTimeFormatter.ofPattern("dd/MM/yy")));
-            ATTEXTSET.setEditable(false);
-            
-            Statement stmt=conn.createStatement();
-            String query = "SELECT CONCAT(br_city, ', ', br_street,' ', IF(br_num IS NULL, '-', br_num)) FROM branch ORDER BY 1 ";
-            ResultSet result = stmt.executeQuery(query);
-           
-            while (result.next()) {
+    private void initSETTINGS(Connection conn) throws SQLException {
+        TABLESET.getItems().clear();
+        ATTEXTSET.setText(userInformation.getAT());
+        NAMETEXTSET.setText(userInformation.getName());
+        LNAMETEXTSET.setText(userInformation.getLastname());
+        SALARYTEXTSET.setText(Double.toString(userInformation.getSalary()));
+        PASSTEXTSET.setText(userInformation.getPassword());
+        DATETEXTSET.setText(userInformation.getStart_date().format(DateTimeFormatter.ofPattern("dd/MM/yy")));
+        ATTEXTSET.disableProperty();
 
-                BRANCHLISTSET.getItems().add( result.getString(1));
-            }        
-            
+        Statement stmt = conn.createStatement();
+        String query = "SELECT CONCAT(br_city, ', ', br_street,' ', IF(br_num IS NULL, '-', br_num)) FROM branch WHERE br_code = "
+                + userInformation.getBranch();
+        ResultSet result = stmt.executeQuery(query);
+
+        while (result.next()) {
+
+            BRANCHTEXTSET.setText(result.getString(1));
+        }
+
         USERCOLUMNSET.setCellValueFactory(new PropertyValueFactory<settings, String>("user"));
-        CHANGESCOLUMNSET.setCellValueFactory(new PropertyValueFactory<settings, String>("changes"));
+        CHANGESCOLUMNSET.setCellValueFactory(new PropertyValueFactory<settings, String>("change"));
         ACTIONCOLUMNSET.setCellValueFactory(new PropertyValueFactory<settings, String>("action"));
         TIMECOLUMNSET.setCellValueFactory(new PropertyValueFactory<settings, String>("date"));
 
-        query="SELECT user_AT, action,changes,stamp FROM log";
-        result=stmt.executeQuery(query);
+        query = "SELECT user_AT, action,changes,stamp FROM log";
+        result = stmt.executeQuery(query);
 
-        while(result.next()) {
-            String user=result.getString("user_AT");
-            String action=result.getString("action");
-            String changes=result.getString("changes");
-            String date=result.getString("stamp");
+        while (result.next()) {
+            String user = result.getString("user_AT");
+            String action = result.getString("action");
+            String changes = result.getString("changes");
+            String date = result.getString("stamp");
 
             TABLESET.getItems().add(new settings(user, changes, action, date));
         }
 
-           
+        stmt.close();
+    }
+
+    public void updateButtonSettingsClicked(ActionEvent e) {
+        try (Connection conn = connectDB.getConnection()) {
+            String at = ATTEXTSET.getText();
+            float salary = Float.parseFloat(SALARYTEXTSET.getText());
+
+            String query = "UPDATE worker SET wrk_salary = ? WHERE wrk_AT = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setFloat(1, salary);
+            stmt.setString(2, at);
+            stmt.executeUpdate();
+            stmt.close();
+
+            query = "SELECT wrk_salary " +
+                    "FROM worker " +
+                    "WHERE wrk_AT = '" + at + "'";
+            Statement stmt2 = conn.createStatement();
+
+            ResultSet result = stmt2.executeQuery(query);
+            while (result.next()) {
+                Float newSalary = result.getFloat("wrk_salary");
+                userInformation.setSalary(newSalary);
+                SALARYTEXTSET.setText(Double.toString(newSalary));
+            }
+            stmt2.close();
+        } catch (SQLException ex) {
+            ex.getSQLState();
+        }
     }
 
     @Override
