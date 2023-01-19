@@ -1221,52 +1221,53 @@ public class dashboardContollers implements Initializable {
     }
 
     // WORKERS SCENE
-    private void initTableOfWorker(Connection conn) throws SQLException{
-        String query = "SELECT w.wrk_AT, " + 
-        "w.wrk_name, " +
-        "w.wrk_lname, " +
-        "w.wrk_salary, " +
-        "CONCAT(b.br_city, ', ', b.br_street, ' ', IF(b.br_num IS NULL, '-', b.br_num)) AS branchName, " +
-        "'DRIVER' AS type " + 
-    "FROM worker w JOIN branch b	ON w.wrk_br_code = b.br_code " + 
-        "JOIN driver d ON d.drv_AT = w.wrk_AT " +
-    "UNION " +
-    "SELECT w.wrk_AT, " + 
-        "w.wrk_name, " +
-        "w.wrk_lname, " +
-        "w.wrk_salary, " +
-        "CONCAT(b.br_city, ', ', b.br_street, ' ', IF(b.br_num IS NULL, '-', b.br_num)) AS branchName, " +
-        "'GUIDE' " +
-    "FROM worker w JOIN branch b ON w.wrk_br_code = b.br_code " + 
-        "JOIN guide g ON g.gui_AT = w.wrk_AT " +
-    "UNION " +
-    "SELECT w.wrk_AT, " +
-        "w.wrk_name, " +
-        "w.wrk_lname, " +
-        "w.wrk_salary, " +
-        "CONCAT(b.br_city, ', ', b.br_street, ' ', IF(b.br_num IS NULL, '-', b.br_num)) AS branchName, " +
-        "ad.adm_type " +
-    "FROM worker w JOIN branch b	ON w.wrk_br_code = b.br_code " + 
-        "JOIN admin ad ON ad.adm_AT = w.wrk_AT " +
-    "UNION " +
-    "SELECT w.wrk_AT, " + 
-        "w.wrk_name, " +
-        "w.wrk_lname, " +
-        "w.wrk_salary, " +
-        "CONCAT(b.br_city, ', ', b.br_street, ' ', IF(b.br_num IS NULL, '-', b.br_num)) AS branchName, "+ 
-        "'WORKER'" +
-    "FROM worker w JOIN branch b	"+
-        "ON w.wrk_br_code = b.br_code " +
-    "WHERE w.wrk_AT NOT IN ( " +
-        "SELECT w.wrk_AT "+
-        "FROM worker w JOIN driver d ON d.drv_AT = w.wrk_AT " +
-        "UNION " +
-        "SELECT w.wrk_AT "+ 
-        "FROM worker w JOIN guide g ON g.gui_AT = w.wrk_AT " +
-        "UNION " +
-        "SELECT w.wrk_AT " +
-        "FROM worker w JOIN admin ad ON ad.adm_AT = w.wrk_AT " +
-        ") ORDER BY wrk_AT";
+    private void initTableOfWorker(Connection conn) throws SQLException {
+        tableWorker.getItems().clear();
+        String query = "SELECT w.wrk_AT, " +
+                "w.wrk_name, " +
+                "w.wrk_lname, " +
+                "w.wrk_salary, " +
+                "CONCAT(b.br_city, ', ', b.br_street, ' ', IF(b.br_num IS NULL, '-', b.br_num)) AS branchName, " +
+                "'DRIVER' AS type " +
+                "FROM worker w JOIN branch b	ON w.wrk_br_code = b.br_code " +
+                "JOIN driver d ON d.drv_AT = w.wrk_AT " +
+                "UNION " +
+                "SELECT w.wrk_AT, " +
+                "w.wrk_name, " +
+                "w.wrk_lname, " +
+                "w.wrk_salary, " +
+                "CONCAT(b.br_city, ', ', b.br_street, ' ', IF(b.br_num IS NULL, '-', b.br_num)) AS branchName, " +
+                "'GUIDE' " +
+                "FROM worker w JOIN branch b ON w.wrk_br_code = b.br_code " +
+                "JOIN guide g ON g.gui_AT = w.wrk_AT " +
+                "UNION " +
+                "SELECT w.wrk_AT, " +
+                "w.wrk_name, " +
+                "w.wrk_lname, " +
+                "w.wrk_salary, " +
+                "CONCAT(b.br_city, ', ', b.br_street, ' ', IF(b.br_num IS NULL, '-', b.br_num)) AS branchName, " +
+                "ad.adm_type " +
+                "FROM worker w JOIN branch b	ON w.wrk_br_code = b.br_code " +
+                "JOIN admin ad ON ad.adm_AT = w.wrk_AT " +
+                "UNION " +
+                "SELECT w.wrk_AT, " +
+                "w.wrk_name, " +
+                "w.wrk_lname, " +
+                "w.wrk_salary, " +
+                "CONCAT(b.br_city, ', ', b.br_street, ' ', IF(b.br_num IS NULL, '-', b.br_num)) AS branchName, " +
+                "'WORKER'" +
+                "FROM worker w JOIN branch b	" +
+                "ON w.wrk_br_code = b.br_code " +
+                "WHERE w.wrk_AT NOT IN ( " +
+                "SELECT w.wrk_AT " +
+                "FROM worker w JOIN driver d ON d.drv_AT = w.wrk_AT " +
+                "UNION " +
+                "SELECT w.wrk_AT " +
+                "FROM worker w JOIN guide g ON g.gui_AT = w.wrk_AT " +
+                "UNION " +
+                "SELECT w.wrk_AT " +
+                "FROM worker w JOIN admin ad ON ad.adm_AT = w.wrk_AT " +
+                ") ORDER BY wrk_AT";
 
         atColumnWorker.setCellValueFactory(new PropertyValueFactory<Worker, String>("at"));
         nameColumnWorker.setCellValueFactory(new PropertyValueFactory<Worker, String>("name"));
@@ -1275,10 +1276,9 @@ public class dashboardContollers implements Initializable {
         branchColumnWorker.setCellValueFactory(new PropertyValueFactory<Worker, String>("branch"));
         typeColumnWorker.setCellValueFactory(new PropertyValueFactory<Worker, String>("type"));
 
-
         Statement stmt = conn.createStatement();
         ResultSet result = stmt.executeQuery(query);
-        while(result.next()){
+        while (result.next()) {
             String AT = result.getString("wrk_AT");
             String name = result.getString("wrk_name");
             String lastname = result.getString("wrk_lname");
@@ -1292,6 +1292,12 @@ public class dashboardContollers implements Initializable {
     }
 
     private void initWorker(Connection conn) throws SQLException {
+        tableWorker.getItems().clear();
+        branchAddWorker.getItems().clear();
+        typeAddWorker.getItems().clear();
+        adminTypeAddWorker.getItems().clear();
+        licenseAddWorker.getItems().clear();
+        routeAddWorker.getItems().clear();
         String query = "SELECT CONCAT(br_city, ', ', br_street,' ', IF(br_num IS NULL, '-', br_num)) FROM branch";
         Statement stmt = conn.createStatement();
         ResultSet result = stmt.executeQuery(query);
@@ -1438,13 +1444,130 @@ public class dashboardContollers implements Initializable {
     }
 
     public void addWorkerButtonClicked(ActionEvent e) {
-        String name = nameAddWorker.getText();
-        String lname = lnameAddWorker.getText();
-        String idNumber = idAddWorker.getText();
-        Float salary = Float.parseFloat(salaryAddWorker.getText());
-        String branch = branchAddWorker.getValue();
-        String worker_type = typeAddWorker.getValue();
+        try (Connection conn = connectDB.getConnection()) {
+            String name = nameAddWorker.getText();
+            String lname = lnameAddWorker.getText();
+            String idNumber = idAddWorker.getText();
+            Float salary = Float.parseFloat(salaryAddWorker.getText());
+            String worker_type = typeAddWorker.getValue().toString();
+            int branch = 0;
+            String branchName = branchAddWorker.getValue();
 
+            String query = "SELECT br_code FROM branch WHERE CONCAT(br_city, ', ', br_street,' ', IF(br_num IS NULL, '-', br_num)) = '"
+                    +
+                    branchName + "'";
+
+            Statement branchid = conn.createStatement();
+            ResultSet result = branchid.executeQuery(query);
+            while (result.next()) {
+                branch = result.getInt("br_code");
+            }
+
+            query = "INSERT INTO worker VALUES (?, ?, ?, ?, ?)";
+
+            switch (worker_type) {
+                case "Worker":
+                    PreparedStatement stmt1 = conn.prepareStatement(query);
+                    stmt1.setString(1, idNumber);
+                    stmt1.setString(2, name);
+                    stmt1.setString(3, lname);
+                    stmt1.setFloat(4, salary);
+                    stmt1.setInt(5, branch);
+                    stmt1.executeUpdate();
+                    stmt1.close();
+                    branchid.close();
+                    break;
+                case "Driver":
+                    CallableStatement stmt = conn.prepareCall("CALL addNewDriver(?, ?, ?, ?, ?, ?, ?)");
+                    stmt.setString(1, idNumber);
+                    stmt.setString(2, name);
+                    stmt.setString(3, lname);
+                    stmt.setFloat(4, salary);
+                    stmt.setString(5, licenseAddWorker.getValue());
+                    stmt.setString(6, routeAddWorker.getValue());
+                    stmt.setString(7, experienceAddWorker.getText());
+                    stmt.executeUpdate();
+                    stmt.close();
+                    break;
+                case "Administrator":
+                    PreparedStatement stmt2 = conn.prepareStatement(query);
+                    stmt2.setString(1, idNumber);
+                    stmt2.setString(2, name);
+                    stmt2.setString(3, lname);
+                    stmt2.setFloat(4, salary);
+                    stmt2.setInt(5, branch);
+                    stmt2.executeUpdate();
+
+                    query = "INSERT INTO admin VALUES(?, ?, ?)";
+                    stmt2 = conn.prepareStatement(query);
+                    stmt2.setString(1, idNumber);
+                    stmt2.setString(2, adminTypeAddWorker.getValue());
+                    stmt2.setString(3, diplomaAddWorker.getText());
+                    stmt2.executeUpdate();
+
+                    query = "SELECT br_code FROM branch WHERE CONCAT(br_city, ', ', br_street,' ', IF(br_num IS NULL, '-', br_num)) = '"
+                            +
+                            adminBranchAddWorker.getValue() + "'";
+
+                    branchid = conn.createStatement();
+                    result = branchid.executeQuery(query);
+                    if (result.next()) {
+                        branch = result.getInt("br_code");
+                    }
+                    branchid.close();
+
+                    query = "INSERT INTO manages VALUES(?, ?)";
+                    stmt2 = conn.prepareStatement(query);
+                    stmt2.setString(1, idNumber);
+                    stmt2.setInt(2, branch);
+                    stmt2.executeUpdate();
+                    stmt2.close();
+                    break;
+                case "Guide":
+                    PreparedStatement stmt3 = conn.prepareStatement(query);
+                    stmt3.setString(1, idNumber);
+                    stmt3.setString(2, name);
+                    stmt3.setString(3, lname);
+                    stmt3.setFloat(4, salary);
+                    stmt3.setInt(5, branch);
+                    stmt3.executeUpdate();
+
+                    query = "INSERT INTO guide VALUES(?, ?)";
+                    stmt3 = conn.prepareStatement(query);
+                    stmt3.setString(1, idNumber);
+                    stmt3.setString(2, cvAddWorker.getText());
+                    stmt3.executeUpdate();
+
+                    query = "INSERT INTO languages VALUES(?, ?)";
+                    stmt3 = conn.prepareStatement(query);
+                    stmt3.setString(1, idNumber);
+                    stmt3.setString(2, languageAddWorker.getText());
+                    stmt3.executeUpdate();
+                    stmt3.close();
+                    break;
+            }
+            initTableOfWorker(conn);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void clearButtonWorkersClicked(ActionEvent e){
+        nameAddWorker.clear();
+        lnameAddWorker.clear();
+        idAddWorker.clear();
+        salaryAddWorker.clear();
+        experienceAddWorker.clear();
+        diplomaAddWorker.clear();
+        cvAddWorker.clear();
+        languageAddWorker.clear();
+
+        branchAddWorker.setValue(null);
+        typeAddWorker.setValue("Worker");
+        licenseAddWorker.setValue(null);
+        routeAddWorker.setValue(null);
+        adminTypeAddWorker.setValue(null);
+        adminBranchAddWorker.setValue(null);
     }
 
     // SETTINGS SCENE
@@ -1511,8 +1634,8 @@ public class dashboardContollers implements Initializable {
             while (result.next()) {
                 Float newSalary = result.getFloat("wrk_salary");
                 userInformation.setSalary(newSalary);
-                SALARYTEXTSET.setText(Double.toString(newSalary));
             }
+            SALARYTEXTSET.setText(Double.toString(userInformation.getSalary()));
             stmt2.close();
         } catch (SQLException ex) {
             ex.getSQLState();
