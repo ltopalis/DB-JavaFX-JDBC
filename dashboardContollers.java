@@ -416,6 +416,48 @@ public class dashboardContollers implements Initializable {
     @FXML
     private TableColumn<Worker, String> typeColumnWorker;
 
+    @FXML
+    private ComboBox<String> destinationListOffer;
+
+    @FXML
+    private ComboBox<String> idListOffer;
+
+    @FXML
+    private DatePicker startDatePickerOffer;
+
+    @FXML
+    private TextField costTextOffer;
+
+    @FXML
+    private DatePicker finishDatePickerOffer;
+
+    @FXML
+    private Button serachButtonOffer;
+
+    @FXML
+    private Button addButtonOffer;
+
+    @FXML
+    private Button clearButtonOffer;
+
+    @FXML
+    private TableView<Offers> offerTable;
+
+    @FXML
+    private TableColumn<Offers, String> idColumnOffer;
+
+    @FXML
+    private TableColumn<Offers, String> startColumnOffer;
+
+    @FXML
+    private TableColumn<Offers, String> finishColumnOffer;
+
+    @FXML
+    private TableColumn<Offers, Float> costColumnOffer;
+
+    @FXML
+    private TableColumn<Offers, String> destinationColumnOffer;
+
     private double x, y;
 
     public void dashboardBottonClicked(ActionEvent e) {
@@ -524,12 +566,17 @@ public class dashboardContollers implements Initializable {
     }
 
     public void offerButtonPressed(ActionEvent e) {
-        dashboard.setVisible(false);
-        travelMenu.setVisible(false);
-        addOffersMenu.setVisible(true);
-        reservationMenu.setVisible(false);
-        userInformationScene.setVisible(false);
-        workersManagerMenu.setVisible(false);
+        try (Connection conn = connectDB.getConnection()) {
+            dashboard.setVisible(false);
+            travelMenu.setVisible(false);
+            addOffersMenu.setVisible(true);
+            reservationMenu.setVisible(false);
+            userInformationScene.setVisible(false);
+            workersManagerMenu.setVisible(false);
+            initOfferScene(conn);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void reservationButtonPressed(ActionEvent e) {
@@ -1552,7 +1599,7 @@ public class dashboardContollers implements Initializable {
         }
     }
 
-    public void clearButtonWorkersClicked(ActionEvent e){
+    public void clearButtonWorkersClicked(ActionEvent e) {
         nameAddWorker.clear();
         lnameAddWorker.clear();
         idAddWorker.clear();
@@ -1568,6 +1615,150 @@ public class dashboardContollers implements Initializable {
         routeAddWorker.setValue(null);
         adminTypeAddWorker.setValue(null);
         adminBranchAddWorker.setValue(null);
+    }
+
+    // OFFER SCENE
+
+    private void initOfferScene(Connection conn) throws SQLException {
+        idListOffer.getItems().clear();
+        destinationListOffer.getItems().clear();
+        String query = "SELECT offer_id FROM offers ORDER BY offer_id";
+        Statement stmt = conn.createStatement();
+        ResultSet result = stmt.executeQuery(query);
+
+        while (result.next()) {
+            idListOffer.getItems().add(Integer.toString(result.getInt("offer_id")));
+        }
+
+        query = "SELECT DISTINCT dst_name FROM destination WHERE dst_location IS NOT NULL ORDER BY dst_name";
+        result = stmt.executeQuery(query);
+
+        while (result.next()) {
+            destinationListOffer.getItems().add(result.getString("dst_name"));
+        }
+
+        stmt.close();
+    }
+
+    public void searchOfferBottonClicked(ActionEvent e) {
+        try (Connection conn = connectDB.getConnection()) {
+            offerTable.getItems().clear();
+            String id = idListOffer.getValue();
+            LocalDate start = startDatePickerOffer.getValue();
+            LocalDate finish = finishDatePickerOffer.getValue();
+            String cost = costTextOffer.getText();
+            String destination = destinationListOffer.getValue();
+
+            String query = "SELECT offer_id, offer_start, offer_finish, offer_cost, dst_name FROM offers JOIN destination ON offer_dst_id = dst_id";
+
+            ArrayList<String> listWhereClause = new ArrayList<>();
+            if (id != null)
+                listWhereClause.add(" offer_id = '" + id + "'");
+            if (start != null && finish != null)
+                listWhereClause.add("offer_start BETWEEN '" + start + " 00:00:00' " + " AND '" + start
+                        + " 23:59:59' AND offer_finish BETWEEN " + finish + " 00:00:00' AND '" + finish + " 23:59:59'");
+            else if (start != null)
+                listWhereClause.add("offer_start BETWEEN '" + start + " 00:00:00' AND '" + start + " 23:59:59'");
+            else if (finish != null)
+                listWhereClause.add("ev_end BETWEEN '" + finish + " 00:00:00'" + " AND  '" + finish + " 23:59:59'");
+            if (!costTextOffer.getText().isEmpty())
+                listWhereClause.add(" offer_cost = " + cost);
+            if (destination != null)
+                listWhereClause.add(" dst_name LIKE '" + destination + "'");
+
+            String whereClause = String.join(" AND ", listWhereClause);
+
+            if (!whereClause.isEmpty())
+                query += " WHERE " + whereClause;
+
+            Statement stmt = conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+
+            idColumnOffer.setCellValueFactory(new PropertyValueFactory<Offers, String>("id"));
+            startColumnOffer.setCellValueFactory(new PropertyValueFactory<Offers, String>("start"));
+            finishColumnOffer.setCellValueFactory(new PropertyValueFactory<Offers, String>("finish"));
+            costColumnOffer.setCellValueFactory(new PropertyValueFactory<Offers, Float>("cost"));
+            destinationColumnOffer.setCellValueFactory(new PropertyValueFactory<Offers, String>("destination"));
+
+            while (result.next()) {
+                String myid = Integer.toString(result.getInt("offer_id"));
+                String mystart = result.getString("offer_start");
+                String myfinish = result.getString("offer_finish");
+                float mycost = result.getFloat("offer_cost");
+                String mydestination = result.getString("dst_name");
+
+                offerTable.getItems().add(new Offers(myid, mystart, myfinish, mycost, mydestination));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void addOfferBottonClicked(ActionEvent e) {
+        try (Connection conn = connectDB.getConnection()) {
+            java.sql.Timestamp start = java.sql.Timestamp.from(
+                    startDatePickerOffer.getValue().atStartOfDay().atZone(java.time.ZoneId.systemDefault())
+                            .toInstant());
+            java.sql.Timestamp finish = java.sql.Timestamp.from(
+                    finishDatePickerOffer.getValue().atStartOfDay().atZone(java.time.ZoneId.systemDefault())
+                            .toInstant());
+            Float costOffer = Float.parseFloat(costTextOffer.getText());
+            int destination = 0;
+
+            String query = "SELECT dst_id FROM destination WHERE dst_name LIKE '" + destinationListOffer.getValue()
+                    + "'";
+
+            Statement stmt = conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            if (result.next()) {
+                destination = result.getInt("dst_id");
+            }
+            stmt.close();
+
+            query = "INSERT INTO offers(offer_start, offer_finish, offer_cost, offer_dst_id) VALUES(?, ?,?, ?)";
+            PreparedStatement stmt1 = conn.prepareStatement(query);
+            stmt1.setTimestamp(1, start);
+            stmt1.setTimestamp(2, finish);
+            stmt1.setFloat(3, costOffer);
+            stmt1.setInt(4, destination);
+            stmt1.executeUpdate();
+            stmt1.close();
+            initOfferScene(conn);
+
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setContentText("Επιτυχής εισαγωγή ταξιδιου!");
+            alert.setTitle("Επιβεβαίωση Εισαγωγής ταξιδιού");
+            alert.setHeaderText("Επιτυχία");
+            alert.showAndWait();
+
+        } catch (SQLException ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setContentText(ex.toString());
+            alert.setHeaderText("Σφάλμα " + ex.getErrorCode());
+            alert.setTitle("Σφάλμα");
+            alert.showAndWait();
+        } catch (NullPointerException ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setContentText("Η ημερομηνία είναι υποχρεωτική");
+            alert.setTitle("Σφάλμα");
+            alert.setHeaderText("Σφάλμα");
+            alert.showAndWait();
+        } catch (Exception ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setContentText(ex.toString());
+            alert.setTitle("Σφάλμα");
+            alert.setHeaderText("Σφάλμα");
+            alert.showAndWait();
+        }
+    }
+
+    public void clearBottonOffer(ActionEvent e) {
+        offerTable.getItems().clear();
+        idListOffer.setValue(null);
+        startDatePickerOffer.setValue(null);
+        finishDatePickerOffer.setValue(null);
+        costTextOffer.setText("");
+        destinationListOffer.setValue(null);
     }
 
     // SETTINGS SCENE

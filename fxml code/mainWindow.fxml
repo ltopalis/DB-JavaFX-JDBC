@@ -354,7 +354,7 @@
                               </TabPane>
                            </children>
                         </AnchorPane>
-                        <Pane fx:id="workersManagerMenu" prefHeight="575.0" prefWidth="725.0">
+                        <Pane fx:id="workersManagerMenu" prefHeight="575.0" prefWidth="725.0" visible="false">
                            <children>
                               <TabPane prefHeight="575.0" prefWidth="725.0" tabClosingPolicy="UNAVAILABLE">
                                 <tabs>
@@ -557,7 +557,7 @@
                               </TabPane>
                            </children>
                         </Pane>
-                        <Pane fx:id="addOffersMenu" prefHeight="575.0" prefWidth="725.0" visible="false">
+                        <Pane fx:id="addOffersMenu" prefHeight="575.0" prefWidth="725.0">
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="54.0" prefWidth="725.0" text="Please enter your offer details">
                                  <font>
@@ -597,28 +597,28 @@
                                     </VBox>
                                     <VBox prefHeight="200.0" prefWidth="150.0">
                                        <children>
-                                          <ComboBox prefHeight="0.0" prefWidth="150.0">
+                                          <ComboBox fx:id="idListOffer" prefHeight="0.0" prefWidth="150.0">
                                              <VBox.margin>
                                                 <Insets bottom="2.0" top="2.0" />
                                              </VBox.margin>
                                           </ComboBox>
-                                          <DatePicker prefHeight="0.0" prefWidth="150.0">
+                                          <DatePicker fx:id="startDatePickerOffer" prefHeight="0.0" prefWidth="150.0">
                                              <VBox.margin>
                                                 <Insets bottom="2.0" top="2.0" />
                                              </VBox.margin>
                                           </DatePicker>
-                                          <DatePicker prefHeight="0.0" prefWidth="150.0">
+                                          <DatePicker fx:id="finishDatePickerOffer" prefHeight="0.0" prefWidth="150.0">
                                              <VBox.margin>
                                                 <Insets bottom="2.0" top="2.0" />
                                              </VBox.margin>
                                           </DatePicker>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-                                          <TextField maxWidth="150.0" minWidth="150.0" prefHeight="10.0" prefWidth="150.0">
+                                          <TextField fx:id="costTextOffer" maxWidth="150.0" minWidth="150.0" prefHeight="10.0" prefWidth="150.0">
                                              <VBox.margin>
                                                 <Insets bottom="2.0" top="2.0" />
                                              </VBox.margin>
                                           </TextField>
-                                          <ComboBox prefHeight="0.0" prefWidth="150.0">
+                                          <ComboBox fx:id="destinationListOffer" prefHeight="0.0" prefWidth="150.0">
                                              <VBox.margin>
                                                 <Insets bottom="2.0" top="2.0" />
                                              </VBox.margin>
@@ -628,11 +628,11 @@
                                     <AnchorPane prefHeight="145.0" prefWidth="203.0" />
                                     <VBox prefHeight="145.0" prefWidth="100.0">
                                        <children>
-                                          <Button defaultButton="true" mnemonicParsing="false" prefWidth="100.0" text="SEARCH" />
+                                          <Button fx:id="serachButtonOffer" defaultButton="true" mnemonicParsing="false" onAction="#searchOfferBottonClicked" prefWidth="100.0" text="SEARCH" />
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-                                          <Button mnemonicParsing="false" prefWidth="100.0" text="ADD" />
+                                          <Button fx:id="addButtonOffer" mnemonicParsing="false" onAction="#addOfferBottonClicked" prefWidth="100.0" text="ADD" />
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-                                          <Button cancelButton="true" mnemonicParsing="false" prefWidth="100.0" text="CLEAR" />
+                                          <Button fx:id="clearButtonOffer" cancelButton="true" mnemonicParsing="false" onAction="#clearBottonOffer" prefWidth="100.0" text="CLEAR" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -640,13 +640,13 @@
                                     <Insets left="10.0" right="10.0" />
                                  </padding>
                               </HBox>
-                              <TableView layoutX="50.0" layoutY="290.0" prefHeight="235.0" prefWidth="625.0">
+                              <TableView fx:id="offerTable" layoutX="50.0" layoutY="290.0" prefHeight="235.0" prefWidth="625.0">
                                 <columns>
-                                  <TableColumn prefWidth="125.0" text="id" />
-                                  <TableColumn prefWidth="125.0" text="start" />
-                                    <TableColumn prefWidth="125.0" text="finish" />
-                                    <TableColumn prefWidth="125.0" text="cost" />
-                                    <TableColumn prefWidth="125.0" text="destination" />
+                                  <TableColumn fx:id="idColumnOffer" prefWidth="125.0" text="id" />
+                                  <TableColumn fx:id="startColumnOffer" prefWidth="125.0" text="start" />
+                                    <TableColumn fx:id="finishColumnOffer" prefWidth="125.0" text="finish" />
+                                    <TableColumn fx:id="costColumnOffer" prefWidth="125.0" text="cost" />
+                                    <TableColumn fx:id="destinationColumnOffer" prefWidth="125.0" text="destination" />
                                 </columns>
                               </TableView>
                            </children>
