@@ -1923,32 +1923,31 @@ public class dashboardContollers implements Initializable {
             if (!lnameTextRes.getText().isEmpty())
                 listWhereClause.add("res_off_lname = '" + lname + "'");
             if (!depositTextRes.getText().isEmpty())
-                listWhereClause.add("res_off_depoit = " + Integer.parseInt(deposit));
+                listWhereClause.add("res_off_depoit = " + Float.parseFloat(deposit));
 
             String whereClause = String.join(" AND ", listWhereClause);
 
             if (!whereClause.isEmpty())
                 query += " WHERE " + whereClause;
-            System.out.println(query);
 
             Statement stmt = conn.createStatement();
             ResultSet result = stmt.executeQuery(query);
 
             idColumnRes.setCellValueFactory(new PropertyValueFactory<reservation_offer, String>("res_off_id"));
-            offeridColumnRes.setCellValueFactory(new PropertyValueFactory<reservation_offer, String>(" offer_id "));
-            nameColumnRes.setCellValueFactory(new PropertyValueFactory<reservation_offer, String>("name"));
-            lnameColumnRes.setCellValueFactory(new PropertyValueFactory<reservation_offer, String>("lname"));
-            depositColumnRes.setCellValueFactory(new PropertyValueFactory<reservation_offer, Float>("deposit"));
+            offeridColumnRes.setCellValueFactory(new PropertyValueFactory<reservation_offer, String>("res_off_tr_id"));
+            nameColumnRes.setCellValueFactory(new PropertyValueFactory<reservation_offer, String>("res_off_name"));
+            lnameColumnRes.setCellValueFactory(new PropertyValueFactory<reservation_offer, String>("res_off_lname"));
+            depositColumnRes.setCellValueFactory(new PropertyValueFactory<reservation_offer, Float>("res_off_deposit"));
 
             while (result.next()) {
                 String reservation_id = Integer.toString(result.getInt("res_off_tr_id"));
-                String offerID = result.getString("res_off_id");
+                String offerID = Integer.toString(result.getInt("res_off_id"));
                 String nameString = result.getString("res_off_name");
                 String lnameString = result.getString("res_off_lname");
-                Float deposit_ = result.getFloat("depoit");
+                float deposit_ = result.getFloat("res_off_depoit");
 
                 offerResTable.getItems()
-                        .add(new reservation_offer(reservation_id, lnameString, nameString, offerID, deposit_));
+                        .add(new reservation_offer(lnameString, reservation_id, nameString, offerID, deposit_));
             }
             stmt.close();
         } catch (SQLException ex) {
