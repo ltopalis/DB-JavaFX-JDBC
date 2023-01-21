@@ -462,8 +462,8 @@ public class dashboardContollers implements Initializable {
     private Tab offersTabReservation;
 
     @FXML
-    private ComboBox<String>  offeridListRes;
-   
+    private ComboBox<String> offeridListRes;
+
     @FXML
     private TextField nameTextRes;
 
@@ -475,7 +475,6 @@ public class dashboardContollers implements Initializable {
 
     @FXML
     private Label offid;
-
 
     @FXML
     private Label offname;
@@ -505,14 +504,13 @@ public class dashboardContollers implements Initializable {
     private TableColumn<reservation_offer, String> nameColumnRes;
 
     @FXML
-    private TableColumn<reservation_offer, String>  lnameColumnRes;
-   
-    @FXML
-    private TableColumn<reservation_offer, String>  offeridColumnRes;
+    private TableColumn<reservation_offer, String> lnameColumnRes;
 
     @FXML
-    private TableColumn<reservation_offer, Float>  depositColumnRes;
+    private TableColumn<reservation_offer, String> offeridColumnRes;
 
+    @FXML
+    private TableColumn<reservation_offer, Float> depositColumnRes;
 
     private double x, y;
 
@@ -637,16 +635,16 @@ public class dashboardContollers implements Initializable {
 
     public void reservationButtonPressed(ActionEvent e) {
         try (Connection conn = connectDB.getConnection()) {
-        initOfferidReservation(conn);
-        dashboard.setVisible(false);
-        travelMenu.setVisible(false);
-        addOffersMenu.setVisible(false);
-        reservationMenu.setVisible(true);
-        userInformationScene.setVisible(false);
-        workersManagerMenu.setVisible(false);
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-    }
+            initOfferidReservation(conn);
+            dashboard.setVisible(false);
+            travelMenu.setVisible(false);
+            addOffersMenu.setVisible(false);
+            reservationMenu.setVisible(true);
+            userInformationScene.setVisible(false);
+            workersManagerMenu.setVisible(false);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void settingsButtonPressed(ActionEvent e) {
@@ -1905,19 +1903,19 @@ public class dashboardContollers implements Initializable {
             offeridListRes.getItems().add(Integer.toString(result.getInt("res_off_id")));
         }
     }
-    
-     public void searchReservationOffer(ActionEvent e) {
+
+    public void searchReservationOffer(ActionEvent e) {
         offerResTable.getItems().clear();
         try (Connection conn = connectDB.getConnection()) {
             String offer_id = offeridListRes.getValue();
             String name = nameTextRes.getText();
-            String lname= lnameTextRes.getText();
-            Float deposit = Float.parseFloat(depositTextRes.getText());
+            String lname = lnameTextRes.getText();
+            String deposit = depositTextRes.getText();
 
             String query = "SELECT res_off_tr_id,res_off_lname,res_off_name,res_off_id,res_off_depoit from reservation_offers ";
 
             ArrayList<String> listWhereClause = new ArrayList<>();
-            if (offer_id!= null)
+            if (offer_id != null)
                 listWhereClause.add("res_off_id = " + offer_id);
             if (!nameTextRes.getText().isEmpty())
                 listWhereClause.add("res_off_name = '" + name + "'");
@@ -1925,34 +1923,34 @@ public class dashboardContollers implements Initializable {
             if (!lnameTextRes.getText().isEmpty())
                 listWhereClause.add("res_off_lname = '" + lname + "'");
             if (!depositTextRes.getText().isEmpty())
-                listWhereClause.add("res_off_depoit = '" + deposit + "'");
-            
-            
+                listWhereClause.add("res_off_depoit = " + Integer.parseInt(deposit));
 
             String whereClause = String.join(" AND ", listWhereClause);
 
             if (!whereClause.isEmpty())
                 query += " WHERE " + whereClause;
+            System.out.println(query);
 
             Statement stmt = conn.createStatement();
             ResultSet result = stmt.executeQuery(query);
 
-            idColumnRes.setCellValueFactory(new PropertyValueFactory<reservation_offer, String>(" offer_id "));
+            idColumnRes.setCellValueFactory(new PropertyValueFactory<reservation_offer, String>("res_off_id"));
+            offeridColumnRes.setCellValueFactory(new PropertyValueFactory<reservation_offer, String>(" offer_id "));
             nameColumnRes.setCellValueFactory(new PropertyValueFactory<reservation_offer, String>("name"));
             lnameColumnRes.setCellValueFactory(new PropertyValueFactory<reservation_offer, String>("lname"));
             depositColumnRes.setCellValueFactory(new PropertyValueFactory<reservation_offer, Float>("deposit"));
 
-            
-
             while (result.next()) {
+                String reservation_id = Integer.toString(result.getInt("res_off_tr_id"));
                 String offerID = result.getString("res_off_id");
                 String nameString = result.getString("res_off_name");
                 String lnameString = result.getString("res_off_lname");
-                Float deposit_=result.getFloat("depoit");
-              
-                offerResTable.getItems().add(new reservation_offer(lnameString,nameString,offerID,deposit_));
+                Float deposit_ = result.getFloat("depoit");
+
+                offerResTable.getItems()
+                        .add(new reservation_offer(reservation_id, lnameString, nameString, offerID, deposit_));
             }
-            // stmt.close();
+            stmt.close();
         } catch (SQLException ex) {
             ex.getSQLState();
         }
@@ -1963,10 +1961,9 @@ public class dashboardContollers implements Initializable {
             String offer_res_id = offeridListRes.getValue();
             String name = nameTextRes.getText();
             String lname = lnameTextRes.getText();
-            String deposit= depositTextRes.getText();
+            String deposit = depositTextRes.getText();
 
-            
-            String  query = "INSERT INTO reservation_offers (res_off_lname,res_off_name,res_off_id,res_off_depoit) VALUES ( ?, ?, ?,?)";
+            String query = "INSERT INTO reservation_offers (res_off_lname,res_off_name,res_off_id,res_off_depoit) VALUES ( ?, ?, ?,?)";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(2, name);
             stmt.setString(1, lname);
@@ -2004,7 +2001,6 @@ public class dashboardContollers implements Initializable {
         depositTextRes.setText("");
         offerResTable.getItems().clear();
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
