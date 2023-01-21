@@ -708,28 +708,28 @@
                                           </AnchorPane>
                                     </content>
                                   </Tab>
-                                  <Tab text="OFFERS">
+                                  <Tab fx:id="offersTabReservation" text="OFFERS">
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <Label layoutX="15.0" layoutY="29.0" prefHeight="25.0" text="offer id" />
-                                                <Label layoutX="15.0" layoutY="71.0" prefHeight="25.0" text="name" />
-                                                <Label layoutX="15.0" layoutY="155.0" prefHeight="25.0" text="deposit" />
-                                                <Label layoutX="15.0" layoutY="113.0" prefHeight="25.0" prefWidth="57.0" text="lastname" />
-                                                <ComboBox layoutX="71.0" layoutY="29.0" prefWidth="150.0" />
-                                                <TextField layoutX="71.0" layoutY="71.0" />
-                                                <TextField layoutX="71.0" layoutY="113.0" />
-                                                <TextField layoutX="70.0" layoutY="155.0" />
-                                                <Button defaultButton="true" layoutX="324.0" layoutY="65.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="add" />
-                                                <Button layoutX="404.0" layoutY="110.0" mnemonicParsing="false" prefWidth="100.0" text="clear" />
-                                                <Button layoutX="485.0" layoutY="65.0" mnemonicParsing="false" prefWidth="100.0" text="search" />
-                                                <TableView layoutX="50.0" layoutY="259.0" prefHeight="247.0" prefWidth="625.0">
+                                                <Label fx:id="offid" layoutX="15.0" layoutY="29.0" prefHeight="25.0" text="offer id" />
+                                                <Label fx:id="offname" layoutX="15.0" layoutY="71.0" prefHeight="25.0" text="name" />
+                                                <Label fx:id="offdeposit" layoutX="15.0" layoutY="155.0" prefHeight="25.0" text="deposit" />
+                                                <Label fx:id="offlname" layoutX="15.0" layoutY="113.0" prefHeight="25.0" prefWidth="57.0" text="lastname" />
+                                                <ComboBox fx:id="offeridListRes" layoutX="71.0" layoutY="29.0" prefWidth="150.0" />
+                                                <TextField fx:id="nameTextRes" layoutX="71.0" layoutY="71.0" />
+                                                <TextField fx:id="lnameTextRes" layoutX="71.0" layoutY="113.0" />
+                                                <TextField fx:id="depositTextRes" layoutX="70.0" layoutY="155.0" />
+                                                <Button fx:id="addResOfferButton" defaultButton="true" layoutX="324.0" layoutY="65.0" mnemonicParsing="false" onAction="#addResOffer" prefHeight="25.0" prefWidth="100.0" text="add" />
+                                                <Button fx:id="clearOfferResButton" layoutX="404.0" layoutY="110.0" mnemonicParsing="false" onAction="#clearOfferRes" prefWidth="100.0" text="clear" />
+                                                <Button fx:id="searchResOfferButton" layoutX="485.0" layoutY="65.0" mnemonicParsing="false" onAction="#searchReservationOffer" prefWidth="100.0" text="search" />
+                                                <TableView fx:id="offerResTable" layoutX="50.0" layoutY="259.0" prefHeight="247.0" prefWidth="625.0">
                                                   <columns>
-                                                    <TableColumn prefWidth="125.0" text="reservation id" />
-                                                    <TableColumn prefWidth="125.0" text="name" />
-                                                      <TableColumn prefWidth="125.0" text="lastname" />
-                                                      <TableColumn prefWidth="125.0" text="offer id" />
-                                                      <TableColumn prefWidth="125.0" text="deposit" />
+                                                    <TableColumn fx:id="idColumnRes" prefWidth="125.0" text="reservation id" />
+                                                    <TableColumn fx:id="nameColumnRes" prefWidth="125.0" text="name" />
+                                                      <TableColumn fx:id="lnameColumnRes" prefWidth="125.0" text="lastname" />
+                                                      <TableColumn fx:id="offeridColumnRes" prefWidth="125.0" text="offer id" />
+                                                      <TableColumn fx:id="depositColumnRes" prefWidth="125.0" text="deposit" />
                                                   </columns>
                                                 </TableView>
                                              </children>

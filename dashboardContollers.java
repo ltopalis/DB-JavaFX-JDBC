@@ -458,6 +458,62 @@ public class dashboardContollers implements Initializable {
     @FXML
     private TableColumn<Offers, String> destinationColumnOffer;
 
+    @FXML
+    private Tab offersTabReservation;
+
+    @FXML
+    private ComboBox<String>  offeridListRes;
+   
+    @FXML
+    private TextField nameTextRes;
+
+    @FXML
+    private TextField lnameTextRes;
+
+    @FXML
+    private TextField depositTextRes;
+
+    @FXML
+    private Label offid;
+
+
+    @FXML
+    private Label offname;
+
+    @FXML
+    private Label offdeposit;
+
+    @FXML
+    private Label offlname;
+
+    @FXML
+    private Button clearOfferResButton;
+
+    @FXML
+    private Button addResOfferButton;
+
+    @FXML
+    private Button searchResOfferButton;
+
+    @FXML
+    private TableView<reservation_offer> offerResTable;
+
+    @FXML
+    private TableColumn<reservation_offer, String> idColumnRes;
+
+    @FXML
+    private TableColumn<reservation_offer, String> nameColumnRes;
+
+    @FXML
+    private TableColumn<reservation_offer, String>  lnameColumnRes;
+   
+    @FXML
+    private TableColumn<reservation_offer, String>  offeridColumnRes;
+
+    @FXML
+    private TableColumn<reservation_offer, Float>  depositColumnRes;
+
+
     private double x, y;
 
     public void dashboardBottonClicked(ActionEvent e) {
@@ -580,12 +636,17 @@ public class dashboardContollers implements Initializable {
     }
 
     public void reservationButtonPressed(ActionEvent e) {
+        try (Connection conn = connectDB.getConnection()) {
+        initOfferidReservation(conn);
         dashboard.setVisible(false);
         travelMenu.setVisible(false);
         addOffersMenu.setVisible(false);
         reservationMenu.setVisible(true);
         userInformationScene.setVisible(false);
         workersManagerMenu.setVisible(false);
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
     }
 
     public void settingsButtonPressed(ActionEvent e) {
@@ -1832,6 +1893,118 @@ public class dashboardContollers implements Initializable {
             ex.getSQLState();
         }
     }
+
+    // Offers Tab
+    private void initOfferidReservation(Connection conn) throws SQLException {
+        offeridListRes.getItems().clear();
+        String query = "SELECT DISTINCT   res_off_id   FROM  reservation_offers   ORDER BY res_off_id ";
+        Statement stmt = conn.createStatement();
+        ResultSet result = stmt.executeQuery(query);
+
+        while (result.next()) {
+            offeridListRes.getItems().add(Integer.toString(result.getInt("res_off_id")));
+        }
+    }
+    
+     public void searchReservationOffer(ActionEvent e) {
+        offerResTable.getItems().clear();
+        try (Connection conn = connectDB.getConnection()) {
+            String offer_id = offeridListRes.getValue();
+            String name = nameTextRes.getText();
+            String lname= lnameTextRes.getText();
+            Float deposit = Float.parseFloat(depositTextRes.getText());
+
+            String query = "SELECT res_off_tr_id,res_off_lname,res_off_name,res_off_id,res_off_depoit from reservation_offers ";
+
+            ArrayList<String> listWhereClause = new ArrayList<>();
+            if (offer_id!= null)
+                listWhereClause.add("res_off_id = " + offer_id);
+            if (!nameTextRes.getText().isEmpty())
+                listWhereClause.add("res_off_name = '" + name + "'");
+
+            if (!lnameTextRes.getText().isEmpty())
+                listWhereClause.add("res_off_lname = '" + lname + "'");
+            if (!depositTextRes.getText().isEmpty())
+                listWhereClause.add("res_off_depoit = '" + deposit + "'");
+            
+            
+
+            String whereClause = String.join(" AND ", listWhereClause);
+
+            if (!whereClause.isEmpty())
+                query += " WHERE " + whereClause;
+
+            Statement stmt = conn.createStatement();
+            ResultSet result = stmt.executeQuery(query);
+
+            idColumnRes.setCellValueFactory(new PropertyValueFactory<reservation_offer, String>(" offer_id "));
+            nameColumnRes.setCellValueFactory(new PropertyValueFactory<reservation_offer, String>("name"));
+            lnameColumnRes.setCellValueFactory(new PropertyValueFactory<reservation_offer, String>("lname"));
+            depositColumnRes.setCellValueFactory(new PropertyValueFactory<reservation_offer, Float>("deposit"));
+
+            
+
+            while (result.next()) {
+                String offerID = result.getString("res_off_id");
+                String nameString = result.getString("res_off_name");
+                String lnameString = result.getString("res_off_lname");
+                Float deposit_=result.getFloat("depoit");
+              
+                offerResTable.getItems().add(new reservation_offer(lnameString,nameString,offerID,deposit_));
+            }
+            // stmt.close();
+        } catch (SQLException ex) {
+            ex.getSQLState();
+        }
+    }
+
+    public void addResOffer(ActionEvent e) {
+        try (Connection conn = connectDB.getConnection()) {
+            String offer_res_id = offeridListRes.getValue();
+            String name = nameTextRes.getText();
+            String lname = lnameTextRes.getText();
+            String deposit= depositTextRes.getText();
+
+            
+            String  query = "INSERT INTO reservation_offers (res_off_lname,res_off_name,res_off_id,res_off_depoit) VALUES ( ?, ?, ?,?)";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(2, name);
+            stmt.setString(1, lname);
+            stmt.setString(3, offer_res_id);
+            stmt.setFloat(4, Float.parseFloat(deposit));
+            stmt.executeUpdate();
+            stmt.close();
+            initOfferidReservation(conn);
+
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setContentText("Επιτυχής εισαγωγή προσφοράς!");
+            alert.setTitle("Επιβεβαίωση Εισαγωγής προσφοράς");
+            alert.setHeaderText("Επιτυχία");
+            alert.showAndWait();
+
+        } catch (SQLException ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setContentText(ex.toString());
+            alert.setHeaderText("Σφάλμα " + ex.getErrorCode());
+            alert.setTitle("Σφάλμα");
+            alert.showAndWait();
+        } catch (Exception ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setContentText(ex.toString());
+            alert.setTitle("Σφάλμα");
+            alert.setHeaderText("Σφάλμα");
+            alert.showAndWait();
+        }
+    }
+
+    public void clearOfferRes(ActionEvent e) {
+        offeridListRes.setValue(null);
+        nameTextRes.setText("");
+        lnameTextRes.setText("");
+        depositTextRes.setText("");
+        offerResTable.getItems().clear();
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
