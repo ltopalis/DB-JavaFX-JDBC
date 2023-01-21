@@ -516,6 +516,21 @@ public class dashboardContollers implements Initializable {
     @FXML
     private ImageView imageReservationRes;
 
+    @FXML
+    private ComboBox<String> ageListReservationRes;
+
+    @FXML
+    private ComboBox<Integer> idReservationRes;
+
+    @FXML
+    private TextField nameFieldReservationRes;
+
+    @FXML
+    private TextField lnameFieldReservationRes;
+
+    @FXML
+    private TextField numSeatFielsReservationRes;
+
     private double x, y;
 
     public void dashboardBottonClicked(ActionEvent e) {
@@ -639,13 +654,13 @@ public class dashboardContollers implements Initializable {
 
     public void reservationButtonPressed(ActionEvent e) {
         try (Connection conn = connectDB.getConnection()) {
-            initOfferidReservation(conn);
             dashboard.setVisible(false);
             travelMenu.setVisible(false);
             addOffersMenu.setVisible(false);
             reservationMenu.setVisible(true);
             userInformationScene.setVisible(false);
             workersManagerMenu.setVisible(false);
+            initOfferidReservation(conn);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -942,6 +957,7 @@ public class dashboardContollers implements Initializable {
                 branch_code = result.getString("br_code");
             }
 
+            stmt.executeQuery("SET @USER = '" + userInformation.getLastname() + "'");
             query = "INSERT INTO trip VALUES(NULL, ?, ?, ?, ?, ?, ?, ?)";
             stmt = conn.prepareStatement(query);
             stmt.setTimestamp(1, departure);
@@ -1071,8 +1087,11 @@ public class dashboardContollers implements Initializable {
                     returnPickerEvents.getValue().atStartOfDay().atZone(java.time.ZoneId.systemDefault()).toInstant());
             String description = descriptionTextEvents.getText();
 
+            PreparedStatement stmt = conn.prepareStatement("SET @USER = ?");
+            stmt.setString(1, userInformation.getLastname());
+            stmt.executeQuery();
             String query = "INSERT INTO event VALUES(?, ?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt = conn.prepareStatement(query);
             stmt.setInt(1, Integer.parseInt(tripId));
             stmt.setTimestamp(2, departure);
             stmt.setTimestamp(3, ret);
@@ -1252,8 +1271,11 @@ public class dashboardContollers implements Initializable {
             String description = descriptionTextDest.getText();
 
             Integer location_id = null;
+            PreparedStatement stmt = conn.prepareStatement("SET @USER = ?");
+            stmt.setString(1, userInformation.getLastname());
+            stmt.executeQuery();
             String query = "SELECT dst_id FROM destination WHERE dst_name LIKE ?";
-            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt = conn.prepareStatement(query);
             stmt.setString(1, location);
             ResultSet result = stmt.executeQuery();
             if (result.next())
@@ -1899,19 +1921,129 @@ public class dashboardContollers implements Initializable {
     // RESERVATION SCENE
     private void initOfferidReservation(Connection conn) throws SQLException {
         offeridListRes.getItems().clear();
-        String query = "SELECT DISTINCT   res_off_id   FROM  reservation_offers   ORDER BY res_off_id ";
+        idReservationRes.getItems().clear();
+        ageListReservationRes.getItems().clear();
+
+        String query = "SELECT DISTINCT res_off_id FROM reservation_offers ORDER BY res_off_id ";
         Statement stmt = conn.createStatement();
         ResultSet result = stmt.executeQuery(query);
 
         while (result.next()) {
             offeridListRes.getItems().add(Integer.toString(result.getInt("res_off_id")));
         }
+        stmt.close();
+
+        query = "SELECT tr_id FROM trip ORDER BY tr_id";
+        stmt = conn.createStatement();
+        result = stmt.executeQuery(query);
+        while (result.next()) {
+            idReservationRes.getItems().add(result.getInt("tr_id"));
+        }
+        stmt.close();
+
+        ageListReservationRes.getItems().add("ADULT");
+        ageListReservationRes.getItems().add("MINOR");
 
         imageReservationRes.setImage(new Image("libraries/image.jpg"));
     }
 
+    /* RESERVATION TAB */
+
+    public void addReservationRes(ActionEvent e) {
+        try (Connection conn = connectDB.getConnection()) {
+            int tr_id = idReservationRes.getValue();
+            String name = nameFieldReservationRes.getText();
+            String lname = lnameFieldReservationRes.getText();
+            String age = ageListReservationRes.getValue();
+            int numSeat = Integer.parseInt(numSeatFielsReservationRes.getText());
+            String query = "INSERT INTO reservation VALUES (?, ?, ?, ?, ?)";
+
+            PreparedStatement stmt = conn.prepareStatement("SET @USER = ?");
+            stmt.setString(1, userInformation.getLastname());
+            stmt.executeQuery();
+
+            query = "INSERT INTO reservation VALUES (?, ?, ?, ?, ?)";
+            stmt = conn.prepareStatement(query);
+            stmt.setInt(1, tr_id);
+            stmt.setInt(2, numSeat);
+            stmt.setString(3, name);
+            stmt.setString(4, lname);
+            stmt.setString(5, age);
+            stmt.executeUpdate();
+            stmt.close();
+
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setContentText("Επιτυχής εισαγωγή προσφοράς!");
+            alert.setTitle("Επιβεβαίωση Εισαγωγής προσφοράς");
+            alert.setHeaderText("Επιτυχία");
+            alert.showAndWait();
+
+        } catch (SQLException ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+
+            if (ex.getErrorCode() == 1062) {
+                alert.setContentText("Η θέση δεν είναι ελεύθερη, επιλέξτε κάποια άλλη.");
+            } else {
+                alert.setContentText(ex.toString());
+            }
+
+            alert.setHeaderText("Σφάλμα " + ex.getErrorCode());
+            alert.setTitle("Σφάλμα");
+            alert.showAndWait();
+        } catch (NullPointerException ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setContentText("Η ημερομηνία είναι υποχρεωτική");
+            alert.setTitle("Σφάλμα");
+            alert.setHeaderText("Σφάλμα");
+            alert.showAndWait();
+        } catch (Exception ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setContentText(ex.toString());
+            alert.setTitle("Σφάλμα");
+            alert.setHeaderText("Σφάλμα");
+            alert.showAndWait();
+        }
+    }
+
+    public void clearReservationRes(ActionEvent e) {
+        idReservationRes.setValue(null);
+        nameFieldReservationRes.setText("");
+        lnameFieldReservationRes.setText("");
+        ageListReservationRes.setValue(null);
+        numSeatFielsReservationRes.setText("");
+    }
+
+    public void deleteReservationRes(ActionEvent e) {
+        try (Connection conn = connectDB.getConnection()) {
+            String query = null;
+
+            ArrayList<String> listWhereClause = new ArrayList<>();
+            if (idReservationRes.getValue() != null)
+                listWhereClause.add("res_tr_id = " + idReservationRes.getValue());
+            if (!nameFieldReservationRes.getText().isEmpty())
+                listWhereClause.add("res_name = '" + nameFieldReservationRes.getText() + "'");
+            if (!lnameFieldReservationRes.getText().isEmpty())
+                listWhereClause.add("res_lname = '" + lnameFieldReservationRes.getText() + "'");
+            if (ageListReservationRes.getValue() != null)
+                listWhereClause.add("res_isadult = '" + ageListReservationRes.getValue() + "'");
+            if (!numSeatFielsReservationRes.getText().isEmpty())
+                listWhereClause.add("res_seatnum = " + numSeatFielsReservationRes.getText());
+
+            if (!listWhereClause.isEmpty())
+                query = "DELETE FROM reservation WHERE " + String.join(" AND ", listWhereClause);
+
+            Statement stmt = conn.createStatement();
+            stmt.executeQuery("SET @USER = '" + userInformation.getLastname() + "'");
+            stmt.executeUpdate(query);
+
+            stmt.close();
+        } catch (SQLException ex) {
+            ex.getSQLState();
+        }
+    }
+
     /* OFFERS TAB */
-    
+
     public void searchReservationOffer(ActionEvent e) {
         offerResTable.getItems().clear();
         try (Connection conn = connectDB.getConnection()) {
@@ -1920,7 +2052,7 @@ public class dashboardContollers implements Initializable {
             String lname = lnameTextRes.getText();
             String deposit = depositTextRes.getText();
 
-            String query = "SELECT res_off_tr_id,res_off_lname,res_off_name,res_off_id,res_off_depoit from reservation_offers ";
+            String query = "SELECT res_off_tr_id, res_off_lname, res_off_name, res_off_id, res_off_depoit FROM reservation_offers ";
 
             ArrayList<String> listWhereClause = new ArrayList<>();
             if (offer_id != null)
@@ -1959,7 +2091,17 @@ public class dashboardContollers implements Initializable {
             }
             stmt.close();
         } catch (SQLException ex) {
-            ex.getSQLState();
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setContentText(ex.toString());
+            alert.setHeaderText("Σφάλμα " + ex.getErrorCode());
+            alert.setTitle("Σφάλμα");
+            alert.showAndWait();
+        } catch (Exception ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setContentText(ex.toString());
+            alert.setTitle("Σφάλμα");
+            alert.setHeaderText("Σφάλμα");
+            alert.showAndWait();
         }
     }
 

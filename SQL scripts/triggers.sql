@@ -26,17 +26,17 @@ BEGIN
     DECLARE changes VARCHAR(200);
     
     SET changes=
-        CONCAT(NEW.tr_id,',',
-        NEW.tr_departure,',',
-        NEW.tr_return,',',
-        NEW.tr_maxseats,',',
-        NEW.tr_cost,',',
-        NEW.tr_br_code,',',
-        NEW.tr_gui_AT,',',
+        CONCAT(NEW.tr_id,', ',
+        NEW.tr_departure,', ',
+        NEW.tr_return,', ',
+        NEW.tr_maxseats,', ',
+        NEW.tr_cost,', ',
+        NEW.tr_br_code,', ',
+        NEW.tr_gui_AT,', ',
         NEW.tr_drv_AT);
         
 	INSERT INTO log
-    VALUES(CURRENT_USER(),'INSERT',changes, CURRENT_TIMESTAMP());
+    VALUES(@USER, 'INSERT', changes, CURRENT_TIMESTAMP());
 END$
 DELIMITER ;
 
@@ -48,14 +48,14 @@ BEGIN
     DECLARE changes VARCHAR(200);
     
     SET changes=
-        CONCAT(NEW.res_tr_id,',',
-        NEW.res_seatnum,',',
-        NEW.res_name,',',
-        NEW.res_lname,',',
+        CONCAT(NEW.res_tr_id,', ',
+        NEW.res_seatnum,', ',
+        NEW.res_name,', ',
+        NEW.res_lname,', ',
         NEW.res_isadult);
         
 	INSERT INTO log
-    VALUES(CURRENT_USER(),'INSERT',changes, CURRENT_TIMESTAMP());
+    VALUES(@USER, 'INSERT', changes, CURRENT_TIMESTAMP());
 END$
 DELIMITER ;
 
@@ -67,13 +67,13 @@ BEGIN
     DECLARE changes VARCHAR(200);
     
     SET changes=
-        CONCAT(NEW.ev_tr_id,',',
-        NEW.ev_start,',',
-        NEW.ev_end,',',
+        CONCAT(NEW.ev_tr_id,', ',
+        NEW.ev_start,', ',
+        NEW.ev_end,', ',
         NEW.ev_descr);
         
 	INSERT INTO log
-    VALUES(CURRENT_USER(),'INSERT',changes, CURRENT_TIMESTAMP());
+    VALUES(@USER, 'INSERT', changes, CURRENT_TIMESTAMP());
 END$
 DELIMITER ;
 
@@ -85,13 +85,13 @@ BEGIN
     DECLARE changes VARCHAR(200);
     
     SET changes=
-        CONCAT(NEW.to_tr_id,',',
-        NEW.to_dst_id,',',
-        NEW.to_arrival,',',
+        CONCAT(NEW.to_tr_id,', ',
+        NEW.to_dst_id,', ',
+        NEW.to_arrival,', ',
         NEW.to_departure);
         
 	INSERT INTO log
-    VALUES(CURRENT_USER(),'INSERT',changes, CURRENT_TIMESTAMP());
+    VALUES(@USER, 'INSERT', changes, CURRENT_TIMESTAMP());
 END$
 DELIMITER ;
 
@@ -103,15 +103,15 @@ BEGIN
     DECLARE changes VARCHAR(200);
     
     SET changes=
-        CONCAT(NEW.dst_id,',',
-        NEW.dst_name,',',
-        NEW.dst_descr,',',
-        NEW.dsrt_type,',',
-        NEW.dst_language,',',
+        CONCAT(NEW.dst_id,', ',
+        NEW.dst_name,', ',
+        NEW.dst_descr,', ',
+        NEW.dsrt_type,', ',
+        NEW.dst_language,', ',
         IF(NEW.dst_location IS NULL, "", NEW.dst_location));
         
 	INSERT INTO log
-    VALUES(CURRENT_USER(),'INSERT',changes, CURRENT_TIMESTAMP());
+    VALUES(@USER, 'INSERT', changes, CURRENT_TIMESTAMP());
 END$
 DELIMITER ;
 
@@ -124,13 +124,13 @@ BEGIN
     DECLARE changes VARCHAR(200);
     
     SET changes=
-        CONCAT(NEW.tr_id,',',
-        NEW.tr_departure,',',
-        NEW.tr_return,',',
-        NEW.tr_maxseats,',',
-        NEW.tr_cost,',',
-        NEW.tr_br_code,',',
-        NEW.tr_gui_AT,',',
+        CONCAT(NEW.tr_id,', ',
+        NEW.tr_departure,', ',
+        NEW.tr_return,', ',
+        NEW.tr_maxseats,', ',
+        NEW.tr_cost,', ',
+        NEW.tr_br_code,', ',
+        NEW.tr_gui_AT,', ',
         NEW.tr_drv_AT);
         
 	INSERT INTO log
@@ -146,10 +146,10 @@ BEGIN
     DECLARE changes VARCHAR(200);
     
     SET changes=
-        CONCAT(NEW.res_tr_id,',',
-        NEW.res_seatnum,',',
-        NEW.res_name,',',
-        NEW.res_lname,',',
+        CONCAT(NEW.res_tr_id,', ',
+        NEW.res_seatnum,', ',
+        NEW.res_name,', ',
+        NEW.res_lname,', ',
         NEW.res_isadult);
         
 	INSERT INTO log
@@ -165,9 +165,9 @@ BEGIN
     DECLARE changes VARCHAR(200);
     
     SET changes=
-        CONCAT(NEW.ev_tr_id,',',
-        NEW.ev_start,',',
-        NEW.ev_end,',',
+        CONCAT(NEW.ev_tr_id,', ',
+        NEW.ev_start,', ',
+        NEW.ev_end,', ',
         NEW.ev_descr);
         
 	INSERT INTO log
@@ -183,9 +183,9 @@ BEGIN
     DECLARE changes VARCHAR(200);
     
     SET changes=
-        CONCAT(NEW.to_tr_id,',',
-        NEW.to_dst_id,',',
-        NEW.to_arrival,',',
+        CONCAT(NEW.to_tr_id,', ',
+        NEW.to_dst_id,', ',
+        NEW.to_arrival,', ',
         NEW.to_departure);
         
 	INSERT INTO log
@@ -201,11 +201,11 @@ BEGIN
     DECLARE changes VARCHAR(200);
     
     SET changes=
-        CONCAT(NEW.dst_id,',',
-        NEW.dst_name,',',
-        NEW.dst_descr,',',
-        NEW.dsrt_type,',',
-        NEW.dst_language,',',
+        CONCAT(NEW.dst_id,', ',
+        NEW.dst_name,', ',
+        NEW.dst_descr,', ',
+        NEW.dsrt_type,', ',
+        NEW.dst_language,', ',
         NEW.dst_location);
         
 	INSERT INTO log
@@ -222,13 +222,13 @@ BEGIN
     DECLARE changes VARCHAR(200);
     
     SET changes=
-        CONCAT(OLD.tr_id,',',
-        OLD.tr_departure,',',
-        OLD.tr_return,',',
-        OLD.tr_maxseats,',',
-        OLD.tr_cost,',',
-        OLD.tr_br_code,',',
-        OLD.tr_gui_AT,',',
+        CONCAT(OLD.tr_id,', ',
+        OLD.tr_departure,', ',
+        OLD.tr_return,', ',
+        OLD.tr_maxseats,', ',
+        OLD.tr_cost,', ',
+        OLD.tr_br_code,', ',
+        OLD.tr_gui_AT,', ',
         OLD.tr_drv_AT);
         
 	INSERT INTO log
@@ -238,20 +238,20 @@ DELIMITER ;
 
 
 DELIMITER $
-CREATE TRIGGER deletData_on_reservation_after_delete AFTER DELETE ON reservation
+CREATE TRIGGER deleteData_on_reservation_after_delete AFTER DELETE ON reservation
 FOR EACH ROW
 BEGIN 
     DECLARE changes VARCHAR(200);
     
     SET changes=
-        CONCAT(OLD.res_tr_id,',',
-        OLD.res_seatnum,',',
-        OLD.res_name,',',
-        OLD.res_lname,',',
+        CONCAT(OLD.res_tr_id,', ',
+        OLD.res_seatnum,', ',
+        OLD.res_name,', ',
+        OLD.res_lname,', ',
         OLD.res_isadult);
         
 	INSERT INTO log
-    VALUES(CURRENT_USER(),'DELET',changes, CURRENT_TIMESTAMP());
+    VALUES(@USER, 'DELETE', changes, CURRENT_TIMESTAMP());
 END$
 DELIMITER ;
 
@@ -263,9 +263,9 @@ BEGIN
     DECLARE changes VARCHAR(200);
     
     SET changes=
-        CONCAT(OLD.ev_tr_id,',',
-        OLD.ev_start,',',
-        OLD.ev_end,',',
+        CONCAT(OLD.ev_tr_id,', ',
+        OLD.ev_start,', ',
+        OLD.ev_end,', ',
         OLD.ev_descr);
         
 	INSERT INTO log
@@ -281,9 +281,9 @@ BEGIN
     DECLARE changes VARCHAR(200);
     
     SET changes=
-        CONCAT(OLD.to_tr_id,',',
-        OLD.to_dst_id,',',
-        OLD.to_arrival,',',
+        CONCAT(OLD.to_tr_id,', ',
+        OLD.to_dst_id,', ',
+        OLD.to_arrival,', ',
         OLD.to_departure);
         
 	INSERT INTO log
@@ -299,11 +299,11 @@ BEGIN
     DECLARE changes VARCHAR(200);
     
     SET changes=
-        CONCAT(OLD.dst_id,',',
-        OLD.dst_name,',',
-        OLD.dst_descr,',',
-        OLD.dsrt_type,',',
-        OLD.dst_language,',',
+        CONCAT(OLD.dst_id,', ',
+        OLD.dst_name,', ',
+        OLD.dst_descr,', ',
+        OLD.dsrt_type,', ',
+        OLD.dst_language,', ',
         OLD.dst_location);
         
 	INSERT INTO log
@@ -362,7 +362,7 @@ BEGIN
 END $
 DELIMITER ;
 /*
-INSERT INTO worker VALUES('ΧΨ109234','Πόπη','Παπακαλιάτη',5000.32,15);
+INSERT INTO worker VALUES('ΧΨ109234', 'Πόπη', 'Παπακαλιάτη',5000.32,15);
 SELECT * FROM worker;
 UPDATE worker
 SET wrk_salary=4000.00

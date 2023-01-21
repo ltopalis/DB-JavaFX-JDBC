@@ -663,36 +663,36 @@
                                                    <children>
                                                       <HBox prefHeight="25.0" prefWidth="205.0">
                                                          <children>
+                                                            <Label prefHeight="25.0" prefWidth="60.0" text="id" />
+                                                            <ComboBox fx:id="idReservationRes" prefWidth="145.0" />
+                                                         </children>
+                                                      </HBox>
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                                                      <HBox prefHeight="25.0" prefWidth="205.0">
+                                                         <children>
                                                             <Label prefHeight="25.0" prefWidth="60.0" text="name" />
-                                                            <TextField prefWidth="145.0" />
+                                                            <TextField fx:id="nameFieldReservationRes" prefWidth="145.0" />
                                                          </children>
                                                       </HBox>
                                                       <AnchorPane prefHeight="200.0" prefWidth="200.0" />
                                                       <HBox prefHeight="25.0" prefWidth="205.0">
                                                          <children>
                                                             <Label prefHeight="25.0" prefWidth="60.0" text="lastname" />
-                                                            <TextField prefWidth="145.0" />
-                                                         </children>
-                                                      </HBox>
-                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-                                                      <HBox prefHeight="25.0" prefWidth="205.0">
-                                                         <children>
-                                                            <Label prefHeight="25.0" prefWidth="60.0" text="id" />
-                                                            <ComboBox prefWidth="145.0" />
+                                                            <TextField fx:id="lnameFieldReservationRes" prefWidth="145.0" />
                                                          </children>
                                                       </HBox>
                                                       <AnchorPane prefHeight="200.0" prefWidth="200.0" />
                                                       <HBox prefHeight="25.0" prefWidth="205.0">
                                                          <children>
                                                             <Label prefHeight="25.0" prefWidth="60.0" text="age" />
-                                                            <ComboBox prefWidth="145.0" />
+                                                            <ComboBox fx:id="ageListReservationRes" prefWidth="145.0" />
                                                          </children>
                                                       </HBox>
                                                       <AnchorPane prefHeight="200.0" prefWidth="200.0" />
                                                       <HBox prefHeight="25.0" prefWidth="205.0">
                                                          <children>
-                                                            <Label prefHeight="25.0" prefWidth="60.0" text="seats" />
-                                                            <TextField prefWidth="145.0" />
+                                                            <Label prefHeight="25.0" prefWidth="60.0" text="num seat" />
+                                                            <TextField fx:id="numSeatFielsReservationRes" prefWidth="145.0" />
                                                          </children>
                                                       </HBox>
                                                    </children>
@@ -700,9 +700,9 @@
                                                       <Insets left="10.0" top="10.0" />
                                                    </padding>
                                                 </VBox>
-                                                <Button layoutX="10.0" layoutY="343.0" mnemonicParsing="false" prefWidth="210.0" text="delete" />
-                                                <Button layoutX="120.0" layoutY="314.0" mnemonicParsing="false" prefWidth="100.0" text="clear" />
-                                                <Button layoutX="10.0" layoutY="314.0" mnemonicParsing="false" prefWidth="100.0" text="add" />
+                                                <Button layoutX="10.0" layoutY="343.0" mnemonicParsing="false" onAction="#deleteReservationRes" prefWidth="210.0" text="delete" />
+                                                <Button layoutX="120.0" layoutY="314.0" mnemonicParsing="false" onAction="#clearReservationRes" prefWidth="100.0" text="clear" />
+                                                <Button layoutX="10.0" layoutY="314.0" mnemonicParsing="false" onAction="#addReservationRes" prefWidth="100.0" text="add" />
                                                 <ImageView fx:id="imageReservationRes" fitHeight="523.0" fitWidth="448.0" layoutX="264.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
                                              </children>
                                           </AnchorPane>
