@@ -703,7 +703,7 @@
                                                 <Button layoutX="10.0" layoutY="343.0" mnemonicParsing="false" prefWidth="210.0" text="delete" />
                                                 <Button layoutX="120.0" layoutY="314.0" mnemonicParsing="false" prefWidth="100.0" text="clear" />
                                                 <Button layoutX="10.0" layoutY="314.0" mnemonicParsing="false" prefWidth="100.0" text="add" />
-                                                <ImageView fitHeight="523.0" fitWidth="448.0" layoutX="264.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
+                                                <ImageView fx:id="imageReservationRes" fitHeight="523.0" fitWidth="448.0" layoutX="264.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
                                              </children>
                                           </AnchorPane>
                                     </content>

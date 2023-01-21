@@ -29,6 +29,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -511,6 +512,9 @@ public class dashboardContollers implements Initializable {
 
     @FXML
     private TableColumn<reservation_offer, Float> depositColumnRes;
+
+    @FXML
+    private ImageView imageReservationRes;
 
     private double x, y;
 
@@ -1892,7 +1896,7 @@ public class dashboardContollers implements Initializable {
         }
     }
 
-    // Offers Tab
+    // RESERVATION SCENE
     private void initOfferidReservation(Connection conn) throws SQLException {
         offeridListRes.getItems().clear();
         String query = "SELECT DISTINCT   res_off_id   FROM  reservation_offers   ORDER BY res_off_id ";
@@ -1902,8 +1906,12 @@ public class dashboardContollers implements Initializable {
         while (result.next()) {
             offeridListRes.getItems().add(Integer.toString(result.getInt("res_off_id")));
         }
+
+        imageReservationRes.setImage(new Image("libraries/image.jpg"));
     }
 
+    /* OFFERS TAB */
+    
     public void searchReservationOffer(ActionEvent e) {
         offerResTable.getItems().clear();
         try (Connection conn = connectDB.getConnection()) {
