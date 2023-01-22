@@ -2141,7 +2141,7 @@ public class dashboardContollers implements Initializable {
         ageListReservationRes.getItems().add("ADULT");
         ageListReservationRes.getItems().add("MINOR");
 
-        imageReservationRes.setImage(new Image("libraries/image.jpg"));
+        imageReservationRes.setImage(new Image("photo/zoumborobot.jpg"));
     }
 
     /* RESERVATION TAB */

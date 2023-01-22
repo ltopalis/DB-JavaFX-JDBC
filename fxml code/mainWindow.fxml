@@ -256,14 +256,14 @@
                                              <children>
                                                 <TableView fx:id="tableTrip" layoutX="57.0" layoutY="305.0" prefHeight="227.0" prefWidth="600.0" styleClass="table" stylesheets="@../CSS%20code/dasboard.css">
                                                   <columns>
-                                                    <TableColumn fx:id="tripidTableTrips" prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="trip id" />
-                                                    <TableColumn fx:id="departureTableTrips" prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="departure" />
-                                                      <TableColumn fx:id="returnTableTrips" prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="return" />
-                                                      <TableColumn fx:id="seatsTableTrips" prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="seats" />
-                                                      <TableColumn fx:id="priceTableTrips" prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="price" />
-                                                      <TableColumn fx:id="branchTableTrip" prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="branch" />
-                                                      <TableColumn fx:id="guideTableTrip" prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="guide" />
-                                                      <TableColumn fx:id="driverTableTrips" prefWidth="75.0" style="-fx-background-color: linear-gradient(to right, #F2D7D9, #fff);" styleClass="tableColumn" text="driver" />
+                                                    <TableColumn fx:id="tripidTableTrips" prefWidth="75.0" styleClass="tableColumn" text="trip id" />
+                                                    <TableColumn fx:id="departureTableTrips" prefWidth="75.0" text="departure" />
+                                                      <TableColumn fx:id="returnTableTrips" prefWidth="75.0" text="return" />
+                                                      <TableColumn fx:id="seatsTableTrips" prefWidth="75.0" text="seats" />
+                                                      <TableColumn fx:id="priceTableTrips" prefWidth="75.0" text="price" />
+                                                      <TableColumn fx:id="branchTableTrip" prefWidth="75.0" text="branch" />
+                                                      <TableColumn fx:id="guideTableTrip" prefWidth="75.0" text="guide" />
+                                                      <TableColumn fx:id="driverTableTrips" prefWidth="75.0" text="driver" />
                                                   </columns>
                                                 </TableView>
                                                 <TextField fx:id="seatTextTrip" layoutX="579.0" layoutY="97.0" prefHeight="26.0" prefWidth="70.0" promptText="seats" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css" />
@@ -360,7 +360,7 @@
                                 <tabs>
                                   <Tab text="ADD">
                                     <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                      <AnchorPane id="rightSide" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../CSS%20code/dasboard.css">
                                              <children>
                                                 <HBox prefHeight="174.0" prefWidth="190.0">
                                                    <children>
@@ -400,32 +400,32 @@
                                                       </VBox>
                                                       <VBox prefHeight="95.0" prefWidth="123.0">
                                                          <children>
-                                                            <TextField fx:id="nameAddWorker">
+                                                            <TextField fx:id="nameAddWorker" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css">
                                                                <VBox.margin>
                                                                   <Insets bottom="2.0" top="2.0" />
                                                                </VBox.margin>
                                                             </TextField>
-                                                            <TextField fx:id="lnameAddWorker">
+                                                            <TextField fx:id="lnameAddWorker" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css">
                                                                <VBox.margin>
                                                                   <Insets bottom="2.0" top="2.0" />
                                                                </VBox.margin>
                                                             </TextField>
-                                                            <TextField fx:id="idAddWorker">
+                                                            <TextField fx:id="idAddWorker" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css">
                                                                <VBox.margin>
                                                                   <Insets bottom="2.0" top="2.0" />
                                                                </VBox.margin>
                                                             </TextField>
-                                                            <TextField fx:id="salaryAddWorker">
+                                                            <TextField fx:id="salaryAddWorker" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css">
                                                                <VBox.margin>
                                                                   <Insets bottom="2.0" top="2.0" />
                                                                </VBox.margin>
                                                             </TextField>
-                                                            <ComboBox fx:id="branchAddWorker" prefWidth="150.0">
+                                                            <ComboBox fx:id="branchAddWorker" prefWidth="150.0" styleClass="list" stylesheets="@../CSS%20code/dasboard.css">
                                                                <VBox.margin>
                                                                   <Insets bottom="2.0" top="2.0" />
                                                                </VBox.margin>
                                                             </ComboBox>
-                                                            <ComboBox fx:id="typeAddWorker" prefWidth="150.0">
+                                                            <ComboBox fx:id="typeAddWorker" prefWidth="150.0" styleClass="list" stylesheets="@../CSS%20code/dasboard.css">
                                                                <VBox.margin>
                                                                   <Insets bottom="2.0" top="2.0" />
                                                                </VBox.margin>
@@ -440,8 +440,8 @@
                                                 <Label fx:id="guideLabel" layoutX="173.0" layoutY="217.0" text="GUIDE" />
                                                 <Label fx:id="driverLabel" layoutX="528.0" layoutY="20.0" text="DRIVER" />
                                                 <Label fx:id="adminLabel" layoutX="528.0" layoutY="217.0" text="ADMIN" />
-                                                <TextArea fx:id="cvAddWorker" layoutX="14.0" layoutY="259.0" prefHeight="157.0" prefWidth="353.0" promptText="CV" />
-                                                <TextField fx:id="languageAddWorker" layoutX="83.0" layoutY="445.0" prefHeight="25.0" prefWidth="211.0" />
+                                                <TextArea fx:id="cvAddWorker" layoutX="14.0" layoutY="259.0" prefHeight="157.0" prefWidth="353.0" promptText="CV" styleClass="TEXT" stylesheets="@../CSS%20code/dasboard.css" />
+                                                <TextField fx:id="languageAddWorker" layoutX="83.0" layoutY="445.0" prefHeight="25.0" prefWidth="211.0" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css" />
                                                 <Label fx:id="languageLabel" layoutX="14.0" layoutY="445.0" prefHeight="25.0" prefWidth="67.0" text="Language" />
                                                 <HBox layoutX="448.0" layoutY="58.0" prefHeight="100.0" prefWidth="200.0">
                                                    <children>
@@ -466,17 +466,17 @@
                                                       </VBox>
                                                       <VBox prefHeight="200.0" prefWidth="100.0">
                                                          <children>
-                                                            <ComboBox fx:id="licenseAddWorker" prefWidth="150.0">
+                                                            <ComboBox fx:id="licenseAddWorker" prefWidth="150.0" styleClass="list" stylesheets="@../CSS%20code/dasboard.css">
                                                                <VBox.margin>
                                                                   <Insets bottom="2.0" top="2.0" />
                                                                </VBox.margin>
                                                             </ComboBox>
-                                                            <ComboBox fx:id="routeAddWorker" prefWidth="150.0">
+                                                            <ComboBox fx:id="routeAddWorker" prefWidth="150.0" styleClass="list" stylesheets="@../CSS%20code/dasboard.css">
                                                                <VBox.margin>
                                                                   <Insets bottom="2.0" top="2.0" />
                                                                </VBox.margin>
                                                             </ComboBox>
-                                                            <TextField fx:id="experienceAddWorker" prefHeight="25.0" prefWidth="211.0">
+                                                            <TextField fx:id="experienceAddWorker" prefHeight="25.0" prefWidth="211.0" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css">
                                                                <VBox.margin>
                                                                   <Insets bottom="2.0" top="2.0" />
                                                                </VBox.margin>
@@ -508,17 +508,17 @@
                                                       </VBox>
                                                       <VBox prefHeight="100.0" prefWidth="250.0">
                                                          <children>
-                                                            <ComboBox fx:id="adminTypeAddWorker" prefWidth="150.0">
+                                                            <ComboBox fx:id="adminTypeAddWorker" prefWidth="150.0" styleClass="list" stylesheets="@../CSS%20code/dasboard.css">
                                                                <VBox.margin>
                                                                   <Insets bottom="2.0" top="2.0" />
                                                                </VBox.margin>
                                                             </ComboBox>
-                                                            <ComboBox fx:id="adminBranchAddWorker" prefWidth="150.0">
+                                                            <ComboBox fx:id="adminBranchAddWorker" prefWidth="150.0" styleClass="list" stylesheets="@../CSS%20code/dasboard.css">
                                                                <VBox.margin>
                                                                   <Insets bottom="2.0" top="2.0" />
                                                                </VBox.margin>
                                                             </ComboBox>
-                                                            <TextField fx:id="diplomaAddWorker" prefHeight="25.0" prefWidth="200.0">
+                                                            <TextField fx:id="diplomaAddWorker" prefHeight="25.0" prefWidth="200.0" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css">
                                                                <VBox.margin>
                                                                   <Insets bottom="2.0" top="2.0" />
                                                                </VBox.margin>
@@ -529,8 +529,8 @@
                                                 </HBox>
                                                 <Separator layoutY="206.0" prefHeight="0.0" prefWidth="725.0" />
                                                 <Separator layoutX="381.0" orientation="VERTICAL" prefHeight="551.0" prefWidth="6.0" />
-                                                <Button fx:id="addButtonAddWorker" defaultButton="true" layoutX="244.0" layoutY="58.0" mnemonicParsing="false" onAction="#addWorkerButtonClicked" prefWidth="100.0" text="ADD" />
-                                                <Button fx:id="clearButtonAddWorker" cancelButton="true" layoutX="244.0" layoutY="114.0" mnemonicParsing="false" onAction="#clearButtonWorkersClicked" prefWidth="100.0" text="CLEAR" />
+                                                <Button id="add" fx:id="addButtonAddWorker" defaultButton="true" layoutX="244.0" layoutY="58.0" mnemonicParsing="false" onAction="#addWorkerButtonClicked" prefWidth="100.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="ADD" />
+                                                <Button fx:id="clearButtonAddWorker" cancelButton="true" layoutX="244.0" layoutY="114.0" mnemonicParsing="false" onAction="#clearButtonWorkersClicked" prefWidth="100.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="CLEAR" />
                                              </children>
                                           </AnchorPane>
                                     </content>
@@ -539,7 +539,7 @@
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView fx:id="tableWorker" layoutX="34.0" layoutY="14.0" prefHeight="546.0" prefWidth="725.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <TableView fx:id="tableWorker" layoutX="34.0" layoutY="14.0" prefHeight="546.0" prefWidth="725.0" styleClass="table" stylesheets="@../CSS%20code/dasboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                   <columns>
                                                     <TableColumn fx:id="atColumnWorker" text="AT" />
                                                     <TableColumn fx:id="nameColumnWorker" prefWidth="100.0" text="NAME" />
@@ -557,7 +557,7 @@
                               </TabPane>
                            </children>
                         </Pane>
-                        <Pane fx:id="addOffersMenu" prefHeight="575.0" prefWidth="725.0" visible="false">
+                        <Pane id="rightSide" fx:id="addOffersMenu" prefHeight="575.0" prefWidth="725.0" stylesheets="@../CSS%20code/dasboard.css" visible="false">
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="54.0" prefWidth="725.0" text="Please enter your offer details">
                                  <font>
@@ -597,28 +597,28 @@
                                     </VBox>
                                     <VBox prefHeight="200.0" prefWidth="150.0">
                                        <children>
-                                          <ComboBox fx:id="idListOffer" prefHeight="0.0" prefWidth="150.0">
+                                          <ComboBox fx:id="idListOffer" prefHeight="0.0" prefWidth="150.0" styleClass="list" stylesheets="@../CSS%20code/dasboard.css">
                                              <VBox.margin>
                                                 <Insets bottom="2.0" top="2.0" />
                                              </VBox.margin>
                                           </ComboBox>
-                                          <DatePicker fx:id="startDatePickerOffer" prefHeight="0.0" prefWidth="150.0">
+                                          <DatePicker fx:id="startDatePickerOffer" prefHeight="0.0" prefWidth="150.0" styleClass="datepicker" stylesheets="@../CSS%20code/dasboard.css">
                                              <VBox.margin>
                                                 <Insets bottom="2.0" top="2.0" />
                                              </VBox.margin>
                                           </DatePicker>
-                                          <DatePicker fx:id="finishDatePickerOffer" prefHeight="0.0" prefWidth="150.0">
+                                          <DatePicker fx:id="finishDatePickerOffer" prefHeight="0.0" prefWidth="150.0" styleClass="datepicker" stylesheets="@../CSS%20code/dasboard.css">
                                              <VBox.margin>
                                                 <Insets bottom="2.0" top="2.0" />
                                              </VBox.margin>
                                           </DatePicker>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-                                          <TextField fx:id="costTextOffer" maxWidth="150.0" minWidth="150.0" prefHeight="10.0" prefWidth="150.0">
+                                          <TextField fx:id="costTextOffer" maxWidth="150.0" minWidth="150.0" prefHeight="10.0" prefWidth="150.0" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css">
                                              <VBox.margin>
                                                 <Insets bottom="2.0" top="2.0" />
                                              </VBox.margin>
                                           </TextField>
-                                          <ComboBox fx:id="destinationListOffer" prefHeight="0.0" prefWidth="150.0">
+                                          <ComboBox fx:id="destinationListOffer" prefHeight="0.0" prefWidth="150.0" styleClass="list" stylesheets="@../CSS%20code/dasboard.css">
                                              <VBox.margin>
                                                 <Insets bottom="2.0" top="2.0" />
                                              </VBox.margin>
@@ -628,11 +628,11 @@
                                     <AnchorPane prefHeight="145.0" prefWidth="203.0" />
                                     <VBox prefHeight="145.0" prefWidth="100.0">
                                        <children>
-                                          <Button fx:id="serachButtonOffer" defaultButton="true" mnemonicParsing="false" onAction="#searchOfferBottonClicked" prefWidth="100.0" text="SEARCH" />
+                                          <Button id="search" fx:id="serachButtonOffer" defaultButton="true" mnemonicParsing="false" onAction="#searchOfferBottonClicked" prefWidth="100.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="SEARCH" />
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-                                          <Button fx:id="addButtonOffer" mnemonicParsing="false" onAction="#addOfferBottonClicked" prefWidth="100.0" text="ADD" />
+                                          <Button id="add" fx:id="addButtonOffer" mnemonicParsing="false" onAction="#addOfferBottonClicked" prefWidth="100.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="ADD" />
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-                                          <Button fx:id="clearButtonOffer" cancelButton="true" mnemonicParsing="false" onAction="#clearBottonOffer" prefWidth="100.0" text="CLEAR" />
+                                          <Button fx:id="clearButtonOffer" cancelButton="true" mnemonicParsing="false" onAction="#clearBottonOffer" prefWidth="100.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="CLEAR" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -640,7 +640,7 @@
                                     <Insets left="10.0" right="10.0" />
                                  </padding>
                               </HBox>
-                              <TableView fx:id="offerTable" layoutX="50.0" layoutY="290.0" prefHeight="235.0" prefWidth="625.0">
+                              <TableView fx:id="offerTable" layoutX="50.0" layoutY="290.0" prefHeight="235.0" prefWidth="625.0" styleClass="table" stylesheets="@../CSS%20code/dasboard.css">
                                 <columns>
                                   <TableColumn fx:id="idColumnOffer" prefWidth="125.0" text="id" />
                                   <TableColumn fx:id="startColumnOffer" prefWidth="125.0" text="start" />
@@ -651,48 +651,48 @@
                               </TableView>
                            </children>
                         </Pane>
-                        <Pane fx:id="reservationMenu" prefHeight="575.0" prefWidth="725.0">
+                        <Pane fx:id="reservationMenu" prefHeight="575.0" prefWidth="725.0" visible="false">
                            <children>
                               <TabPane prefHeight="575.0" prefWidth="725.0" tabClosingPolicy="UNAVAILABLE">
                                 <tabs>
                                   <Tab text="RESERVATION">
                                     <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                      <AnchorPane id="rightSide" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../CSS%20code/dasboard.css">
                                              <children>
                                                 <VBox prefHeight="200.0" prefWidth="215.0">
                                                    <children>
                                                       <HBox prefHeight="25.0" prefWidth="205.0">
                                                          <children>
                                                             <Label prefHeight="25.0" prefWidth="60.0" text="id" />
-                                                            <ComboBox fx:id="idReservationRes" prefWidth="145.0" />
+                                                            <ComboBox fx:id="idReservationRes" prefWidth="145.0" styleClass="list" />
                                                          </children>
                                                       </HBox>
                                                       <AnchorPane prefHeight="200.0" prefWidth="200.0" />
                                                       <HBox prefHeight="25.0" prefWidth="205.0">
                                                          <children>
                                                             <Label prefHeight="25.0" prefWidth="60.0" text="name" />
-                                                            <TextField fx:id="nameFieldReservationRes" prefWidth="145.0" />
+                                                            <TextField fx:id="nameFieldReservationRes" prefWidth="145.0" styleClass="textField" />
                                                          </children>
                                                       </HBox>
                                                       <AnchorPane prefHeight="200.0" prefWidth="200.0" />
                                                       <HBox prefHeight="25.0" prefWidth="205.0">
                                                          <children>
                                                             <Label prefHeight="25.0" prefWidth="60.0" text="lastname" />
-                                                            <TextField fx:id="lnameFieldReservationRes" prefWidth="145.0" />
+                                                            <TextField fx:id="lnameFieldReservationRes" prefWidth="145.0" styleClass="textField" />
                                                          </children>
                                                       </HBox>
                                                       <AnchorPane prefHeight="200.0" prefWidth="200.0" />
                                                       <HBox prefHeight="25.0" prefWidth="205.0">
                                                          <children>
                                                             <Label prefHeight="25.0" prefWidth="60.0" text="age" />
-                                                            <ComboBox fx:id="ageListReservationRes" prefWidth="145.0" />
+                                                            <ComboBox fx:id="ageListReservationRes" prefWidth="145.0" styleClass="list" />
                                                          </children>
                                                       </HBox>
                                                       <AnchorPane prefHeight="200.0" prefWidth="200.0" />
                                                       <HBox prefHeight="25.0" prefWidth="205.0">
                                                          <children>
                                                             <Label prefHeight="25.0" prefWidth="60.0" text="num seat" />
-                                                            <TextField fx:id="numSeatFielsReservationRes" prefWidth="145.0" />
+                                                            <TextField fx:id="numSeatFielsReservationRes" prefWidth="145.0" styleClass="textField" />
                                                          </children>
                                                       </HBox>
                                                    </children>
@@ -700,9 +700,9 @@
                                                       <Insets left="10.0" top="10.0" />
                                                    </padding>
                                                 </VBox>
-                                                <Button layoutX="10.0" layoutY="343.0" mnemonicParsing="false" onAction="#deleteReservationRes" prefWidth="210.0" text="delete" />
-                                                <Button layoutX="120.0" layoutY="314.0" mnemonicParsing="false" onAction="#clearReservationRes" prefWidth="100.0" text="clear" />
-                                                <Button layoutX="10.0" layoutY="314.0" mnemonicParsing="false" onAction="#addReservationRes" prefWidth="100.0" text="add" />
+                                                <Button layoutX="10.0" layoutY="343.0" mnemonicParsing="false" onAction="#deleteReservationRes" prefWidth="210.0" styleClass="botton" text="delete" />
+                                                <Button id="clear" layoutX="120.0" layoutY="314.0" mnemonicParsing="false" onAction="#clearReservationRes" prefWidth="100.0" styleClass="botton" text="clear" />
+                                                <Button id="add" layoutX="10.0" layoutY="314.0" mnemonicParsing="false" onAction="#addReservationRes" prefWidth="100.0" styleClass="botton" text="add" />
                                                 <ImageView fx:id="imageReservationRes" fitHeight="523.0" fitWidth="448.0" layoutX="264.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
                                              </children>
                                           </AnchorPane>
@@ -710,20 +710,20 @@
                                   </Tab>
                                   <Tab fx:id="offersTabReservation" text="OFFERS">
                                     <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                      <AnchorPane id="rightSide" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../CSS%20code/dasboard.css">
                                              <children>
                                                 <Label fx:id="offid" layoutX="15.0" layoutY="29.0" prefHeight="25.0" text="offer id" />
                                                 <Label fx:id="offname" layoutX="15.0" layoutY="71.0" prefHeight="25.0" text="name" />
                                                 <Label fx:id="offdeposit" layoutX="15.0" layoutY="155.0" prefHeight="25.0" text="deposit" />
                                                 <Label fx:id="offlname" layoutX="15.0" layoutY="113.0" prefHeight="25.0" prefWidth="57.0" text="lastname" />
-                                                <ComboBox fx:id="offeridListRes" layoutX="71.0" layoutY="29.0" prefWidth="150.0" />
-                                                <TextField fx:id="nameTextRes" layoutX="71.0" layoutY="71.0" />
-                                                <TextField fx:id="lnameTextRes" layoutX="71.0" layoutY="113.0" />
-                                                <TextField fx:id="depositTextRes" layoutX="70.0" layoutY="155.0" />
-                                                <Button fx:id="addResOfferButton" defaultButton="true" layoutX="324.0" layoutY="65.0" mnemonicParsing="false" onAction="#addResOffer" prefHeight="25.0" prefWidth="100.0" text="add" />
-                                                <Button fx:id="clearOfferResButton" layoutX="404.0" layoutY="110.0" mnemonicParsing="false" onAction="#clearOfferRes" prefWidth="100.0" text="clear" />
-                                                <Button fx:id="searchResOfferButton" layoutX="485.0" layoutY="65.0" mnemonicParsing="false" onAction="#searchReservationOffer" prefWidth="100.0" text="search" />
-                                                <TableView fx:id="offerResTable" layoutX="50.0" layoutY="259.0" prefHeight="247.0" prefWidth="625.0">
+                                                <ComboBox fx:id="offeridListRes" layoutX="71.0" layoutY="29.0" prefWidth="150.0" styleClass="list" />
+                                                <TextField fx:id="nameTextRes" layoutX="71.0" layoutY="71.0" styleClass="textField" />
+                                                <TextField fx:id="lnameTextRes" layoutX="71.0" layoutY="113.0" styleClass="textField" />
+                                                <TextField fx:id="depositTextRes" layoutX="70.0" layoutY="155.0" styleClass="textField" />
+                                                <Button id="add" fx:id="addResOfferButton" defaultButton="true" layoutX="324.0" layoutY="65.0" mnemonicParsing="false" onAction="#addResOffer" prefHeight="25.0" prefWidth="100.0" styleClass="botton" text="add" />
+                                                <Button fx:id="clearOfferResButton" layoutX="404.0" layoutY="110.0" mnemonicParsing="false" onAction="#clearOfferRes" prefWidth="100.0" styleClass="botton" text="clear" />
+                                                <Button id="search" fx:id="searchResOfferButton" layoutX="485.0" layoutY="65.0" mnemonicParsing="false" onAction="#searchReservationOffer" prefWidth="100.0" styleClass="botton" text="search" />
+                                                <TableView fx:id="offerResTable" layoutX="50.0" layoutY="259.0" prefHeight="247.0" prefWidth="625.0" styleClass="table">
                                                   <columns>
                                                     <TableColumn fx:id="idColumnRes" prefWidth="125.0" text="reservation id" />
                                                     <TableColumn fx:id="nameColumnRes" prefWidth="125.0" text="name" />
@@ -740,9 +740,9 @@
                               </TabPane>
                            </children>
                         </Pane>
-                        <Pane fx:id="userInformationScene" prefHeight="575.0" prefWidth="725.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Pane id="rightSide" fx:id="userInformationScene" prefHeight="575.0" prefWidth="725.0" stylesheets="@../CSS%20code/dasboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <TableView fx:id="TABLESET" layoutX="46.0" layoutY="294.0" prefHeight="200.0" prefWidth="625.0">
+                              <TableView fx:id="TABLESET" layoutX="46.0" layoutY="294.0" prefHeight="200.0" prefWidth="625.0" styleClass="table">
                                 <columns>
                                   <TableColumn fx:id="USERCOLUMNSET" prefWidth="75.0" text="USER" />
                                   <TableColumn fx:id="ACTIONCOLUMNSET" prefWidth="79.5" text="ACTION" />
@@ -754,31 +754,73 @@
                                  <children>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <Label prefHeight="25.0" prefWidth="100.0" text="AT" />
-                                          <Label prefHeight="25.0" prefWidth="100.0" text="name" />
-                                          <Label prefHeight="25.0" prefWidth="100.0" text="lastname" />
-                                          <Label prefHeight="25.0" prefWidth="100.0" text="salary" />
-                                          <Label prefHeight="25.0" prefWidth="100.0" text="branch" />
-                                          <Label prefHeight="25.0" prefWidth="100.0" text="password" />
-                                          <Label prefHeight="25.0" prefWidth="100.0" text="IT from" />
+                                          <Label prefHeight="25.0" prefWidth="100.0" text="AT">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin></Label>
+                                          <Label prefHeight="25.0" prefWidth="100.0" text="name">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin></Label>
+                                          <Label prefHeight="25.0" prefWidth="100.0" text="lastname">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin></Label>
+                                          <Label prefHeight="25.0" prefWidth="100.0" text="salary">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin></Label>
+                                          <Label prefHeight="25.0" prefWidth="100.0" text="branch">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin></Label>
+                                          <Label prefHeight="25.0" prefWidth="100.0" text="password">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin></Label>
+                                          <Label prefHeight="25.0" prefWidth="100.0" text="IT from">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin></Label>
                                        </children>
                                     </VBox>
                                     <VBox prefHeight="167.0" prefWidth="143.0">
                                        <children>
-                                          <TextField fx:id="ATTEXTSET" editable="false" />
-                                          <TextField fx:id="NAMETEXTSET" editable="false" />
-                                          <TextField fx:id="LNAMETEXTSET" editable="false" />
-                                          <TextField fx:id="SALARYTEXTSET" />
-                                          <TextField fx:id="BRANCHTEXTSET" editable="false" />
-                                          <PasswordField fx:id="PASSTEXTSET" editable="false" />
-                                          <Label fx:id="DATETEXTSET" prefHeight="25.0" prefWidth="100.0" text="Label" />
+                                          <TextField id="itTextField" fx:id="ATTEXTSET" editable="false" styleClass="textField">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin></TextField>
+                                          <TextField id="itTextField" fx:id="NAMETEXTSET" editable="false" styleClass="textField">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin></TextField>
+                                          <TextField id="itTextField" fx:id="LNAMETEXTSET" editable="false" styleClass="textField">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin></TextField>
+                                          <TextField id="itTextField" fx:id="SALARYTEXTSET" styleClass="textField">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin></TextField>
+                                          <TextField id="itTextField" fx:id="BRANCHTEXTSET" editable="false" styleClass="textField">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin></TextField>
+                                          <PasswordField id="itTextField" fx:id="PASSTEXTSET" editable="false" styleClass="textField">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin></PasswordField>
+                                          <Label fx:id="DATETEXTSET" prefHeight="25.0" prefWidth="100.0" text="Label">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin></Label>
                                        </children>
                                     </VBox>
                                     <AnchorPane prefHeight="167.0" prefWidth="99.0" />
                                     <ImageView fx:id="PHOTOUSERSET" fitHeight="97.0" fitWidth="103.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </HBox>
-                              <Button fx:id="UPDATESET" layoutX="90.0" layoutY="221.0" mnemonicParsing="false" onAction="#updateButtonSettingsClicked" prefWidth="200.0" text="update" />
+                              <Button id="search" fx:id="UPDATESET" layoutX="90.0" layoutY="250.0" mnemonicParsing="false" onAction="#updateButtonSettingsClicked" prefWidth="200.0" styleClass="botton" text="update" />
                            </children>
                         </Pane>
                      </children>

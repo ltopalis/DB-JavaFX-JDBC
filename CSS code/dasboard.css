@@ -75,3 +75,7 @@
 #rightSideBackground{
     -fx-background-color: red;
 }
+
+#itTextField {
+    -fx-background-color: rgba(249, 221, 229, 0.793);
+}
