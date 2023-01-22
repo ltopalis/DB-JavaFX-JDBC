@@ -32,7 +32,7 @@
                   <Pane id="header" prefHeight="25.0" prefWidth="900.0" stylesheets="@../CSS%20code/dasboard.css" BorderPane.alignment="CENTER">
                      <children>
                         <FontAwesomeIconView glyphName="PLANE" layoutX="11.0" layoutY="19.0" size="20" />
-                        <Label layoutX="35.0" layoutY="-2.0" text="Stella Stellats Agency">
+                        <Label layoutX="35.0" layoutY="-2.0" text="Stellats Agency">
                            <font>
                               <Font size="18.0" />
                            </font>
