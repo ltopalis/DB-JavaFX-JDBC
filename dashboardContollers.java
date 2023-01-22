@@ -8,7 +8,10 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,12 +26,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -36,6 +42,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.converter.FloatStringConverter;
+import javafx.util.converter.IntegerStringConverter;
 
 public class dashboardContollers implements Initializable {
 
@@ -613,6 +621,7 @@ public class dashboardContollers implements Initializable {
             initLocationDestination(conn);
             initLanguageDestination(conn);
             initTripIdDestination(conn);
+            initTripTable(conn);
             dashboard.setVisible(false);
             travelMenu.setVisible(true);
             addOffersMenu.setVisible(false);
@@ -815,6 +824,203 @@ public class dashboardContollers implements Initializable {
         }
     }
 
+    private void initTripTable(Connection conn) throws SQLException {
+        tableTrip.setEditable(true);
+
+        String query = "SELECT DISTINCT CONCAT(wrk_name, ' ', wrk_lname) AS name " +
+                "FROM guide g JOIN worker w " +
+                "ON g.gui_AT = w.wrk_AT " +
+                "ORDER BY CONCAT(wrk_name, ' ', wrk_lname);";
+
+        Statement stmt = conn.createStatement();
+        ResultSet result = stmt.executeQuery(query);
+
+        ObservableList<String> guides = FXCollections.observableArrayList();
+        while (result.next()) {
+            guides.add(result.getString("name"));
+        }
+
+        query = "SELECT CONCAT(br_city, ', ', br_street,' ', IF(br_num IS NULL, '-', br_num)) AS address " +
+                "FROM branch ORDER BY address";
+
+        result = stmt.executeQuery(query);
+
+        ObservableList<String> branches = FXCollections.observableArrayList();
+        while (result.next()) {
+            branches.add(result.getString("address"));
+        }
+
+        query = "SELECT DISTINCT CONCAT(wrk_name, ' ', wrk_lname) AS name " +
+                "FROM driver d JOIN worker w " +
+                "ON d.drv_AT = w.wrk_AT " +
+                "ORDER BY CONCAT(wrk_name, ' ', wrk_lname)";
+
+        result = stmt.executeQuery(query);
+
+        ObservableList<String> drivers = FXCollections.observableArrayList();
+        while (result.next()) {
+            drivers.add(result.getString("name"));
+        }
+
+        tripidTableTrips.setCellValueFactory(new PropertyValueFactory<Trip, Integer>("trip_id"));
+        departureTableTrips.setCellValueFactory(new PropertyValueFactory<Trip, String>("departure"));
+        returnTableTrips.setCellValueFactory(new PropertyValueFactory<Trip, String>("return_"));
+
+        priceTableTrips.setCellValueFactory(new PropertyValueFactory<Trip, Float>("cost"));
+        priceTableTrips.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
+        priceTableTrips.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Trip, Float>>() {
+
+            @Override
+            public void handle(CellEditEvent<Trip, Float> arg0) {
+                try(Connection conn1 = connectDB.getConnection()) {
+                    Trip trip = arg0.getRowValue();
+                    int id = trip.getTrip_id();
+
+                    String updateQuery = "SET @USER = ?";
+                    PreparedStatement preparedStmt = conn1.prepareStatement(updateQuery);
+                    preparedStmt.setString(1, userInformation.getLastname());
+
+                    updateQuery = "UPDATE trip SET tr_cost = ? WHERE tr_id = ?";
+                    preparedStmt = conn1.prepareStatement(updateQuery);
+                    preparedStmt.setFloat(1, arg0.getNewValue());
+                    preparedStmt.setInt(2, id);
+                    preparedStmt.executeUpdate();
+                    preparedStmt.close();
+                    
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        seatsTableTrips.setCellValueFactory(new PropertyValueFactory<Trip, Integer>("seats"));
+        seatsTableTrips.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        seatsTableTrips.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Trip, Integer>>() {
+
+            @Override
+            public void handle(CellEditEvent<Trip, Integer> arg0) {
+                try(Connection conn1 = connectDB.getConnection()) {
+                    Trip trip = arg0.getRowValue();
+                    int id = trip.getTrip_id();
+
+                    String updateQuery = "SET @USER = ?";
+                    PreparedStatement preparedStmt = conn1.prepareStatement(updateQuery);
+                    preparedStmt.setString(1, userInformation.getLastname());
+                    
+                    updateQuery = "UPDATE trip SET tr_maxseats = ? WHERE tr_id = ?";
+                    preparedStmt = conn1.prepareStatement(updateQuery);
+                    preparedStmt.setInt(1, arg0.getNewValue());
+                    preparedStmt.setInt(2, id);
+                    preparedStmt.executeUpdate();
+                    preparedStmt.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        branchTableTrip.setCellValueFactory(new PropertyValueFactory<Trip, String>("branch"));
+        branchTableTrip.setCellFactory(ComboBoxTableCell.forTableColumn(branches));
+        branchTableTrip.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Trip, String>>() {
+
+            @Override
+            public void handle(CellEditEvent<Trip, String> arg0) {
+                try(Connection conn1 = connectDB.getConnection()) {
+                    Trip trip = arg0.getRowValue();
+                    int id = trip.getTrip_id();
+
+                    String updateQuery = "SET @USER = ?";
+                    PreparedStatement preparedStmt = conn1.prepareStatement(updateQuery);
+                    preparedStmt.setString(1, userInformation.getLastname());
+                    
+                    updateQuery = "SELECT br_code FROM branch WHERE CONCAT(br_city, ', ', br_street,' ', IF(br_num IS NULL, '-', br_num)) LIKE ?";
+                    preparedStmt = conn1.prepareStatement(updateQuery);
+                    preparedStmt.setString(1, arg0.getNewValue());
+                    ResultSet result = preparedStmt.executeQuery();
+                    result.next();
+                    int branchId = result.getInt("br_code");
+
+                    updateQuery = "UPDATE trip SET tr_br_code = ? WHERE tr_id = ?";
+                    preparedStmt = conn1.prepareStatement(updateQuery);
+                    preparedStmt.setInt(1, branchId);
+                    preparedStmt.setInt(2, id);
+                    preparedStmt.executeUpdate();
+                    preparedStmt.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        guideTableTrip.setCellValueFactory(new PropertyValueFactory<Trip, String>("guide"));
+        guideTableTrip.setCellFactory(ComboBoxTableCell.forTableColumn(guides));
+        guideTableTrip.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Trip, String>>() {
+
+            @Override
+            public void handle(CellEditEvent<Trip, String> arg0) {
+                try(Connection conn1 = connectDB.getConnection()) {
+                    Trip trip = arg0.getRowValue();
+                    int id = trip.getTrip_id();
+
+                    String updateQuery = "SET @USER = ?";
+                    PreparedStatement preparedStmt = conn1.prepareStatement(updateQuery);
+                    preparedStmt.setString(1, userInformation.getLastname());
+                    
+                    updateQuery = "SELECT gui_AT FROM guide g JOIN worker w ON g.gui_AT = w.wrk_AT WHERE CONCAT(wrk_name, ' ', wrk_lname) = ?";
+                    preparedStmt = conn1.prepareStatement(updateQuery);
+                    preparedStmt.setString(1, arg0.getNewValue());
+                    ResultSet result = preparedStmt.executeQuery();
+                    result.next();
+                    String guideAT = result.getString("gui_AT");
+
+                    updateQuery = "UPDATE trip SET tr_gui_AT = ? WHERE tr_id = ?";
+                    preparedStmt = conn1.prepareStatement(updateQuery);
+                    preparedStmt.setString(1, guideAT);
+                    preparedStmt.setInt(2, id);
+                    preparedStmt.executeUpdate();
+                    preparedStmt.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        driverTableTrips.setCellValueFactory(new PropertyValueFactory<Trip, String>("driver"));
+        driverTableTrips.setCellFactory(ComboBoxTableCell.forTableColumn(drivers));
+        driverTableTrips.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Trip, String>>() {
+
+            @Override
+            public void handle(CellEditEvent<Trip, String> arg0) {
+                try(Connection conn1 = connectDB.getConnection()) {
+                    Trip trip = arg0.getRowValue();
+                    int id = trip.getTrip_id();
+
+                    String updateQuery = "SET @USER = ?";
+                    PreparedStatement preparedStmt = conn1.prepareStatement(updateQuery);
+                    preparedStmt.setString(1, userInformation.getLastname());
+                    
+                    updateQuery = "SELECT drv_AT FROM driver d JOIN worker w ON d.drv_AT = w.wrk_AT WHERE CONCAT(wrk_name, ' ', wrk_lname) = ?";
+                    preparedStmt = conn1.prepareStatement(updateQuery);
+                    preparedStmt.setString(1, arg0.getNewValue());
+                    ResultSet result = preparedStmt.executeQuery();
+                    result.next();
+                    String driverAT = result.getString("drv_AT");
+
+                    updateQuery = "UPDATE trip SET tr_drv_AT = ? WHERE tr_id = ?";
+                    preparedStmt = conn1.prepareStatement(updateQuery);
+                    preparedStmt.setString(1, driverAT);
+                    preparedStmt.setInt(2, id);
+                    preparedStmt.executeUpdate();
+                    preparedStmt.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        stmt.close();
+    }
+
     public void searchTrip(ActionEvent e) {
         try (Connection conn = connectDB.getConnection()) {
             tableTrip.getItems().clear();
@@ -890,15 +1096,6 @@ public class dashboardContollers implements Initializable {
                 query += " WHERE " + whereClause;
 
             result = stmt.executeQuery(query);
-
-            tripidTableTrips.setCellValueFactory(new PropertyValueFactory<Trip, Integer>("trip_id"));
-            departureTableTrips.setCellValueFactory(new PropertyValueFactory<Trip, String>("departure"));
-            returnTableTrips.setCellValueFactory(new PropertyValueFactory<Trip, String>("return_"));
-            priceTableTrips.setCellValueFactory(new PropertyValueFactory<Trip, Float>("cost"));
-            seatsTableTrips.setCellValueFactory(new PropertyValueFactory<Trip, Integer>("seats"));
-            branchTableTrip.setCellValueFactory(new PropertyValueFactory<Trip, String>("branch"));
-            guideTableTrip.setCellValueFactory(new PropertyValueFactory<Trip, String>("guide"));
-            driverTableTrips.setCellValueFactory(new PropertyValueFactory<Trip, String>("driver"));
 
             while (result.next()) {
                 int trip_id_temp = result.getInt("t.tr_id");

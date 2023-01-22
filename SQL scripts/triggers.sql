@@ -134,7 +134,7 @@ BEGIN
         NEW.tr_drv_AT);
         
 	INSERT INTO log
-    VALUES(CURRENT_USER(),'UPDATE',changes, CURRENT_TIMESTAMP());
+    VALUES(@USER,'UPDATE',changes, CURRENT_TIMESTAMP());
 END$
 DELIMITER ;
 
