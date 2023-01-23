@@ -539,6 +539,15 @@ public class dashboardContollers implements Initializable {
     @FXML
     private TextField numSeatFielsReservationRes;
 
+    @FXML
+    private Button createITSettings;
+
+    @FXML
+    private ComboBox<String> workersItComboBoxSettings;
+
+    @FXML
+    private PasswordField passwordITSeettings;
+
     private double x, y;
 
     public void dashboardBottonClicked(ActionEvent e) {
@@ -872,7 +881,7 @@ public class dashboardContollers implements Initializable {
 
             @Override
             public void handle(CellEditEvent<Trip, Float> arg0) {
-                try(Connection conn1 = connectDB.getConnection()) {
+                try (Connection conn1 = connectDB.getConnection()) {
                     Trip trip = arg0.getRowValue();
                     int id = trip.getTrip_id();
 
@@ -886,7 +895,7 @@ public class dashboardContollers implements Initializable {
                     preparedStmt.setInt(2, id);
                     preparedStmt.executeUpdate();
                     preparedStmt.close();
-                    
+
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -899,14 +908,14 @@ public class dashboardContollers implements Initializable {
 
             @Override
             public void handle(CellEditEvent<Trip, Integer> arg0) {
-                try(Connection conn1 = connectDB.getConnection()) {
+                try (Connection conn1 = connectDB.getConnection()) {
                     Trip trip = arg0.getRowValue();
                     int id = trip.getTrip_id();
 
                     String updateQuery = "SET @USER = ?";
                     PreparedStatement preparedStmt = conn1.prepareStatement(updateQuery);
                     preparedStmt.setString(1, userInformation.getLastname());
-                    
+
                     updateQuery = "UPDATE trip SET tr_maxseats = ? WHERE tr_id = ?";
                     preparedStmt = conn1.prepareStatement(updateQuery);
                     preparedStmt.setInt(1, arg0.getNewValue());
@@ -925,14 +934,14 @@ public class dashboardContollers implements Initializable {
 
             @Override
             public void handle(CellEditEvent<Trip, String> arg0) {
-                try(Connection conn1 = connectDB.getConnection()) {
+                try (Connection conn1 = connectDB.getConnection()) {
                     Trip trip = arg0.getRowValue();
                     int id = trip.getTrip_id();
 
                     String updateQuery = "SET @USER = ?";
                     PreparedStatement preparedStmt = conn1.prepareStatement(updateQuery);
                     preparedStmt.setString(1, userInformation.getLastname());
-                    
+
                     updateQuery = "SELECT br_code FROM branch WHERE CONCAT(br_city, ', ', br_street,' ', IF(br_num IS NULL, '-', br_num)) LIKE ?";
                     preparedStmt = conn1.prepareStatement(updateQuery);
                     preparedStmt.setString(1, arg0.getNewValue());
@@ -958,14 +967,14 @@ public class dashboardContollers implements Initializable {
 
             @Override
             public void handle(CellEditEvent<Trip, String> arg0) {
-                try(Connection conn1 = connectDB.getConnection()) {
+                try (Connection conn1 = connectDB.getConnection()) {
                     Trip trip = arg0.getRowValue();
                     int id = trip.getTrip_id();
 
                     String updateQuery = "SET @USER = ?";
                     PreparedStatement preparedStmt = conn1.prepareStatement(updateQuery);
                     preparedStmt.setString(1, userInformation.getLastname());
-                    
+
                     updateQuery = "SELECT gui_AT FROM guide g JOIN worker w ON g.gui_AT = w.wrk_AT WHERE CONCAT(wrk_name, ' ', wrk_lname) = ?";
                     preparedStmt = conn1.prepareStatement(updateQuery);
                     preparedStmt.setString(1, arg0.getNewValue());
@@ -991,14 +1000,14 @@ public class dashboardContollers implements Initializable {
 
             @Override
             public void handle(CellEditEvent<Trip, String> arg0) {
-                try(Connection conn1 = connectDB.getConnection()) {
+                try (Connection conn1 = connectDB.getConnection()) {
                     Trip trip = arg0.getRowValue();
                     int id = trip.getTrip_id();
 
                     String updateQuery = "SET @USER = ?";
                     PreparedStatement preparedStmt = conn1.prepareStatement(updateQuery);
                     preparedStmt.setString(1, userInformation.getLastname());
-                    
+
                     updateQuery = "SELECT drv_AT FROM driver d JOIN worker w ON d.drv_AT = w.wrk_AT WHERE CONCAT(wrk_name, ' ', wrk_lname) = ?";
                     preparedStmt = conn1.prepareStatement(updateQuery);
                     preparedStmt.setString(1, arg0.getNewValue());
@@ -2082,6 +2091,12 @@ public class dashboardContollers implements Initializable {
             TABLESET.getItems().add(new settings(user, changes, action, date));
         }
 
+        query = "SELECT CONCAT (wrk_name, ' ', wrk_lname) AS name FROM worker LEFT JOIN it ON worker.wrk_AT = it.IT_AT WHERE IT_AT IS NULL ORDER BY name";
+        result = stmt.executeQuery(query);
+        while (result.next()) {
+            workersItComboBoxSettings.getItems().add(result.getString("name"));
+        }
+
         stmt.close();
     }
 
@@ -2112,6 +2127,42 @@ public class dashboardContollers implements Initializable {
             stmt2.close();
         } catch (SQLException ex) {
             ex.getSQLState();
+        }
+    }
+
+    public void createITbuttonClicked(ActionEvent e) {
+        try (Connection conn = connectDB.getConnection()) {
+            String name = workersItComboBoxSettings.getValue();
+
+            String query = "SELECT wrk_AT FROM worker WHERE CONCAT (wrk_name, ' ', wrk_lname) LIKE ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, name);
+            ResultSet result = stmt.executeQuery();
+            result.next();
+            String AT = result.getString("wrk_AT");
+
+            if(passwordITSeettings.getText().isEmpty()){
+                query = "INSERT INTO it(IT_AT, start_date) VALUES (?, CURRENT_TIMESTAMP)";
+                stmt = conn.prepareStatement(query);
+                stmt.setString(1, AT);
+            }else
+            {
+                query = "INSERT INTO it(IT_AT, password, start_date) VALUES (?, ?, CURRENT_TIMESTAMP)";
+                stmt = conn.prepareStatement(query);
+                stmt.setString(1, AT);
+                stmt.setString(2, passwordITSeettings.getText());
+            }
+
+            stmt.executeUpdate();
+            stmt.close();
+
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setContentText("Επιτυχής εισαγωγή IT!");
+            alert.setTitle("Επιβεβαίωση Εισαγωγής IT");
+            alert.setHeaderText("Επιτυχία");
+            alert.showAndWait();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
 

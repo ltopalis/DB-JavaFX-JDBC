@@ -817,7 +817,17 @@
                                        </children>
                                     </VBox>
                                     <AnchorPane prefHeight="167.0" prefWidth="99.0" />
-                                    <ImageView fx:id="PHOTOUSERSET" fitHeight="97.0" fitWidth="103.0" pickOnBounds="true" preserveRatio="true" />
+                                    <VBox prefHeight="181.0" prefWidth="160.0">
+                                       <children>
+                                          <AnchorPane prefHeight="150.0" prefWidth="160.0" />
+                                          <ComboBox fx:id="workersItComboBoxSettings" prefHeight="25.0" prefWidth="160.0" styleClass="list" stylesheets="@../CSS%20code/dasboard.css" />
+                                          <AnchorPane prefHeight="150.0" prefWidth="160.0" />
+                                          <PasswordField fx:id="passwordITSeettings" promptText="password" styleClass="textField" stylesheets="@../CSS%20code/dasboard.css" />
+                                          <AnchorPane prefHeight="150.0" prefWidth="200.0" />
+                                          <Button id="add" fx:id="createITSettings" mnemonicParsing="false" onAction="#createITbuttonClicked" prefHeight="25.0" prefWidth="160.0" styleClass="botton" stylesheets="@../CSS%20code/dasboard.css" text="create IT" />
+                                          <AnchorPane prefHeight="150.0" prefWidth="200.0" />
+                                       </children>
+                                    </VBox>
                                  </children>
                               </HBox>
                               <Button id="search" fx:id="UPDATESET" layoutX="90.0" layoutY="250.0" mnemonicParsing="false" onAction="#updateButtonSettingsClicked" prefWidth="200.0" styleClass="botton" text="update" />
