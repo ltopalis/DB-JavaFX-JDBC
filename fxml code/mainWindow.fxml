@@ -250,7 +250,7 @@
                            <children>
                               <TabPane prefHeight="575.0" prefWidth="725.0" tabClosingPolicy="UNAVAILABLE">
                                 <tabs>
-                                  <Tab text="Trips">
+                                 <Tab text="Trips">
                                     <content>
                                       <AnchorPane id="rightSide" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../CSS%20code/dasboard.css">
                                              <children>
@@ -651,7 +651,7 @@
                               </TableView>
                            </children>
                         </Pane>
-                        <Pane fx:id="reservationMenu" prefHeight="575.0" prefWidth="725.0" visible="false">
+                        <Pane fx:id="reservationMenu" prefHeight="575.0" prefWidth="725.0">
                            <children>
                               <TabPane prefHeight="575.0" prefWidth="725.0" tabClosingPolicy="UNAVAILABLE">
                                 <tabs>
@@ -704,6 +704,7 @@
                                                 <Button id="clear" layoutX="120.0" layoutY="314.0" mnemonicParsing="false" onAction="#clearReservationRes" prefWidth="100.0" styleClass="botton" text="clear" />
                                                 <Button id="add" layoutX="10.0" layoutY="314.0" mnemonicParsing="false" onAction="#addReservationRes" prefWidth="100.0" styleClass="botton" text="add" />
                                                 <ImageView fx:id="imageReservationRes" fitHeight="523.0" fitWidth="448.0" layoutX="264.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
+                                                <Label layoutX="24.0" layoutY="503.0" text="Αυτό είναι ένα ζουμπο-ρομποτ =&gt; " />
                                              </children>
                                           </AnchorPane>
                                     </content>
@@ -740,7 +741,7 @@
                               </TabPane>
                            </children>
                         </Pane>
-                        <Pane id="rightSide" fx:id="userInformationScene" prefHeight="575.0" prefWidth="725.0" stylesheets="@../CSS%20code/dasboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Pane id="rightSide" fx:id="userInformationScene" prefHeight="575.0" prefWidth="725.0" stylesheets="@../CSS%20code/dasboard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <TableView fx:id="TABLESET" layoutX="46.0" layoutY="294.0" prefHeight="200.0" prefWidth="625.0" styleClass="table">
                                 <columns>

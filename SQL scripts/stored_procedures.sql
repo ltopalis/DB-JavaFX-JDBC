@@ -123,3 +123,58 @@ DELIMITER ;
 # SELECT * FROM worker;
 # CALL deleteWorker('Μήτσος','Παυλάτος');
 # CALL deleteWorker('Μανωλία','Μπούρνοβα');
+
+-- 3.1.3.4
+DELIMITER $$
+CREATE PROCEDURE returnCustomers(
+	IN minAmount INT, 
+    IN maxAmount INT
+)
+BEGIN
+    SELECT CONCAT(res_off_name, " ", res_off_lname) AS name
+    FROM reservation_offers 
+    WHERE reservation_offers.res_off_depoit BETWEEN minAmount AND maxAmount;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE GetCustomerName (
+	IN lastName varchar(50)
+)
+BEGIN
+    SELECT CONCAT(res_off_lname, ' ', res_off_name) AS name, 
+		res_off_id, 
+        COUNT(*) as number
+    FROM reservation_offers
+    WHERE res_off_lname = lastName
+    GROUP BY res_off_lname, res_off_name, res_off_id
+    ORDER BY number DESC, res_off_id;
+END $$
+DELIMITER ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

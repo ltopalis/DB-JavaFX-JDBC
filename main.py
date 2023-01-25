@@ -1,7 +1,7 @@
 import math
 import random
 
-records = math.floor(90_000)
+records = math.floor(60_000)
 number_of_offers = 3
 
 if records % number_of_offers != 0:

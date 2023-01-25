@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS trip (
     CONSTRAINT tr_drv_AT_ FOREIGN KEY (tr_drv_AT)
         REFERENCES driver (drv_AT)
         ON DELETE CASCADE ON UPDATE CASCADE
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS event (
     ev_tr_id INT(11) NOT NULL,
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS event (
     CONSTRAINT ev_tr_id_ FOREIGN KEY (ev_tr_id)
         REFERENCES trip (tr_id)
         ON DELETE CASCADE ON UPDATE CASCADE
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS trip (
     tr_id INT(11) NOT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS trip (
     CONSTRAINT tr_drv_AT_ FOREIGN KEY (tr_drv_AT)
         REFERENCES driver (drv_AT)
         ON DELETE CASCADE ON UPDATE CASCADE
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS languages (
     lng_gui_AT CHAR(10) NOT NULL,
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS languages (
     CONSTRAINT lng_gui_AT_ FOREIGN KEY (lng_gui_AT)
         REFERENCES guide (gui_AT)
         ON DELETE CASCADE ON UPDATE CASCADE
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS destination (
     dst_id INT(11) NOT NULL AUTO_INCREMENT,
@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS destination (
     CONSTRAINT dst_location_ FOREIGN KEY (dst_location)
         REFERENCES destination (dst_id)
         ON DELETE CASCADE ON UPDATE CASCADE
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS travel_to (
     to_tr_id INT(11) NOT NULL,
@@ -159,7 +159,7 @@ CREATE TABLE IF NOT EXISTS travel_to (
     CONSTRAINT to_dst_id_ FOREIGN KEY (to_dst_id)
         REFERENCES destination (dst_id)
         ON DELETE CASCADE ON UPDATE CASCADE   
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS reservation (
     res_tr_id INT(11) NOT NULL,
@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS reservation (
     CONSTRAINT res_tr_id_ FOREIGN KEY (res_tr_id)
         REFERENCES trip (tr_id)
         ON DELETE CASCADE ON UPDATE CASCADE
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS it(
 	IT_AT CHAR(10)  NOT NULL,
@@ -182,14 +182,14 @@ CREATE TABLE IF NOT EXISTS it(
     CONSTRAINT IT_at FOREIGN KEY (IT_AT)
         REFERENCES worker(wrk_AT)
         ON DELETE CASCADE ON UPDATE CASCADE
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS log (
     user_AT VARCHAR(20)                        NOT NULL,
     action  ENUM('INSERT', 'DELETE', 'UPDATE') NOT NULL,
     changes VARCHAR(200)                       NOT NULL,
     stamp   TIMESTAMP                          DEFAULT CURRENT_TIMESTAMP
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS offers (
     offer_id     INT        NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -201,7 +201,7 @@ CREATE TABLE IF NOT EXISTS offers (
     CONSTRAINT ofr_fk_dst FOREIGN KEY (offer_dst_id)
         REFERENCES destination(dst_id)
         ON DELETE CASCADE ON UPDATE CASCADE
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS reservation_offers (
     res_off_tr_id  INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -213,4 +213,4 @@ CREATE TABLE IF NOT EXISTS reservation_offers (
     CONSTRAINT res_off_fk_off FOREIGN KEY (res_off_id)
         REFERENCES offers(offer_id)
         ON DELETE CASCADE ON UPDATE CASCADE
-);
+) ENGINE=MEMORY MAX_ROWS=90020 AVG_ROW_LENGTH=100;
