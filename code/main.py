@@ -7,7 +7,7 @@ number_of_offers = 3
 if records % number_of_offers != 0:
     records = records + 3 - (records % number_of_offers)
 
-with open("names.txt", "r") as f:
+with open("../names.txt", "r") as f:
     name = []
     surname = []
     offer_code = range(1, 4)
