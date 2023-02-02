@@ -915,6 +915,7 @@ public class dashboardContollers implements Initializable {
                     String updateQuery = "SET @USER = ?";
                     PreparedStatement preparedStmt = conn1.prepareStatement(updateQuery);
                     preparedStmt.setString(1, userInformation.getLastname());
+                    preparedStmt.executeQuery();
 
                     updateQuery = "UPDATE trip SET tr_maxseats = ? WHERE tr_id = ?";
                     preparedStmt = conn1.prepareStatement(updateQuery);
@@ -941,6 +942,7 @@ public class dashboardContollers implements Initializable {
                     String updateQuery = "SET @USER = ?";
                     PreparedStatement preparedStmt = conn1.prepareStatement(updateQuery);
                     preparedStmt.setString(1, userInformation.getLastname());
+                    preparedStmt.executeQuery();
 
                     updateQuery = "SELECT br_code FROM branch WHERE CONCAT(br_city, ', ', br_street,' ', IF(br_num IS NULL, '-', br_num)) LIKE ?";
                     preparedStmt = conn1.prepareStatement(updateQuery);
@@ -974,6 +976,7 @@ public class dashboardContollers implements Initializable {
                     String updateQuery = "SET @USER = ?";
                     PreparedStatement preparedStmt = conn1.prepareStatement(updateQuery);
                     preparedStmt.setString(1, userInformation.getLastname());
+                    preparedStmt.executeQuery();
 
                     updateQuery = "SELECT gui_AT FROM guide g JOIN worker w ON g.gui_AT = w.wrk_AT WHERE CONCAT(wrk_name, ' ', wrk_lname) = ?";
                     preparedStmt = conn1.prepareStatement(updateQuery);
@@ -1007,6 +1010,7 @@ public class dashboardContollers implements Initializable {
                     String updateQuery = "SET @USER = ?";
                     PreparedStatement preparedStmt = conn1.prepareStatement(updateQuery);
                     preparedStmt.setString(1, userInformation.getLastname());
+                    preparedStmt.executeQuery();
 
                     updateQuery = "SELECT drv_AT FROM driver d JOIN worker w ON d.drv_AT = w.wrk_AT WHERE CONCAT(wrk_name, ' ', wrk_lname) = ?";
                     preparedStmt = conn1.prepareStatement(updateQuery);
