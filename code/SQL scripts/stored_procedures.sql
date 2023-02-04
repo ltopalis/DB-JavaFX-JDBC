@@ -151,30 +151,3 @@ BEGIN
     ORDER BY number DESC, res_off_id;
 END $$
 DELIMITER ;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

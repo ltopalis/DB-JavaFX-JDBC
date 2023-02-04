@@ -357,7 +357,7 @@ BEGIN
     
     IF(diff<0)
     THEN 
-        INSERT INTO branch(br_street) VALUES (NULL);
+        SET NEW.wrk_salary = OLD.wrk_salary;
 	END IF;
 END $
 DELIMITER ;
