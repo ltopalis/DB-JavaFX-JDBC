@@ -7,7 +7,7 @@ number_of_offers = 3
 if records % number_of_offers != 0:
     records = records + 3 - (records % number_of_offers)
 
-with open("../names.txt", "r") as f:
+with open("names.txt", "r") as f:
     name = []
     surname = []
     offer_code = range(1, 4)
@@ -20,7 +20,7 @@ with open("../names.txt", "r") as f:
     for i in range(number_of_offers):
         mydict[str(i + 1)] = records // number_of_offers
 
-    with open("SQL scripts/insertData.sql", "a") as f2:
+    with open("code/SQL scripts/insertData.sql", "a") as f2:
         f2.write("\n\n-- reservation_offers table\n")
         randomName = random.sample(name, k=1)[0]
         randomSurname = random.sample(surname, k=1)[0]
