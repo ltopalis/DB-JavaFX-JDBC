@@ -1,6 +1,8 @@
 import java.io.IOException;
+import java.math.RoundingMode;
 import java.net.URL;
 import java.sql.*;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -1249,7 +1251,7 @@ public class dashboardContollers implements Initializable {
                 listWhereClause.add("ev_tr_id = " + tripId);
             if (departure != null && ret != null)
                 listWhereClause.add("ev_start BETWEEN '" + departure + " 00:00:00' " + " AND '" + departure
-                        + " 23:59:59' AND ev_end BETWEEN " + ret + " 00:00:00' AND '" + ret + " 23:59:59'");
+                        + " 23:59:59' AND ev_end BETWEEN '" + ret + " 00:00:00' AND '" + ret + " 23:59:59'");
             else if (departure != null)
                 listWhereClause
                         .add("ev_start BETWEEN '" + departure + " 00:00:00' AND '" + departure + " 23:59:59'");
