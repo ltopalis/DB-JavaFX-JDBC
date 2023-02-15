@@ -213,4 +213,4 @@ CREATE TABLE IF NOT EXISTS reservation_offers (
     CONSTRAINT res_off_fk_off FOREIGN KEY (res_off_id)
         REFERENCES offers(offer_id)
         ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=MEMORY MAX_ROWS=90020 AVG_ROW_LENGTH=100;
+) ENGINE = InnoDB;

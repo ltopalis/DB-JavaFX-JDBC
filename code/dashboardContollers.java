@@ -1,8 +1,6 @@
 import java.io.IOException;
-import java.math.RoundingMode;
 import java.net.URL;
 import java.sql.*;
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -890,6 +888,7 @@ public class dashboardContollers implements Initializable {
                     String updateQuery = "SET @USER = ?";
                     PreparedStatement preparedStmt = conn1.prepareStatement(updateQuery);
                     preparedStmt.setString(1, userInformation.getLastname());
+                    preparedStmt.executeQuery();
 
                     updateQuery = "UPDATE trip SET tr_cost = ? WHERE tr_id = ?";
                     preparedStmt = conn1.prepareStatement(updateQuery);
@@ -1424,13 +1423,13 @@ public class dashboardContollers implements Initializable {
             else if (ret != null)
                 listWhereClause.add("ev_end BETWEEN '" + ret + " 00:00:00'" + " AND  '" + ret + " 23:59:59'");
             if (type != null)
-                listWhereClause.add("d.dsrt_type = " + type);
+                listWhereClause.add("d.dsrt_type = '" + type + "'");
             if (location != null)
-                listWhereClause.add("d1.dst_name = " + location);
+                listWhereClause.add("d1.dst_name = '" + location + "'");
             if (language != null)
-                listWhereClause.add("d.dst_language = " + language);
+                listWhereClause.add("d.dst_language = '" + language + "'");
             if (!descriptionTextDest.getText().isEmpty())
-                listWhereClause.add("d.dst_descr LIKE " + description);
+                listWhereClause.add("d.dst_descr LIKE '" + description + "'");
 
             String whereClause = String.join(" AND ", listWhereClause);
 
@@ -2069,6 +2068,7 @@ public class dashboardContollers implements Initializable {
         PASSTEXTSET.setText(userInformation.getPassword());
         DATETEXTSET.setText(userInformation.getStart_date().format(DateTimeFormatter.ofPattern("dd/MM/yy")));
         ATTEXTSET.disableProperty();
+        workersItComboBoxSettings.getItems().clear();
 
         Statement stmt = conn.createStatement();
         String query = "SELECT CONCAT(br_city, ', ', br_street,' ', IF(br_num IS NULL, '-', br_num)) FROM branch WHERE br_code = "
